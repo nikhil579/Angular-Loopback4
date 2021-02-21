@@ -1,0 +1,212 @@
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h4>Customer Information</h4>
+        </div>
+        <div class="card-body">
+            <form #form='ngForm' (ngSubmit)='send(form)'>
+                <div class="form-group">
+                    <label>First Name </label>
+                    <input [(ngModel)]='userInfo.firstName' class="form-control" type="text" name="firstName"
+                        placeholder="Enter First Name" required />
+                </div>
+
+
+                <div class="form-group">
+                    <label>Last Name </label>
+                    <input [(ngModel)]='userInfo.lastName' class="form-control" type="text" name="lastName"
+                        placeholder="Enter Last Name" required />
+                </div>
+
+                <div class="form-group">
+                    <label>Email </label>
+                    <input [(ngModel)]='userInfo.email' class="form-control" type="email" name="email"
+                        placeholder="Enter Email" required />
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Phone Number</label>
+                    <input [(ngModel)]='userInfo.phoneNumber' class="form-control" type="number" name='phoneNumber'
+                        placeholder="Enter Phone Number" required />
+                </div>
+                <div class="form-group">
+                    <label>Gender</label>
+                    <select id="inputgender" [(ngModel)]='userInfo.gender' name="gender" class="form-control" required>
+                        <option selected [ngValue]="null">Choose...</option>
+                        <option *ngFor="let item of userGender" [value]="item">
+                            {{ item }}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Date of Birth</label>
+                    <input [(ngModel)]='userInfo.dateOfBirth' type="date" name="dateOfBirth"
+                        placeholder="Enter Date of Birth" class="form-control" required />
+                </div>
+                <!-- seperator -->
+                <div class="row">
+                    <div class="col">
+                        <hr />
+                    </div>
+                </div>
+                <!-- address form portion -->
+                <div class="form-group">
+                    <label> Address</label>
+                    <input [(ngModel)]='userInfo.address' class="form-control" type="text" name='address'
+                        placeholder="Enter Address" required />
+                </div>
+                <div class="form-group">
+                    <label> City</label>
+                    <input [(ngModel)]='userInfo.city' class="form-control" type="text" name='city'
+                        placeholder="Enter City" required />
+                </div>
+                <div class="form-group">
+                    <label> State</label>
+                    <input [(ngModel)]='userInfo.state' class="form-control" type="text" name='state'
+                        placeholder="Enter State" required />
+                </div>
+                <div class="form-group">
+                    <label> Zipcode</label>
+                    <input [(ngModel)]='userInfo.zipcode' class="form-control" type="number" name='zipcode'
+                        placeholder="Enter Zip Code" required />
+                </div>
+                <!-- seperator -->
+                <div class="row">
+                    <div class="col">
+                        <hr />
+                    </div>
+                </div>
+                <!--  -->
+                <div class="form-group">
+                    <label> Occupation</label>
+                    <input [(ngModel)]='userInfo.occupation' class="form-control" type="text" name='occupation'
+                        placeholder="Enter Occupation" />
+                </div>
+                <div class="form-group">
+                    <label> Organisation Name</label>
+                    <input [(ngModel)]='userInfo.orgName' class="form-control" type="text" name='orgName'
+                        placeholder="Enter Organistaion Name" />
+                </div>
+                <div class="form-group">
+                    <label>Sector</label>
+                    <select id="inputSector" [(ngModel)]='userInfo.sector' name="sector" class="form-control">
+                        <option selected [ngValue]="null">Choose...</option>
+                        <option *ngFor="let item of userSector" [value]="item">
+                            {{ item }}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Residence Type</label>
+                    <select id="inputRes" [(ngModel)]='userInfo.residenceType' name="residenceType"
+                        class="form-control">
+                        <option selected [ngValue]="null">Choose...</option>
+                        <option *ngFor="let item of userResidence" [value]="item">
+                            {{ item }}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Current Residence </label>
+                    <select id="inputCurrRes" [(ngModel)]='userInfo.currResidence' name="residenceType"
+                        class="form-control">
+                        <option selected [ngValue]="null">Choose...</option>
+                        <option *ngFor="let item of userCurrentRes" [value]="item">
+                            {{ item }}
+                        </option>
+                    </select>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label>Booking</label>
+                    <select id="inputBooking" [(ngModel)]='userInfo.bookingPref' name="booking" class="form-control">
+                        <option selected [ngValue]="null">Choose...</option>
+                        <option *ngFor="let item of userBookingPref" [value]="item">
+                            {{ item }}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Budget</label>
+                    <select id="inputBud" [(ngModel)]='userInfo.budget' name="budget" class="form-control">
+                        <option selected [ngValue]="null">Choose...</option>
+                        <option *ngFor="let item of userBudget" [value]="item">
+                            {{ item }}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Possession</label>
+                    <select id="inputPoss" [(ngModel)]='userInfo.possession' name="possession" class="form-control">
+                        <option selected [ngValue]="null">Choose...</option>
+                        <option *ngFor="let item of userPossession" [value]="item">
+                            {{ item }}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Purpose of Buying</label>
+                    <select id="inputPur" [(ngModel)]='userInfo.purpose' name="purpose" class="form-control">
+                        <option selected [ngValue]="null">Choose...</option>
+                        <option *ngFor="let item of userPurpose" [value]="item">
+                            {{ item }}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Financing Details</label>
+                    <select id="inputFin" [(ngModel)]='userInfo.financeDetail' name="finance" class="form-control">
+                        <option selected [ngValue]="null">Choose...</option>
+                        <option *ngFor="let item of userFinance" [value]="item">
+                            {{ item }}
+                        </option>
+                    </select>
+                </div>
+                <!--  -->
+                <!-- seperator -->
+                <div class="row">
+                    <div class="col">
+                        <hr />
+                    </div>
+                </div>
+                <!--  -->
+                <div class="form-group">
+                    <label>Channel Partner Firm Name </label>
+                    <input [(ngModel)]='userInfo.chFirmName' class="form-control" type="text" name="chFirmName"
+                        placeholder="Enter Firm Name" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Channel Partner SM Name</label>
+                    <input [(ngModel)]='userInfo.chSMname' class="form-control" type="text" name="chSMname"
+                        placeholder="Enter SM Name" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Channel Mobile Number</label>
+                    <input [(ngModel)]='userInfo.chMobNo' class="form-control" type="number" name="chMobNo"
+                        placeholder="Enter Channel Mobile Number" class="form-control" />
+                </div>
+                <!--  -->
+                <!-- seperator -->
+                <div class="row">
+                    <div class="col">
+                        <hr />
+                    </div>
+                </div>
+                <!--  -->
+                <div class="row">
+                    <div class="col">
+                        <button class="btn btn-success btn-block " type="submit">Add</button>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-secondary btn-block " type="reset">Clear</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

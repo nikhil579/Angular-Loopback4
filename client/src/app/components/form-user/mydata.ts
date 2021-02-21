@@ -1,0 +1,10 @@
+export const gender = ['Male', 'Female', 'Other']
+export const occupation = ['Self Employed', 'Service', 'Other'];
+export const sector = ['IT', 'Bank', 'Management', 'Other'];
+export const residenceType = ['Self-Owned', 'Rented'];
+export const currResidence = ['1 BHK', '2 BHK', '3 BHK', 'Other'];
+export const bookingPref = ['1 BHK', '2 BHK', '3 BHK'];
+export const budget = ['Below 50 Lac', '60 Lac', '70 Lac', '80 Lac', '90 Lac', '1 Cr & Above'];
+export const possession = ['Ready', '6 Months', '1 Year', '2 Years', '3 Years'];
+export const purpose = ['Investment', 'End Use', 'Both'];
+export const financeDetail = ['Self Funding', 'Home Loan'];

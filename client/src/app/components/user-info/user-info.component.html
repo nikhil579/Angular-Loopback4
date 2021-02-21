@@ -1,0 +1,142 @@
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h4> Customer Information</h4>
+            <span style="margin: 1rem;"></span>
+            <button (click)='showForm()' type="submit" class="btn btn-block btn-outline-info">
+                <span *ngIf="!setForm">Show Info</span>
+                <span *ngIf="setForm">Hide Info</span>
+            </button>
+        </div>
+        <div class="card-body">
+            <div class="form-group">
+                <label>First Name </label>
+                {{users.firstName}}
+            </div>
+            <div class="form-group">
+                <label>Last Name </label>
+                {{users.lastName}}
+            </div>
+            <div class="form-group">
+                <label>Email </label>
+                {{users.email}}
+            </div>
+            <span *ngIf="setForm">
+                <div class="form-group">
+                    <label for="phoneNumber">Phone Number</label>
+                    {{users.phoneNumber}}
+                </div>
+                <div class="form-group">
+                    <label>Gender</label>
+                    {{users.gender}}
+                </div>
+                <div class="form-group">
+                    <label>Date of Birth</label>
+                    {{users.dateOfBirth}}
+                </div>
+
+                <!-- seperator -->
+                <div class="row">
+                    <div class="col">
+                        <hr />
+                    </div>
+                </div>
+                <!-- address form portion -->
+                <div class="form-group">
+                    <label> Address</label>
+                    {{users.address}}
+                </div>
+                <div class="form-group">
+                    <label> City</label>
+                    {{users.city}}
+                </div>
+                <div class="form-group">
+                    <label> State</label>
+                    {{users.state}}
+                </div>
+                <div class="form-group">
+                    <label> Zipcode</label>
+                    {{users.zipcode}}
+                </div>
+                <!-- seperator -->
+                <div class="row">
+                    <div class="col">
+                        <hr />
+                    </div>
+                </div>
+                <!--  -->
+                <div class="form-group">
+                    <label> Occupation</label>
+                    {{users.occupation}}
+                </div>
+                <div class="form-group">
+                    <label> Organisation Name</label>
+                    {{users.orgName}}
+                </div>
+                <div class="form-group">
+                    <label> Sector</label>
+                    {{users.sector}}
+                </div>
+                <div class="form-group">
+                    <label> Residence Type</label>
+                    {{users.residenceType}}
+                </div>
+                <div class="form-group">
+                    <label> Current Residence</label>
+                    {{users.currResidence}}
+                </div>
+                <div class="form-group">
+                    <label> Booking</label>
+                    {{users.bookingPref}}
+                </div>
+                <div class="form-group">
+                    <label> Budget</label>
+                    {{users.budget}}
+                </div>
+                <div class="form-group">
+                    <label> Possession</label>
+                    {{users.possession}}
+                </div>
+                <div class="form-group">
+                    <label> Purpose of Buying</label>
+                    {{users.purpose}}
+                </div>
+                <div class="form-group">
+                    <label> Financing Details</label>
+                    {{users.financeDetail}}
+                </div>
+                <!-- seperator -->
+                <div class="row">
+                    <div class="col">
+                        <hr />
+                    </div>
+                </div>
+                <!--  -->
+                <div class="form-group">
+                    <label>Channel Partner Firm Name </label>
+                    {{users.chFirmName}}
+                </div>
+                <div class="form-group">
+                    <label>Channel Partner SM Name</label>
+                    {{users.chSMname}}
+                </div>
+                <div class="form-group">
+                    <label>Channel Mobile Number</label>
+                    {{users.chMobNo}}
+                </div>
+            </span>
+            <!--  -->
+        </div>
+        <div class="card-footer">
+            <button (click)='settings()' type="submit" class="btn btn-outline-success btn-block">
+                <span *ngIf="!opt">Options</span>
+                <span *ngIf="opt">Hide Options</span>
+            </button>
+            <br /><br />
+            <span *ngIf="opt">
+                <button [routerLink]="['/editUser',users.id]" class="btn btn-dark btn-block">Edit</button>
+                <button (click)='delete(users)' class="btn btn-danger btn-block">Delete</button>
+            </span>
+        </div>
+    </div>
+</div>
