@@ -31,8 +31,8 @@ export class FormUserComponent implements OnInit {
     }
   }
   send(form: NgForm) {
-    // console.log(form.value);
-    if(form.invalid){
+    console.log(form.value);
+    if (form.invalid) {
       Swal.fire(
         'Error',
         'Enter all required fields',
@@ -56,7 +56,7 @@ export class FormUserComponent implements OnInit {
       )
       this.router.navigateByUrl('/')
     }, err => {
-      console.error(err);
+      console.error(err)
     })
   }
   post(form: NgForm) {
@@ -67,7 +67,7 @@ export class FormUserComponent implements OnInit {
       )
       this.router.navigateByUrl('/')
     }, err => {
-      console.error(err);
+      console.error(err)
     }
     )
   }

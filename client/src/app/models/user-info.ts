@@ -18,7 +18,7 @@ export class UserInfo {
     residenceType: string
     currResidence: string
     bookingPref: string
-    budget: number
+    budget: string
     possession: string
     purpose: string
     financeDetail: string

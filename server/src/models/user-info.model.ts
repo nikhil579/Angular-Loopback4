@@ -103,9 +103,9 @@ export class UserInfo extends Entity {
   bookingPref?: string;
 
   @property({
-    type: 'number',
+    type: 'string',
   })
-  budget?: number;
+  budget?: string;
 
   @property({
     type: 'string',

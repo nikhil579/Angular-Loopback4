@@ -12,7 +12,8 @@ import { FormsModule } from '@angular/forms';
 import { UserInfoComponent } from './components/user-info/user-info.component';
 import { NewUserComponent } from './containers/new-user/new-user.component';
 import { FormUserComponent } from './components/form-user/form-user.component';
-
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatStepperModule } from '@angular/material/stepper';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,9 @@ import { FormUserComponent } from './components/form-user/form-user.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NoopAnimationsModule,
+    MatStepperModule
   ],
   providers: [],
   bootstrap: [AppComponent]
