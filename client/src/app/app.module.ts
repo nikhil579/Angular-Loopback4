@@ -14,6 +14,7 @@ import { NewUserComponent } from './containers/new-user/new-user.component';
 import { FormUserComponent } from './components/form-user/form-user.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatStepperModule } from '@angular/material/stepper';
+import { UsersPageComponent } from './containers/users-page/users-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +25,8 @@ import { MatStepperModule } from '@angular/material/stepper';
     FormNoteComponent,
     UserInfoComponent,
     NewUserComponent,
-    FormUserComponent
+    FormUserComponent,
+    UsersPageComponent
   ],
   imports: [
     BrowserModule,

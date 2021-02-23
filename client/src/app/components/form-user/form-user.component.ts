@@ -24,11 +24,20 @@ export class FormUserComponent implements OnInit {
   userPossession: Array<String> = possession
   userPurpose: Array<String> = purpose
   userFinance: Array<String> = financeDetail
+
+  //stepper form
+  step: any = 1
   constructor(public databaseService: UserDatabaseService, private router: Router) { }
   ngOnInit(): void {
     if (this.id) {
       this.getOne();
     }
+  }
+  next(){
+    this.step = this.step + 1
+  }
+  previous(){
+    this.step = this.step - 1
   }
   send(form: NgForm) {
     console.log(form.value);

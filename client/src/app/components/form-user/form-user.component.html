@@ -5,6 +5,9 @@
         </div>
         <div class="card-body">
             <form #form='ngForm' (ngSubmit)='send(form)'>
+                <div class="card-header">
+                    <h5>User Details</h5>
+                </div>
                 <div class="form-group">
                     <label>First Name </label>
                     <input [(ngModel)]='userInfo.firstName' class="form-control" type="text" name="firstName"
@@ -44,7 +47,7 @@
                 </div>
                 <div class="form-group">
                     <label for="phoneNumber">Phone Number</label>
-                    <input [(ngModel)]='userInfo.phoneNumber' class="form-control" type="tel" name='phoneNumber'
+                    <input [(ngModel)]='userInfo.phoneNumber' class="form-control" type="number" name='phoneNumber'
                         placeholder="Enter Phone Number" required #phoneNumber='ngModel' pattern="^[7-9][0-9]{9}$"
                         ngModel phoneNumber #phoneNumber="ngModel" maxlength="10" minlength="6" />
                     <div *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)"
@@ -76,6 +79,9 @@
                     </div>
                 </div>
                 <!-- address form portion -->
+                <div class="card-header">
+                    <h5>Address Details</h5>
+                </div>
                 <div class="form-group">
                     <label> Address</label>
                     <input [(ngModel)]='userInfo.address' class="form-control" type="text" name='address'
@@ -103,6 +109,9 @@
                     </div>
                 </div>
                 <!--  -->
+                <div class="card-header">
+                    <h5>Work Details</h5>
+                </div>
                 <div class="form-group">
                     <label> Occupation</label>
                     <input [(ngModel)]='userInfo.occupation' class="form-control" type="text" name='occupation'
@@ -121,6 +130,9 @@
                             {{ item }}
                         </option>
                     </select>
+                </div>
+                <div class="card-header">
+                    <h5>Residence Details</h5>
                 </div>
                 <div class="form-group">
                     <label>Residence Type</label>

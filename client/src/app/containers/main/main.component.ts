@@ -11,11 +11,11 @@ import { UserDatabaseService } from 'src/app/services/user-database.service';
 })
 export class MainComponent implements OnInit {
   // notes: Note[] = []
-  // constructor(private databaseService: DatabaseService) { }
+  constructor() { }
 
-  // ngOnInit() {
-  //   this.getNotes();
-  // }
+  ngOnInit() {
+    // this.getNotes();
+  }
   // getNotes() {
   //   this.databaseService.getNotes().subscribe((notes: Note[]) => {
   //     console.log(notes);
@@ -23,20 +23,7 @@ export class MainComponent implements OnInit {
   //   }, err => console.log(err)
   //   )
   // }
-  users: UserInfo[] = []
-  constructor(private databaseService: UserDatabaseService) { }
 
-  ngOnInit() {
-    this.getUsers()
-  }
-  getUsers() {
-    this.databaseService.getUserInfo().subscribe((users: UserInfo[]) => {
-      console.log(users);
-      this.users = users
-    }, err => {
-      console.error(err)
-    })
-  }
 
 }
 
