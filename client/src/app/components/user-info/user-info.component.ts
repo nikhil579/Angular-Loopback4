@@ -10,11 +10,26 @@ import Swal from 'sweetalert2';
 })
 export class UserInfoComponent implements OnInit {
   @Input() users: UserInfo
+  @Input() id: string
+  userInfo: UserInfo = new UserInfo()
   opt = false
   setForm = false
   constructor(private databaseService: UserDatabaseService) { }
 
   ngOnInit(): void {
+    if (this.id) {
+      this.getOne();
+    }
+  }
+  getOne() {
+    this.databaseService.getOneUserInfo(this.id).subscribe((user: UserInfo) => {
+      console.log(user);
+      this.userInfo = user
+    }, err => {
+      console.log(err);
+
+    }
+    )
   }
   showForm() {
     if (this.setForm) {

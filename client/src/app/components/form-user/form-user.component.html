@@ -4,12 +4,12 @@
             <h4>Customer Information</h4>
         </div>
         <div class="card-body">
-            <form #form='ngForm' (ngSubmit)='send(form)'>
+            <form #form='ngForm' >
                 <div class="card-header">
                     <h5>User Details</h5>
                 </div>
                 <div class="form-group">
-                    <label>First Name </label>
+                    <label>First Name *</label>
                     <input [(ngModel)]='userInfo.firstName' class="form-control" type="text" name="firstName"
                         placeholder="Enter First Name" required minlength='3' #firstName='ngModel' />
                     <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert alert-danger">
@@ -26,7 +26,8 @@
                 <div class="form-group">
                     <label>Last Name </label>
                     <input [(ngModel)]='userInfo.lastName' class="form-control" type="text" name="lastName"
-                        placeholder="Enter Last Name" required #lastName='ngModel' />
+                        placeholder="Enter Last Name" required #lastName='ngModel'
+                        [class.is-invalid]="lastName.invalid && lastName.dirty" />
                     <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert alert-danger">
                         <div *ngIf="lastName.errors.required">
                             Last Name is required.
@@ -41,8 +42,9 @@
                         required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" />
                     <div *ngIf="email.errors && (email.valid || email.dirty)">
                         <div class="text-danger" *ngIf="email.errors.required">Email is required</div>
-                        <div class="text-danger" *ngIf="email.errors.pattern">Please provide a valid email
-                            address</div>
+                        <div class="text-danger" *ngIf="email.errors.pattern">Please provide a valid email address</div>
+                        <div class="text-danger" *ngIf="email.errors?.serverError">Email already in use</div>
+
                     </div>
                 </div>
                 <div class="form-group">
@@ -241,7 +243,7 @@
                 <!--  -->
                 <div class="row">
                     <div class="col">
-                        <button class="btn btn-success btn-block " type="submit">Add</button>
+                        <button class="btn btn-success btn-block" (click)='createUser()' type="submit">Submit</button>
                     </div>
                     <div class="col">
                         <button class="btn btn-secondary btn-block " type="reset">Clear</button>

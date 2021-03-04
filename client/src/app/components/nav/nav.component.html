@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
     <a class="navbar-brand" [routerLink]="['/']">FlyWheel Tech</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,31 +13,31 @@
             <li class="nav-item ">
                 <a class="nav-link " [routerLink]="['/usersPage']">Users</a>
             </li>
-            <!-- <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false">
-                    Dropdown
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
+            <li class="nav-item ">
+                <a class="nav-link " [routerLink]="['/listUsers']">List Users</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
-            </li> -->
         </ul>
-        <!-- <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-     -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <div class="ml-auto">
                 <a class="btn btn-secondary text-light" [routerLink]="['/newUser']">New User</a>
             </div>
         </div>
     </div>
-</nav>
+</nav> -->
+<mat-toolbar class="mat-elevation-z3">
+    <span>
+        <mat-icon [routerLink]="['/']">home</mat-icon>
+    </span>
+    <nav>
+        <a mat-button [routerLink]="['/']">Home<span class="sr-only">(current)</span></a>
+        <a mat-button [routerLink]="['/usersPage']">Users</a>
+        <a mat-button [routerLink]="['/listUsers']">List Users</a>
+        <a mat-button [routerLink]="['/listBrokers']">List Brokers</a>
+        <a mat-icon-button routerLink="search" matTooltip="Search">
+            <mat-icon>search</mat-icon>
+        </a>
+    </nav>
+</mat-toolbar>
+<div class="app-content">
+    <router-outlet></router-outlet>
+</div>

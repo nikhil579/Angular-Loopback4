@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h4>Broker Information</h4>
+        </div>
+        <div class="card-body">
+            <form #form='ngForm'>
+                <div class="card-header">
+                    <h5>Broker Details</h5>
+                </div>
+                <div class="form-group">
+                    <label>Name *</label>
+                    <input [(ngModel)]='broker.name' class="form-control" type="text" name="name"
+                        placeholder="Enter Name" required minlength='3' #name='ngModel' />
+                    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+                        <div *ngIf="name.errors.required">
+                            Name is required.
+                        </div>
+                        <div *ngIf="name.errors.minlength">
+                            Name must be at least 3 characters long.
+                        </div>
+                    </div>
+                </div>
+                <!-- email -->
+                <div class="form-group">
+                    <label>Email </label>
+                    <input type="email" [(ngModel)]='broker.email' class="form-control" name="email"
+                        placeholder="Enter Email" #email='ngModel' [class.is-invalid]="email.invalid && email.dirty"
+                        required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" />
+                    <div *ngIf="email.errors && (email.valid || email.dirty)">
+                        <div class="alert alert-danger" *ngIf="email.errors.required">Email is required</div>
+                        <div class="alert alert-danger" *ngIf="email.errors.pattern">Please provide a valid email address</div>
+                    </div>
+                    <div class="alert alert-danger" *ngIf="brokerExist && email.valid">Email Already Exists</div>
+                </div>
+                <!-- company -->
+                <div class="form-group">
+                    <label> Company</label>
+                    <input [(ngModel)]='broker.company' class="form-control" type="text" name='company'
+                        placeholder="Enter Company" required />
+                </div>
+                <!-- address -->
+                <div class="form-group">
+                    <label> Address</label>
+                    <input [(ngModel)]='broker.address' class="form-control" type="text" name='address'
+                        placeholder="Enter Address" required />
+                </div>
+
+                <!-- seperator -->
+                <div class="row">
+                    <div class="col">
+                        <hr />
+                    </div>
+                </div>
+                <!--  -->
+                <div class="row">
+                    <div class="col">
+                        <button class="btn btn-success btn-block" (click)='validateUser(form)' type="submit">Submit</button>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-secondary btn-block " type="reset">Clear</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
