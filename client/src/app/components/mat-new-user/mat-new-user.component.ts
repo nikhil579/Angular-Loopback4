@@ -17,10 +17,15 @@ export class MatNewUserComponent implements OnInit {
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required]
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', Validators.required],
+      phoneNumber: ['', Validators.required],
     });
     this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
+      address: ['', Validators.required],
+      city: ['', Validators.required],
+      zipcode: ['', Validators.required]
     });
   }
 }

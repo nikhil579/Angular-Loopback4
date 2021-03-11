@@ -37,12 +37,12 @@ export class BrokerController {
         'application/json': {
           schema: getModelSchemaRef(Broker, {
             title: 'NewBroker',
-            exclude: ['id'],
+            
           }),
         },
       },
     })
-    broker: Omit<Broker, 'id'>,
+    broker: Broker,
   ): Promise<Broker> {
     return this.brokerRepository.create(broker);
   }

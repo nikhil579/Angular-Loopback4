@@ -98,18 +98,18 @@ export class ListUsersComponent implements OnInit {
       }
     })
   }
-  edit(form: NgForm) {
-    this.databaseService.updateUserInfo(form.value, this.id).subscribe(res => {
-      console.log(res);
-      Swal.fire(
-        'Success',
-        'User Details Modified Successfully',
-        'success'
-      )
-    }, err => {
-      console.error(err)
-    })
-  }
+  // edit(form: NgForm) {
+  //   this.databaseService.updateUserInfo(form.value, this.id).subscribe(res => {
+  //     console.log(res);
+  //     Swal.fire(
+  //       'Success',
+  //       'User Details Modified Successfully',
+  //       'success'
+  //     )
+  //   }, err => {
+  //     console.error(err)
+  //   })
+  // }
   delete(user: UserInfo) {
     const id = user.id
     Swal.fire({

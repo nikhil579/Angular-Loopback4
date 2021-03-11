@@ -1,6 +1,6 @@
-import {Entity, model, property} from '@loopback/repository';
+import { Entity, model, property } from '@loopback/repository';
 
-@model({settings: {strict: false}})
+@model({ settings: { strict: false } })
 export class Broker extends Entity {
   @property({
     type: 'string',
@@ -20,12 +20,6 @@ export class Broker extends Entity {
     type: 'string',
     required: true,
   })
-  company: string;
-
-  @property({
-    type: 'string',
-    required: true,
-  })
   address: string;
   @property({
     type: 'string',
@@ -33,6 +27,10 @@ export class Broker extends Entity {
   })
   id?: string;
 
+  @property({
+    type: 'string',
+  })
+  companyName?: string;
   // Define well-known properties here
 
   // Indexer property to allow additional data

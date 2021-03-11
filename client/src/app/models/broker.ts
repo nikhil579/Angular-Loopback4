@@ -2,7 +2,8 @@ export class Broker {
 
     name: string
     email: string
-    company: string
     address: string
+    id: string
+    companyName: string
     additionalProp1: {}
 }

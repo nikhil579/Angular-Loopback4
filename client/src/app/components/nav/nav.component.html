@@ -24,15 +24,17 @@
         </div>
     </div>
 </nav> -->
-<mat-toolbar class="mat-elevation-z3">
+<mat-toolbar class="mat-elevation-z3 bg-dark">
     <span>
         <mat-icon [routerLink]="['/']">home</mat-icon>
     </span>
     <nav>
         <a mat-button [routerLink]="['/']">Home<span class="sr-only">(current)</span></a>
-        <a mat-button [routerLink]="['/usersPage']">Users</a>
-        <a mat-button [routerLink]="['/listUsers']">List Users</a>
-        <a mat-button [routerLink]="['/listBrokers']">List Brokers</a>
+        <!-- <a mat-button [routerLink]="['/usersPage']">Users</a> -->
+        <a mat-button [routerLink]="['/listUsers']">Users List</a>
+        <a mat-button [routerLink]="['/listBrokers']">Brokers List</a>
+        <!-- <a mat-button [routerLink]="['/customerPage']">Customers</a> -->
+        <a mat-button [routerLink]="['/listCustomers']">Customers List</a>
         <a mat-icon-button routerLink="search" matTooltip="Search">
             <mat-icon>search</mat-icon>
         </a>

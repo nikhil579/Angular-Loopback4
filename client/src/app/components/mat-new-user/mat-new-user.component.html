@@ -1,42 +1,59 @@
 <app-nav></app-nav>
 <br>
 <div class="container">
-<mat-horizontal-stepper #stepper>
-    <mat-step [stepControl]="firstFormGroup">
-        <form [formGroup]="firstFormGroup">
-            <ng-template matStepLabel>Fill out your name</ng-template>
-            <mat-form-field>
-                <mat-label>Name</mat-label>
-                <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-            </mat-form-field>
-            <div>
-                <button mat-button matStepperNext>Next</button>
-            </div>
-        </form>
-    </mat-step>
-    <!-- #docregion label -->
-    <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
-        <!-- #enddocregion label -->
-        <form [formGroup]="secondFormGroup">
-            <mat-form-field>
-                <mat-label>Address</mat-label>
-                <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
-            </mat-form-field>
+    <mat-horizontal-stepper #stepper>
+        <mat-step [stepControl]="firstFormGroup">
+            <form [formGroup]="firstFormGroup" class="form-container">
+                <ng-template matStepLabel>Fill out your Info</ng-template>
+                <mat-card>
+                    <mat-card-content>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <mat-form-field class="full-width">
+                                    <mat-label>Name</mat-label>
+                                    <input matInput placeholder="Last name, First name" formControlName="firstCtrl"
+                                        required>
+                                </mat-form-field>
+                                <span style="margin: 50px;"></span>
+                                <mat-form-field>
+                                    <mat-label>Name</mat-label>
+                                    <input matInput placeholder="Last name, First name" formControlName="firstCtrl"
+                                        required>
+                                </mat-form-field>
+                                <br>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+                <div>
+                    <button mat-button matStepperNext>Next</button>
+                </div>
+            </form>
+        </mat-step>
+        <!-- #docregion label -->
+        <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
+            <!-- #enddocregion label -->
+            <form [formGroup]="secondFormGroup">
+                <mat-form-field>
+                    <mat-label>Address</mat-label>
+                    <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
+                </mat-form-field>
+
+                <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext>Next</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Done</ng-template>
+            <p>You are now done.</p>
             <div>
                 <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
+                <button mat-button (click)="stepper.reset()">Reset</button>
             </div>
-        </form>
-    </mat-step>
-    <mat-step>
-        <ng-template matStepLabel>Done</ng-template>
-        <p>You are now done.</p>
-        <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button (click)="stepper.reset()">Reset</button>
-        </div>
-    </mat-step>
-</mat-horizontal-stepper>
+        </mat-step>
+    </mat-horizontal-stepper>
 </div>
 
 <!-- Copyright 2020 Google LLC. All Rights Reserved.

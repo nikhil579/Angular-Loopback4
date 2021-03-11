@@ -37,12 +37,12 @@ export class UserInfoController {
         'application/json': {
           schema: getModelSchemaRef(UserInfo, {
             title: 'NewUserInfo',
-            exclude: ['id'],
+            
           }),
         },
       },
     })
-    userInfo: Omit<UserInfo, 'id'>,
+    userInfo: UserInfo,
   ): Promise<UserInfo> {
     return this.userInfoRepository.create(userInfo);
   }

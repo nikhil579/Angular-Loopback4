@@ -30,6 +30,11 @@ import { SingleUserComponent } from './containers/single-user/single-user.compon
 import { ListBrokerComponent } from './containers/list-broker/list-broker.component';
 import { NewBrokerComponent } from './containers/new-broker/new-broker.component';
 import { FormBrokerComponent } from './components/form-broker/form-broker.component';
+import { CustomerInfoComponent } from './components/customer-info/customer-info.component';
+import { CustomerPageComponent } from './containers/customer-page/customer-page.component';
+import { NewCustomerComponent } from './containers/new-customer/new-customer.component';
+import { FormCustomerComponent } from './components/form-customer/form-customer.component';
+import { ListCustomersComponent } from './containers/list-customers/list-customers.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +54,11 @@ import { FormBrokerComponent } from './components/form-broker/form-broker.compon
     ListBrokerComponent,
     NewBrokerComponent,
     FormBrokerComponent,
+    CustomerInfoComponent,
+    CustomerPageComponent,
+    NewCustomerComponent,
+    FormCustomerComponent,
+    ListCustomersComponent,
 
   ],
   imports: [

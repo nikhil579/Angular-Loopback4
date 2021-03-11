@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./list-broker.component.css']
 })
 export class ListBrokerComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'email', 'company', 'address', 'update', 'delete'];
+  displayedColumns: string[] = ['name', 'email', 'companyName', 'address', 'update', 'delete'];
   brokers: Broker[] = []
   dataSource: any
   @Input() inputBroker: Broker
@@ -57,7 +57,9 @@ export class ListBrokerComponent implements OnInit {
   //update
 
   public redirectToUpdate = (id: string) => {
-    console.log(id);
+    // console.log("Update" + " " + id);
+    // const routerLink = ['/editUser/' + id]
+    // console.log(routerLink);
     open('/editBroker/' + id)
   }
   broker: Broker = new Broker()

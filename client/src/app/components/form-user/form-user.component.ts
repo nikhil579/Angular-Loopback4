@@ -78,13 +78,22 @@ export class FormUserComponent implements OnInit {
   post(form: NgForm) {
     this.databaseService.postUserInfo(form.value).subscribe(res => {
       console.log(res);
+      this.isCreated = true
+      this.userExist = false
       Swal.fire(
         'User Created Successfully'
       )
-      this.router.navigateByUrl('/')
-    }, err => {
-      console.error(err)
-    }
+      this.router.navigateByUrl('/listUsers')
+    },
+      err => {
+        this.userError = err.error
+        this.isCreated = false
+        if (err.status != 200) {
+          this.isCreated = false
+          this.userExist = true
+        }
+        console.error(err);
+      }
     )
   }
   validSend(form: NgForm) {

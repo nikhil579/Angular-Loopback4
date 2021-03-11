@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserInfo } from "../models/user-info";
-import { environment } from "../environments/environments";
 @Injectable({
   providedIn: 'root'
 })
@@ -25,7 +24,7 @@ export class UserDatabaseService {
   getOneUserInfo(id: string) {
     return this.http.get(this.URL + `/${id}`)
   }
-//
+  //
   postValidUserInfo(userinfo: UserInfo) {
     const getEmail = this.getUserInfo()
     if (userinfo.email != 'nikhilsonawane21@gmail.com') {
@@ -35,8 +34,8 @@ export class UserDatabaseService {
       console.error("email already exist");
     }
   }
-  createUser(userinfo: UserInfo){
-    return this.http.post(this.URL, userinfo,this.httpheader);
+  createUser(userinfo: UserInfo) {
+    return this.http.post(this.URL, userinfo, this.httpheader);
   }
 
 }
