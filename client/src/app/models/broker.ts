@@ -1,5 +1,4 @@
 export class Broker {
-
     name: string
     email: string
     address: string

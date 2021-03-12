@@ -11,7 +11,7 @@
                     <div class="col">
                         <div class="form-group">
                             <label for='firstName'>First Name *</label>
-                            <input class="form-control" type="text" formControlName="firstName"
+                            <input id="firstName" class="form-control" type="text" formControlName="firstName"
                                 placeholder="Enter First Name" />
                             <div *ngIf="getForm.firstName.invalid && (getForm.firstName.dirty || getForm.firstName.touched)"
                                 class="alert alert-danger">
@@ -209,8 +209,12 @@
                     <div class="col">
                         <div class="form-group">
                             <label for='occupation'> Occupation</label>
-                            <input class="form-control" type="text" formControlName='occupation'
-                                placeholder="Enter Occupation" />
+                            <select id="occupation" formControlName="occupation" class="form-control">
+                                <option selected [ngValue]="null">Choose...</option>
+                                <option *ngFor="let item of userOccupation" [value]="item">
+                                    {{ item }}
+                                </option>
+                            </select>
                         </div>
                     </div>
                     <div class="col">
@@ -228,6 +232,24 @@
                                     {{ item }}
                                 </option>
                             </select>
+                        </div>
+                    </div>
+                </div>
+                <!-- office location -->
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for='officeLocation'> Office Location</label>
+                            <input class="form-control" type="text" formControlName='officeLocation'
+                                placeholder="Enter Office Location" />
+                        </div>
+                    </div>
+                    <!-- designation -->
+                    <div class="col">
+                        <div class="form-group">
+                            <label for='designation'> Designation </label>
+                            <input class="form-control" type="text" formControlName='designation'
+                                placeholder="Enter Designation" />
                         </div>
                     </div>
                 </div>
@@ -348,7 +370,13 @@
 
         </div>
         <!--  -->
-
+        <!-- seperator -->
+        <div class="row">
+            <div class="col">
+                <hr />
+            </div>
+        </div>
+        <!--  -->
 
         <div class="row">
             <div class="col">

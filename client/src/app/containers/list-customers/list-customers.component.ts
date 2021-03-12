@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { CustomerModel } from 'src/app/models/customer';
 import { CustomerService } from 'src/app/services/customer.service';
 import Swal from 'sweetalert2';
-
+import { Router } from "@angular/router";
 @Component({
   selector: 'app-list-customers',
   templateUrl: './list-customers.component.html',
@@ -17,7 +17,7 @@ export class ListCustomersComponent implements OnInit {
   dataSource: any
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  constructor(private DB: CustomerService) { }
+  constructor(private DB: CustomerService, private router: Router) { }
 
   ngOnInit(): void {
     this.getCustomerList()
@@ -55,10 +55,7 @@ export class ListCustomersComponent implements OnInit {
     open('/editCustomer/' + id)
   }
   public redirectToUpdate = (id: string) => {
-    // console.log("Update" + " " + id);
-    // const routerLink=['/editUser/'+id]
-    // console.log(routerLink);
-    open('/editCustomer/' + id)
+    this.router.navigate(['/editCustomer/', id])
   }
   public redirectToDelete = (id: string) => {
     Swal.fire({

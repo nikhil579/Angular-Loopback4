@@ -1,14 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CustomerModel } from "src/app/models/customer";
 import { CustomerService } from 'src/app/services/customer.service';
 import { bookingPref, budget, currResidence, financeDetail, gender, occupation, possession, purpose, residenceType, sector } from './mydata';
 import Swal from 'sweetalert2';
-import { Router } from '@angular/router';
-import { fromEvent } from 'rxjs';
-import { tap, map, debounceTime } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
+import { tap, debounceTime } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+
 
 
 @Component({
@@ -31,50 +30,60 @@ export class FormCustomerComponent implements OnInit {
   userFinance: Array<String> = financeDetail
   companyArray = ['Our Broker Company', 'Vulcan', '360 Realtors']
 
-  constructor(private fb: FormBuilder, public DB: CustomerService, private router: Router, private httpClient: HttpClient) { }
+  constructor(
+    private fb: FormBuilder, public DB: CustomerService, private router: Router,
+    private httpClient: HttpClient, private route: ActivatedRoute) { }
 
   customerForm: FormGroup;
   submitted = false;
 
   ngOnInit(): void {
-    if (this.snapshotId) {
+    this.createForms()
+    if (this.snapshotId) {    //will get one customer info only if snapshotif is provided
       this.getOneCustomer()
     }
-    this.createForms()
-    this.checkEmails()
 
+    if (!this.snapshotId) {
+      this.checkEmails()    //will ignore email validations on edit functionality
+    }
+
+    this.route.paramMap.subscribe(params => {
+      const cusID = params.get('id')
+      if (cusID) {
+        this.getOneCustomerById(cusID)
+      }
+    })
   }
 
   createForms() {
     this.customerForm = this.fb.group({
-      firstName: ['', [Validators.required, Validators.minLength(3)]],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.email, Validators.required]],
-      phoneNumber: ['', [Validators.required, Validators.maxLength(10)]],
-      dateOfBirth: ['', Validators.required],
-      gender: ['', Validators.required],
-      address: ['', Validators.required],
-      city: ['', Validators.required],
-      state: ['', Validators.required],
-      zipcode: ['', Validators.required],
-      occupation: [''],
-      orgName: [''],
-      designation: [''],
-      officeLocation: [''],
-      sector: [''],
-      residenceType: [''],
-      currResidence: [''],
-      bookingPref: [''],
-      budget: [''],
-      possession: [''],
-      purpose: [''],
-      financeDetail: [''],
-      chFirmName: [''],  //get record form real estate company e.g. broker company
+      firstName: [this.customerModel.firstName, [Validators.required, Validators.minLength(3)]],
+      lastName: [this.customerModel.lastName, Validators.required],
+      email: [this.customerModel.email, [Validators.email, Validators.required]],
+      phoneNumber: [this.customerModel.phoneNumber, [Validators.required, Validators.maxLength(10)]],
+      dateOfBirth: [this.customerModel.dateOfBirth, Validators.required],
+      gender: [this.customerModel.gender, Validators.required],
+      address: [this.customerModel.address, Validators.required],
+      city: [this.customerModel.city, Validators.required],
+      state: [this.customerModel.state, Validators.required],
+      zipcode: [this.customerModel.zipcode, Validators.required],
+      occupation: [this.customerModel.occupation],
+      orgName: [this.customerModel.orgName],
+      designation: [this.customerModel.designation],
+      officeLocation: [this.customerModel.officeLocation],
+      sector: [this.customerModel.sector],
+      residenceType: [this.customerModel.residenceType],
+      currResidence: [this.customerModel.currResidence],
+      bookingPref: [this.customerModel.bookingPref],
+      budget: [this.customerModel.budget],
+      possession: [this.customerModel.possession],
+      purpose: [this.customerModel.purpose],
+      financeDetail: [this.customerModel.financeDetail],
+      chFirmName: [this.customerModel.chFirmName],
     })
   }
 
   get getForm() { return this.customerForm.controls; }
-
 
   post() {
     this.DB.postCustomer(this.customerForm.value).subscribe(res => {
@@ -87,22 +96,12 @@ export class FormCustomerComponent implements OnInit {
       this.router.navigateByUrl('/listCustomers')
     },
       err => {
-        // if (err.status != 200) {
-        //   console.error("USER ALREADY EXIST");
-        // }
         console.error(err)
       }
     )
   }
 
   send() {
-    if (this.customerForm.invalid) {// REMOVE
-      Swal.fire(
-        'Error',
-        'Form Invalid',
-        'error'
-      )
-    }
     if (this.snapshotId) {
       this.editCustomer()
     }
@@ -116,9 +115,49 @@ export class FormCustomerComponent implements OnInit {
       (customerModel: CustomerModel) => {
         console.log(customerModel)
         this.customerModel = customerModel
+        this.editCustomer()
           , (err: any) => console.error(err);
       }
     )
+  }
+  /**
+   * for edit id in 2nd way
+   */
+  getOneCustomerById(id: string) {
+    this.DB.getOneCustomer(id).subscribe(
+      (customerModel: CustomerModel) => {
+        console.log(customerModel);
+        this.editCustomerById(customerModel),
+          (err: any) => console.error(err);
+      }
+    )
+  }
+  editCustomerById(customerModel: CustomerModel) {
+    this.customerForm.patchValue({
+      firstName: customerModel.firstName,
+      lastName: customerModel.lastName,
+      email: customerModel.email,
+      phoneNumber: customerModel.phoneNumber,
+      dateOfBirth: customerModel.dateOfBirth,
+      gender: customerModel.gender,
+      address: customerModel.address,
+      city: customerModel.city,
+      state: customerModel.state,
+      zipcode: customerModel.zipcode,
+      occupation: customerModel.occupation,
+      orgName: customerModel.orgName,
+      designation: customerModel.designation,
+      officeLocation: customerModel.officeLocation,
+      sector: customerModel.sector,
+      residenceType: customerModel.residenceType,
+      currResidence: customerModel.currResidence,
+      bookingPref: customerModel.bookingPref,
+      budget: customerModel.budget,
+      possession: customerModel.possession,
+      purpose: customerModel.purpose,
+      financeDetail: customerModel.financeDetail,
+      chFirmName: customerModel.chFirmName
+    })
   }
   editCustomer() {
     this.DB.updateCustomer(this.customerForm.value, this.snapshotId)
@@ -135,19 +174,21 @@ export class FormCustomerComponent implements OnInit {
           console.error(err);
         });
   }
-  /**
-   * for email validations
-   */
 
+
+
+  /**Email Validations 
+   * 
+  */
+  customersArray: CustomerModel[];
   get emailControl() {
     return this.customerForm.get('email') as FormControl
   }
-  customersArray: CustomerModel[];
-  //method to check email on each key press, tap and debounce in RxJS Library
   checkEmails() {
-    this.emailControl.valueChanges.pipe(      //pipe will filter out email when typed on emailControl Field
-      debounceTime(500),
-      tap(emailControl => {                   //tap will check on each keypress, with 500ms debounce time
+    //method to check email on each key press, tap and debounce in RxJS Library
+    this.emailControl.valueChanges.pipe(      // pipe will filter out email when typed on emailControl Field
+      debounceTime(1000),                     // Don't update the model with every keypress, instead wait 1s and then update
+      tap(emailControl => {                   // tap will check on each keypress, with 500ms debounce time
         if (emailControl !== '' && !this.emailControl.invalid) {
           this.emailControl.markAsPending();
         }
@@ -172,25 +213,6 @@ export class FormCustomerComponent implements OnInit {
         })
     })
   }
-  // Don't update the model with every keypress, instead wait 1s and then update
+
 
 }//end of class
-
-
-
-  // checkEmails() {
-  //   this.DB.getCustomers().subscribe(
-  //     (customersArray: CustomerModel[]) => {
-  //       customersArray.filter((res) => {
-  //         console.log(res.email);
-  //       })
-  //       const custObjs = customersArray.find(function (item) {
-  //         return item.email === 'nikhilsonawane21@gmail.com'
-  //       })
-  //       console.log("FOUND " + custObjs.email);
-  //     }
-  //   ),
-  //     err => {
-  //       console.error(err);
-  //     }
-  // }

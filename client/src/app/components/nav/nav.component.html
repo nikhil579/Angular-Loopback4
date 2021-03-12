@@ -1,3 +1,20 @@
+<mat-toolbar class="mat-elevation-z3 bg-dark">
+    <span>
+        <mat-icon [routerLink]="['/']">home</mat-icon>
+    </span>
+    <nav>
+        <a mat-button [routerLink]="['/']">Home<span class="sr-only">(current)</span></a>
+        <a mat-button [routerLink]="['/listUsers']">Users List</a>
+        <a mat-button [routerLink]="['/listBrokers']">Brokers List</a>
+        <a mat-button [routerLink]="['/listCustomers']">Customers List</a>
+        <a mat-icon-button routerLink="search" matTooltip="Search">
+            <mat-icon>search</mat-icon>
+        </a>
+    </nav>
+</mat-toolbar>
+<div class="app-content">
+    <router-outlet></router-outlet>
+</div>
 <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
     <a class="navbar-brand" [routerLink]="['/']">FlyWheel Tech</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -24,22 +41,3 @@
         </div>
     </div>
 </nav> -->
-<mat-toolbar class="mat-elevation-z3 bg-dark">
-    <span>
-        <mat-icon [routerLink]="['/']">home</mat-icon>
-    </span>
-    <nav>
-        <a mat-button [routerLink]="['/']">Home<span class="sr-only">(current)</span></a>
-        <!-- <a mat-button [routerLink]="['/usersPage']">Users</a> -->
-        <a mat-button [routerLink]="['/listUsers']">Users List</a>
-        <a mat-button [routerLink]="['/listBrokers']">Brokers List</a>
-        <!-- <a mat-button [routerLink]="['/customerPage']">Customers</a> -->
-        <a mat-button [routerLink]="['/listCustomers']">Customers List</a>
-        <a mat-icon-button routerLink="search" matTooltip="Search">
-            <mat-icon>search</mat-icon>
-        </a>
-    </nav>
-</mat-toolbar>
-<div class="app-content">
-    <router-outlet></router-outlet>
-</div>
