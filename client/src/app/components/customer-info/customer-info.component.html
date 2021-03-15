@@ -1,134 +1,259 @@
 <div class="container">
-    <div class="card">
-        <div class="card-header">
-            <h4> Customer Information </h4>
-            <span style="margin: 1rem;"></span>
-            <button (click)='showForm()' type="submit" class="btn btn-block btn-outline-info">
-                <span *ngIf="!setForm">Show Info</span>
-                <span *ngIf="setForm">Hide Info</span>
-            </button>
+    <form [formGroup]="customerForm" #SENDFORM="ngForm">
+        <div class="card">
+            <div class="card-header">
+                <h4>Customer Information</h4>
+            </div>
+            <div class="card-body">
+
+                <!-- name -->
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for='firstName'>First Name : </label>
+                            {{customerModel.firstName}}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for='lastName'>Last Name :</label>
+                            {{customerModel.lastName}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <!-- email -->
+                        <div class="form-group">
+                            <label for='email'>Email : </label>
+                            {{customerModel.email}}
+                        </div>
+
+                    </div>
+                    <!-- phone -->
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="phoneNumber">Phone Number : </label>
+                            {{customerModel.phoneNumber}}
+                        </div>
+                    </div>
+                </div>
+                <!-- gender -->
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for='gender'>Gender : </label>
+                            {{customerModel.gender}}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for='dateOfBirth'>Date of Birth : </label>
+                            {{customerModel.dateOfBirth}}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-            <div class="form-group">
-                <label>First Name </label>
-                {{customersInput.firstName}}
+
+        <!--  -->
+        <!-- seperator -->
+        <div class="row">
+            <div class="col">
+                <hr />
             </div>
-            <div class="form-group">
-                <label>Last Name </label>
-                {{customersInput.lastName}}
+        </div>
+        <!-- address -->
+        <div class="card">
+            <div class="card-header">
+                <h4>Address Information</h4>
             </div>
-            <div class="form-group">
-                <label>Email </label>
-                {{customersInput.email}}
-            </div>
-            <span *ngIf="setForm">
-                <div class="form-group">
-                    <label for="phoneNumber">Phone Number</label>
-                    {{customersInput.phoneNumber}}
-                </div>
-                <div class="form-group">
-                    <label>Gender</label>
-                    {{customersInput.gender}}
-                </div>
-                <div class="form-group">
-                    <label>Date of Birth</label>
-                    {{customersInput.dateOfBirth}}
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for='address'> Address : </label>
+                            {{customerModel.address}}
+                        </div>
+                    </div>
                 </div>
 
-                <!-- seperator -->
+                <!-- city -->
                 <div class="row">
                     <div class="col">
-                        <hr />
+                        <div class="form-group">
+                            <label for='city'> City : </label>
+                            {{customerModel.city}}
+                        </div>
                     </div>
-                </div>
-                <!-- address form portion -->
-                <div class="form-group">
-                    <label> Address</label>
-                    {{customersInput.address}}
-                </div>
-                <div class="form-group">
-                    <label> City</label>
-                    {{customersInput.city}}
-                </div>
-                <div class="form-group">
-                    <label> State</label>
-                    {{customersInput.state}}
-                </div>
-                <div class="form-group">
-                    <label> Zipcode</label>
-                    {{customersInput.zipcode}}
-                </div>
-                <!-- seperator -->
-                <div class="row">
+                    <!-- State -->
                     <div class="col">
-                        <hr />
+                        <div class="form-group">
+                            <label for='state'> State : </label>
+                            {{customerModel.state}}
+                        </div>
                     </div>
-                </div>
-                <!--  -->
-                <div class="form-group">
-                    <label> Occupation</label>
-                    {{customersInput.occupation}}
-                </div>
-                <div class="form-group">
-                    <label> Organisation Name</label>
-                    {{customersInput.orgName}}
-                </div>
-                <div class="form-group">
-                    <label> Sector</label>
-                    {{customersInput.sector}}
-                </div>
-                <div class="form-group">
-                    <label> Residence Type</label>
-                    {{customersInput.residenceType}}
-                </div>
-                <div class="form-group">
-                    <label> Current Residence</label>
-                    {{customersInput.currResidence}}
-                </div>
-                <div class="form-group">
-                    <label> Booking</label>
-                    {{customersInput.bookingPref}}
-                </div>
-                <div class="form-group">
-                    <label> Budget</label>
-                    {{customersInput.budget}}
-                </div>
-                <div class="form-group">
-                    <label> Possession</label>
-                    {{customersInput.possession}}
-                </div>
-                <div class="form-group">
-                    <label> Purpose of Buying</label>
-                    {{customersInput.purpose}}
-                </div>
-                <div class="form-group">
-                    <label> Financing Details</label>
-                    {{customersInput.financeDetail}}
-                </div>
-                <!-- seperator -->
-                <div class="row">
+                    <!-- zipcode -->
                     <div class="col">
-                        <hr />
+                        <div class="form-group">
+                            <label for='zipcode'> Zipcode : </label>
+                            {{customerModel.zipcode}}
+                        </div>
                     </div>
                 </div>
-                <!--  -->
-                <div class="form-group">
-                    <label>Channel Partner Firm Name </label>
-                    {{customersInput.chFirmName}}
-                </div>
-            </span>
-            <!--  -->
+            </div>
         </div>
-        <div class="card-footer">
-            <button (click)='settings()' type="submit" class="btn btn-outline-success btn-block">
-                <span *ngIf="!opt">Options</span>
-                <span *ngIf="opt">Hide Options</span>
-            </button>
-            <br /><br />
-            <span *ngIf="opt">
-                <button [routerLink]="['/editCustomer',customersInput.id]" class="btn btn-dark btn-block">Edit</button>
-                <button (click)='delete(customersInput)' class="btn btn-danger btn-block">Delete</button>
-            </span>
+        <!-- seperator -->
+        <div class="row">
+            <div class="col">
+                <hr />
+            </div>
         </div>
-    </div>
+        <!-- work -->
+        <div class="card">
+            <div class="card-header">
+                <h4>Work Information</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for='occupation'> Occupation : </label>
+                            {{customerModel.occupation}}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for='orgName'> Organisation Name : </label>
+                            {{customerModel.orgName}}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for='sector'> Sector : </label>
+                            {{customerModel.sector}}
+                        </div>
+                    </div>
+                </div>
+                <!-- office location -->
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for='officeLocation'> Office Location : </label>
+                            {{customerModel.officeLocation}}
+                        </div>
+                    </div>
+                    <!-- designation -->
+                    <div class="col">
+                        <div class="form-group">
+                            <label for='designation'> Designation : </label>
+                            {{customerModel.designation}}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- seperator -->
+        <div class="row">
+            <div class="col">
+                <hr />
+            </div>
+        </div>
+        <!-- residence -->
+        <div class="card">
+            <div class="card-header">
+                <h4>Residence Details</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for='residenceType'> Residence Type : </label>
+                            {{customerModel.residenceType}}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for='currResidence'> Current Residence : </label>
+                            {{customerModel.currResidence}}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for='bookingPref'> Booking : </label>
+                            {{customerModel.bookingPref}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for='budget'> Budget : </label>
+                            {{customerModel.budget}}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for='possession'> Possession : </label>
+                            {{customerModel.possession}}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for='purpose'> Purpose of Buying : </label>
+                            {{customerModel.purpose}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for='financeDetail'> Financing Details : </label>
+                            {{customerModel.financeDetail}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--  -->
+        <!-- seperator -->
+        <div class="row">
+            <div class="col">
+                <hr />
+            </div>
+        </div>
+        <!--  -->
+        <div class="form-group">
+            <label for="chFirmName">Channel Partner Company : </label>
+            {{customerModel.chFirmName}}
+
+        </div>
+        <!--  -->
+        <!-- seperator -->
+        <div class="row">
+            <div class="col">
+                <hr />
+            </div>
+        </div>
+        <!--  -->
+
+        <div class="row">
+            <div class="col">
+                <button [routerLink]="['/editCustomer',snapshotId]" class="btn btn-dark col-6">Edit</button>
+            </div>
+            <div class="col">
+                <button (click)="deleteCustomerId(snapshotId)" class="btn btn-danger btn-block col-6">Delete</button>
+            </div>
+        </div>
+
+
+        <!-- seperator -->
+        <div class="row">
+            <div class="col">
+                <hr />
+            </div>
+        </div>
+        <!--  -->
+    </form>
 </div>

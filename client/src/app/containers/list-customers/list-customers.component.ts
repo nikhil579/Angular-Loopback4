@@ -52,7 +52,7 @@ export class ListCustomersComponent implements OnInit {
     this.dataSource.paginator = this.paginator
   }
   public redirectToDetails = (id: string) => {
-    open('/editCustomer/' + id)
+    this.router.navigate(['/customerPage/', id])
   }
   public redirectToUpdate = (id: string) => {
     this.router.navigate(['/editCustomer/', id])

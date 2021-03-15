@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CustomerModel } from 'src/app/models/customer';
-import { CustomerInfoComponent } from "src/app/components/customer-info/customer-info.component"; //client\src\app\components\customer-info\customer-info.component.ts
+import { CustomerInfoComponent } from "src/app/components/customer-info/customer-info.component";
 import { CustomerService } from 'src/app/services/customer.service';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-customer-page',
   templateUrl: './customer-page.component.html',
@@ -9,9 +10,13 @@ import { CustomerService } from 'src/app/services/customer.service';
 })
 export class CustomerPageComponent implements OnInit {
   customersArray: CustomerModel[] = []
-  constructor(private DB: CustomerService) { }
-
+  id: any
+  constructor(private DB: CustomerService, private route: ActivatedRoute) {
+    this.id = this.route.snapshot.paramMap.get('id')
+  }
   ngOnInit(): void {
+    console.log(this.id);
+
     this.getCustomersPage()
   }
   getCustomersPage() {
@@ -24,5 +29,4 @@ export class CustomerPageComponent implements OnInit {
       console.error(err);
     }
   }
-
 }

@@ -4,7 +4,6 @@
     </span>
     <nav>
         <a mat-button [routerLink]="['/']">Home<span class="sr-only">(current)</span></a>
-        <a mat-button [routerLink]="['/listUsers']">Users List</a>
         <a mat-button [routerLink]="['/listBrokers']">Brokers List</a>
         <a mat-button [routerLink]="['/listCustomers']">Customers List</a>
         <a mat-icon-button routerLink="search" matTooltip="Search">
@@ -15,29 +14,3 @@
 <div class="app-content">
     <router-outlet></router-outlet>
 </div>
-<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
-    <a class="navbar-brand" [routerLink]="['/']">FlyWheel Tech</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link " [routerLink]="['/']">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item ">
-                <a class="nav-link " [routerLink]="['/usersPage']">Users</a>
-            </li>
-            <li class="nav-item ">
-                <a class="nav-link " [routerLink]="['/listUsers']">List Users</a>
-            </li>
-        </ul>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <div class="ml-auto">
-                <a class="btn btn-secondary text-light" [routerLink]="['/newUser']">New User</a>
-            </div>
-        </div>
-    </div>
-</nav> -->

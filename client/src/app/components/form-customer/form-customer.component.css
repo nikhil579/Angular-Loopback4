@@ -24,3 +24,4 @@ input.ng-pending{
   border-right: 1px solid orange;
   box-shadow: 0 0 0 0.2rem rgba(255, 128, 2, .25);
 }
+form label {font-weight:500}

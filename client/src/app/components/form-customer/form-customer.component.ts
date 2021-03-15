@@ -8,28 +8,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { tap, debounceTime } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 
-
-
 @Component({
   selector: 'app-form-customer',
   templateUrl: './form-customer.component.html',
   styleUrls: ['./form-customer.component.css']
 })
 export class FormCustomerComponent implements OnInit {
+
   customerModel: CustomerModel = new CustomerModel()
   @Input() snapshotId: string
-  userGender: Array<String> = gender
-  userOccupation: Array<String> = occupation
-  userSector: Array<String> = sector
-  userResidence: Array<String> = residenceType
-  userCurrentRes: Array<String> = currResidence
-  userBookingPref: Array<String> = bookingPref
-  userBudget: Array<String> = budget
-  userPossession: Array<String> = possession
-  userPurpose: Array<String> = purpose
-  userFinance: Array<String> = financeDetail
-  companyArray = ['Our Broker Company', 'Vulcan', '360 Realtors']
-
   constructor(
     private fb: FormBuilder, public DB: CustomerService, private router: Router,
     private httpClient: HttpClient, private route: ActivatedRoute) { }
@@ -39,12 +26,12 @@ export class FormCustomerComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForms()
-    if (this.snapshotId) {    //will get one customer info only if snapshotif is provided
+    if (this.snapshotId) {    // This will get one customer info only if snapshotid is returned
       this.getOneCustomer()
     }
 
-    if (!this.snapshotId) {
-      this.checkEmails()    //will ignore email validations on edit functionality
+    if (!this.snapshotId) {    // This will ignore email validations on edit functionality
+      this.checkEmails();
     }
 
     this.route.paramMap.subscribe(params => {
@@ -82,7 +69,9 @@ export class FormCustomerComponent implements OnInit {
       chFirmName: [this.customerModel.chFirmName],
     })
   }
-
+  /**
+   * form control getter shortcut
+   * */
   get getForm() { return this.customerForm.controls; }
 
   post() {
@@ -108,8 +97,8 @@ export class FormCustomerComponent implements OnInit {
     else {
       this.post()
     }
-
   }
+
   getOneCustomer() {
     this.DB.getOneCustomer(this.snapshotId).subscribe(
       (customerModel: CustomerModel) => {
@@ -121,7 +110,7 @@ export class FormCustomerComponent implements OnInit {
     )
   }
   /**
-   * for edit id in 2nd way
+   * Mimics ngModel two way binding. contains edit by id function
    */
   getOneCustomerById(id: string) {
     this.DB.getOneCustomer(id).subscribe(
@@ -132,6 +121,7 @@ export class FormCustomerComponent implements OnInit {
       }
     )
   }
+  /** Patch method. Works the same way as ngModel two way binding  */
   editCustomerById(customerModel: CustomerModel) {
     this.customerForm.patchValue({
       firstName: customerModel.firstName,
@@ -175,20 +165,17 @@ export class FormCustomerComponent implements OnInit {
         });
   }
 
-
-
-  /**Email Validations 
-   * 
+  /**Email Validations
+   *
   */
   customersArray: CustomerModel[];
   get emailControl() {
     return this.customerForm.get('email') as FormControl
   }
-  checkEmails() {
-    //method to check email on each key press, tap and debounce in RxJS Library
-    this.emailControl.valueChanges.pipe(      // pipe will filter out email when typed on emailControl Field
-      debounceTime(1000),                     // Don't update the model with every keypress, instead wait 1s and then update
-      tap(emailControl => {                   // tap will check on each keypress, with 500ms debounce time
+  checkEmails() {                             /* method to check email on each key press, tap and debounce in RxJS Library */
+    this.emailControl.valueChanges.pipe(      /* pipe will filter out email when typed on emailControl Field */
+      debounceTime(1000),                     /* Don't update the model with every keypress, instead wait 1s and then update */
+      tap(emailControl => {                   /* tap will check on each keypress, with 500ms debounce time */
         if (emailControl !== '' && !this.emailControl.invalid) {
           this.emailControl.markAsPending();
         }
@@ -197,6 +184,7 @@ export class FormCustomerComponent implements OnInit {
         }
       })
     ).subscribe(emailData => {
+      /**filter query to search by email */
       const filterQuery = {
         offset: 0, where: { 'email': emailData }
       };
@@ -214,5 +202,15 @@ export class FormCustomerComponent implements OnInit {
     })
   }
 
-
-}//end of class
+  userGender: Array<String> = gender
+  userOccupation: Array<String> = occupation
+  userSector: Array<String> = sector
+  userResidence: Array<String> = residenceType
+  userCurrentRes: Array<String> = currResidence
+  userBookingPref: Array<String> = bookingPref
+  userBudget: Array<String> = budget
+  userPossession: Array<String> = possession
+  userPurpose: Array<String> = purpose
+  userFinance: Array<String> = financeDetail
+  companyArray = ['Our Broker Company', 'Vulcan', '360 Realtors']
+}// end of class

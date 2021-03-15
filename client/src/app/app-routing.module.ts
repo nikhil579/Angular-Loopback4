@@ -15,6 +15,18 @@ const routes: Routes = [
     component: MainComponent
   },
   {
+    path: 'newCustomer',
+    component: NewCustomerComponent
+  },
+  {
+    path: 'listCustomers',
+    component: ListCustomersComponent
+  },
+  {
+    path: 'editCustomer/:id',
+    component: NewCustomerComponent
+  },
+  {
     path: 'listBrokers',
     component: ListBrokerComponent
   },
@@ -27,25 +39,14 @@ const routes: Routes = [
     component: NewBrokerComponent
   },
   {
-    path: 'customerInfo',
-    component: CustomerInfoComponent
+    path: 'customerPage/:id',
+    component: CustomerPageComponent
   },
   {
     path: 'customerPage',
     component: CustomerPageComponent
   },
-  {
-    path: 'newCustomer',
-    component: NewCustomerComponent
-  },
-  {
-    path: 'listCustomers',
-    component: ListCustomersComponent
-  },
-  {
-    path: 'editCustomer/:id',
-    component: NewCustomerComponent
-  }
+
 
 ];
 
