@@ -17,19 +17,19 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {Broker} from '../models';
-import {BrokerRepository} from '../repositories';
+import { Broker } from '../models';
+import { BrokerRepository } from '../repositories';
 
 export class BrokerController {
   constructor(
     @repository(BrokerRepository)
-    public brokerRepository : BrokerRepository,
-  ) {}
+    public brokerRepository: BrokerRepository,
+  ) { }
 
   @post('/brokers')
   @response(200, {
     description: 'Broker model instance',
-    content: {'application/json': {schema: getModelSchemaRef(Broker)}},
+    content: { 'application/json': { schema: getModelSchemaRef(Broker) } },
   })
   async create(
     @requestBody({
@@ -37,12 +37,12 @@ export class BrokerController {
         'application/json': {
           schema: getModelSchemaRef(Broker, {
             title: 'NewBroker',
-            
+            exclude: ['id'],
           }),
         },
       },
     })
-    broker: Broker,
+    broker: Omit<Broker, 'id'>,
   ): Promise<Broker> {
     return this.brokerRepository.create(broker);
   }
@@ -50,7 +50,7 @@ export class BrokerController {
   @get('/brokers/count')
   @response(200, {
     description: 'Broker model count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
     @param.where(Broker) where?: Where<Broker>,
@@ -65,7 +65,7 @@ export class BrokerController {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(Broker, {includeRelations: true}),
+          items: getModelSchemaRef(Broker, { includeRelations: true }),
         },
       },
     },
@@ -79,13 +79,13 @@ export class BrokerController {
   @patch('/brokers')
   @response(200, {
     description: 'Broker PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Broker, {partial: true}),
+          schema: getModelSchemaRef(Broker, { partial: true }),
         },
       },
     })
@@ -100,13 +100,13 @@ export class BrokerController {
     description: 'Broker model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(Broker, {includeRelations: true}),
+        schema: getModelSchemaRef(Broker, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(Broker, {exclude: 'where'}) filter?: FilterExcludingWhere<Broker>
+    @param.filter(Broker, { exclude: 'where' }) filter?: FilterExcludingWhere<Broker>
   ): Promise<Broker> {
     return this.brokerRepository.findById(id, filter);
   }
@@ -120,7 +120,7 @@ export class BrokerController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Broker, {partial: true}),
+          schema: getModelSchemaRef(Broker, { partial: true }),
         },
       },
     })

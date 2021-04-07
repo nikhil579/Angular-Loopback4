@@ -7,11 +7,10 @@ import { MainComponent } from './containers/main/main.component';
 import { NavComponent } from './components/nav/nav.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-
-//material UI
-
-import { DemoMaterialModule } from './material-module';
 import { ReactiveFormsModule } from "@angular/forms";
+//material UI
+import { DemoMaterialModule } from './material-module';
+//custom modules
 import { ListBrokerComponent } from './containers/list-broker/list-broker.component';
 import { NewBrokerComponent } from './containers/new-broker/new-broker.component';
 import { FormBrokerComponent } from './components/form-broker/form-broker.component';
@@ -20,6 +19,9 @@ import { CustomerPageComponent } from './containers/customer-page/customer-page.
 import { NewCustomerComponent } from './containers/new-customer/new-customer.component';
 import { FormCustomerComponent } from './components/form-customer/form-customer.component';
 import { ListCustomersComponent } from './containers/list-customers/list-customers.component';
+import { BrokerPageComponent } from './containers/broker-page/broker-page.component';
+import { BrokerInfoComponent } from './components/broker-info/broker-info.component';
+import { ListRealEstateComponent } from './containers/list-real-estate/list-real-estate.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,9 @@ import { ListCustomersComponent } from './containers/list-customers/list-custome
     NewCustomerComponent,
     FormCustomerComponent,
     ListCustomersComponent,
+    BrokerPageComponent,
+    BrokerInfoComponent,
+    ListRealEstateComponent,
 
   ],
   imports: [

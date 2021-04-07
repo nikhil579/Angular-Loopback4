@@ -1,38 +1,28 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { Broker } from 'src/app/models/broker';
 import { BrokerService } from 'src/app/services/broker.service';
 import Swal from 'sweetalert2';
-
 @Component({
   selector: 'app-list-broker',
   templateUrl: './list-broker.component.html',
   styleUrls: ['./list-broker.component.css']
 })
 export class ListBrokerComponent implements OnInit {
-  displayedColumns: string[] = ['name', 'email', 'companyName', 'address', 'update', 'delete'];
+  displayedColumns: string[] = ['name', 'email', 'companyName', 'location', 'details', 'update', 'delete'];
   brokers: Broker[] = []
   dataSource: any
-  @Input() inputBroker: Broker
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  brokersList: Broker[];
-  constructor(private databaseService: BrokerService) { }
+  constructor(private databaseService: BrokerService, private router: Router) { }
 
   ngOnInit() {
     this.getBrokers()
   }
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
+
   getBrokers() {
     this.databaseService.getBrokers().subscribe((brokers: Broker[]) => {
       console.log(brokers);
@@ -45,25 +35,30 @@ export class ListBrokerComponent implements OnInit {
     })
     console.log(this.brokers);
   }
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
   tableUserView() {
     this.databaseService.getBrokers()
       .subscribe((data) => {
         this.dataSource.data = data || []
-
       })
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator
   }
-  //update
 
-  public redirectToUpdate = (id: string) => {
-    // console.log("Update" + " " + id);
-    // const routerLink = ['/editUser/' + id]
-    // console.log(routerLink);
-    open('/editBroker/' + id)
+  public redirectToDetails = (id: string) => {
+    this.router.navigate(['/brokersPage/', id])
   }
-  broker: Broker = new Broker()
-  @Input() id: string
+  //update
+  public redirectToUpdate = (id: string) => {
+    this.router.navigate(['/editBroker/', id])
+  }
 
   // delete
   public redirectToDelete = (id: string) => {
@@ -90,18 +85,6 @@ export class ListBrokerComponent implements OnInit {
             console.error(err);
           })
       }
-    })
-  }
-  edit(form: NgForm) {
-    this.databaseService.updateBroker(form.value, this.id).subscribe(res => {
-      console.log(res);
-      Swal.fire(
-        'Success',
-        'User Details Modified Successfully',
-        'success'
-      )
-    }, err => {
-      console.error(err)
     })
   }
   delete(user: Broker) {

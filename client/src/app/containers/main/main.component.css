@@ -1,0 +1,30 @@
+/* Add application styles & imports to this file! */
+
+.container {
+    padding: 20px 20px;
+  }
+    
+.mat-checkbox-layout {
+    display: inline !important;
+  }
+  
+  .bottom-margin {
+    margin-bottom: 30px;
+  }
+  
+  .form-dropdown .ui-dropdown .ui-dropdown-trigger .fa, .form-dropdown .ui-dropdown .ui-multiselect-trigger .fa, .form-dropdown .ui-multiselect .ui-dropdown-trigger .fa, .form-dropdown .ui-multiselect .ui-multiselect-trigger .fa {
+    margin-top: 0 !important;
+  }
+  
+  a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
+    color: white;
+  }
+  
+  .fa.fa-caret-down {
+    font-size: 14px;
+  }
+  
+  .nav-dropdown-content.dropdown-extend-left {
+    right: calc(100% - 75px);
+  }
+  

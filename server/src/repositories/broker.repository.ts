@@ -5,7 +5,7 @@ import {Broker, BrokerRelations} from '../models';
 
 export class BrokerRepository extends DefaultCrudRepository<
   Broker,
-  typeof Broker.prototype.email,
+  typeof Broker.prototype.id,
   BrokerRelations
 > {
   constructor(

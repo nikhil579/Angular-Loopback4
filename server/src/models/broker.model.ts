@@ -1,28 +1,10 @@
 import { Entity, model, property } from '@loopback/repository';
 
-@model({ settings: { strict: false } })
+@model()
 export class Broker extends Entity {
   @property({
     type: 'string',
-    required: true,
-  })
-  name: string;
-
-  @property({
-    type: 'string',
     id: true,
-    generated: false,
-    required: true,
-  })
-  email: string;
-
-  @property({
-    type: 'string',
-    required: true,
-  })
-  address: string;
-  @property({
-    type: 'string',
     generated: true,
   })
   id?: string;
@@ -30,12 +12,42 @@ export class Broker extends Entity {
   @property({
     type: 'string',
   })
-  companyName?: string;
-  // Define well-known properties here
+  name?: string;
 
-  // Indexer property to allow additional data
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [prop: string]: any;
+  @property({
+    type: 'string',
+  })
+  email?: string;
+
+  @property({
+    type: 'number',
+  })
+  mobile?: number;
+
+  @property({
+    type: 'string',
+  })
+  companyName?: string;
+
+  @property({
+    type: 'string',
+  })
+  location?: string;
+
+  @property({
+    type: 'string',
+  })
+  Rera_Number?: string;
+
+  @property({
+    type: 'string',
+  })
+  GST_Number?: string;
+
+  @property({
+    type: 'string',
+  })
+  realEstateId?: string;
 
   constructor(data?: Partial<Broker>) {
     super(data);

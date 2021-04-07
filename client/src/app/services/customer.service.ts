@@ -6,10 +6,8 @@ import { CustomerModel } from '../models/customer';
   providedIn: 'root'
 })
 export class CustomerService {
-
   private readonly URL: string = 'http://localhost:3000/customer-infos'
   private httpheader = { headers: new HttpHeaders({ 'Content-type': 'application/json' }) }
-
   constructor(private http: HttpClient) { }
 
   getCustomers() {

@@ -2,37 +2,36 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { CustomerModel } from 'src/app/models/customer';
-import { CustomerService } from 'src/app/services/customer.service';
+import { Router } from '@angular/router';
+import { RealEstate } from 'src/app/models/realEstate';
+import { RealEstateService } from 'src/app/services/realEstate.service';
 import Swal from 'sweetalert2';
-import { Router } from "@angular/router";
 @Component({
-  selector: 'app-list-customers',
-  templateUrl: './list-customers.component.html',
-  styleUrls: ['./list-customers.component.css']
+  selector: 'app-list-real-estate',
+  templateUrl: './list-real-estate.component.html',
+  styleUrls: ['./list-real-estate.component.css']
 })
-export class ListCustomersComponent implements OnInit {
-  customerModel: CustomerModel[] = []
-  displayedColumns: string[] = ['firstName', 'lastName', 'email', 'phoneNumber', 'city', 'details', 'update', 'delete'];
+export class ListRealEstateComponent implements OnInit {
+  displayedColumns: string[] = ['companyName', 'location', 'details', 'update', 'delete'];
+  realEstateArray: RealEstate[] = []
   dataSource: any
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  constructor(private DB: CustomerService, private router: Router) { }
+  constructor(private databaseService: RealEstateService, private router: Router) { }
 
-  ngOnInit(): void {
-    this.getCustomerList()
+  ngOnInit() {
+    this.getRealEstate()
   }
-  getCustomerList() {
-    this.DB.getCustomers().subscribe((customerModel: CustomerModel[]) => {
-      console.log(customerModel);
-      this.customerModel = customerModel
-      this.dataSource = new MatTableDataSource(customerModel)
-      this.dataSource.sort = this.sort
+  getRealEstate() {
+    this.databaseService.getRealEstates().subscribe((realEstateArray: RealEstate[]) => {
+      console.log(realEstateArray);
+      this.realEstateArray = realEstateArray
+      this.dataSource = new MatTableDataSource(realEstateArray)
+      this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator
     }, err => {
-      console.error(err);
+      console.error(err)
     })
-    console.log(this.customerModel);
   }
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -43,7 +42,7 @@ export class ListCustomersComponent implements OnInit {
     }
   }
   tableUserView() {
-    this.DB.getCustomers()
+    this.databaseService.getRealEstates()
       .subscribe((data) => {
         this.dataSource.data = data || []
       })
@@ -51,12 +50,14 @@ export class ListCustomersComponent implements OnInit {
     this.dataSource.paginator = this.paginator
   }
   public redirectToDetails = (id: string) => {
-    this.router.navigate(['/customerPage/', id])
+    console.log(id);
   }
   public redirectToUpdate = (id: string) => {
-    this.router.navigate(['/editCustomer/', id])
+    console.log(id);
   }
+  // delete
   public redirectToDelete = (id: string) => {
+    console.log(id);
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -67,10 +68,10 @@ export class ListCustomersComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.DB.deleteCustomer(id).subscribe(res => {
+        this.databaseService.deleteRealEstate(id).subscribe(res => {
           Swal.fire(
             'Deleted!',
-            'Customer has been deleted.',
+            'Your file has been deleted.',
             'success'
           )
           location.reload();
@@ -81,5 +82,4 @@ export class ListCustomersComponent implements OnInit {
       }
     })
   }
-
 }

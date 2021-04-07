@@ -1,0 +1,81 @@
+<div class="container">
+    <form [formGroup]="brokerForm" #SENDFORM="ngForm">
+        <div class="card">
+            <div class="card-header">
+                <h4>Broker Information</h4>
+                <button [routerLink]="['/editBroker',snapshotId]" id='edit' class="btn btn-dark">Edit</button>
+                <button (click)="deleteBrokerById(snapshotId)" class="btn btn-danger">Delete</button>
+            </div>
+            <div class="card-body">
+
+
+                <!-- name -->
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for='name'>Name </label>
+                            <input disabled id="name" class="form-control" type="text" formControlName="name"
+                                placeholder="Enter Name" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <!-- email -->
+                        <div class="form-group">
+                            <label for='email'>Email </label>
+                            <input disabled class="form-control" type="email" formControlName='email'
+                                [class.notValid]="emailControl.errors?.notUnique" placeholder="Enter Email" />
+                        </div>
+
+                    </div>
+                    <!-- phone -->
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="mobile">Mobile Number </label>
+                            <input disabled class="form-control" type="number" formControlName='mobile'
+                                placeholder="Enter Phone Number" />
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for='companyName'>Company Name </label>
+                            <select disabled id="companyName" formControlName="companyName" class="form-control">
+                                <option>{{brokerModel.companyName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for='location'>Location </label>
+                            <input disabled id="location" class="form-control" type="text" formControlName="location"
+                                placeholder="Enter Location" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for='Rera_Number'>RERA Number </label>
+                        <input disabled id="Rera_Number" class="form-control" type="text" formControlName="Rera_Number"
+                            placeholder="Enter RERA Number" />
+                    </div>
+                    <div class="col">
+                        <label for='GST_Number'>GST Number </label>
+                        <input disabled id="GST_Number" class="form-control" type="text" formControlName="GST_Number"
+                            placeholder="Enter GST Number" />
+                    </div>
+                </div>
+                <!--  -->
+                <div class="row">
+                    <div class="col">
+                        <hr />
+                    </div>
+                </div>
+                <!--  -->
+
+            </div>
+        </div>
+    </form>
+</div>

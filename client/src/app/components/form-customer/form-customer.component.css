@@ -14,6 +14,11 @@ input.ng-valid{
   border-right: 1px solid green;
   box-shadow: 0 0 0 0.2rem rgba(0, 128, 10, .25);
 }
+select.ng-valid{
+  border:1px solid green;
+  border-right: 1px solid green;
+  box-shadow: 0 0 0 0.2rem rgba(0, 128, 10, .25);
+}
 input.ng-invalid.ng-touched, input.notValid{
   border:1px solid red;
   border-right: 1px solid red;

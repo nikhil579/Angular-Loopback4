@@ -1,8 +1,11 @@
 export class Broker {
+    id?: string
     name: string
     email: string
-    address: string
-    id: string
+    mobile: number
     companyName: string
-    additionalProp1: {}
+    location: string
+    Rera_Number?: string
+    GST_Number?: string
+    realEstateId: string
 }

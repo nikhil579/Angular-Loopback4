@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CustomerInfoComponent } from './components/customer-info/customer-info.component';
+import { BrokerPageComponent } from './containers/broker-page/broker-page.component';
 import { CustomerPageComponent } from './containers/customer-page/customer-page.component';
 import { ListBrokerComponent } from './containers/list-broker/list-broker.component';
 import { ListCustomersComponent } from './containers/list-customers/list-customers.component';
+import { ListRealEstateComponent } from './containers/list-real-estate/list-real-estate.component';
 import { MainComponent } from './containers/main/main.component';
 import { NewBrokerComponent } from './containers/new-broker/new-broker.component';
 import { NewCustomerComponent } from './containers/new-customer/new-customer.component';
@@ -27,27 +29,29 @@ const routes: Routes = [
     component: NewCustomerComponent
   },
   {
-    path: 'listBrokers',
-    component: ListBrokerComponent
+    path: 'customerPage/:id',
+    component: CustomerPageComponent
   },
   {
     path: 'newBroker',
     component: NewBrokerComponent
   },
   {
+    path: 'listBrokers',
+    component: ListBrokerComponent
+  },
+  {
     path: 'editBroker/:id',
     component: NewBrokerComponent
   },
   {
-    path: 'customerPage/:id',
-    component: CustomerPageComponent
+    path: 'brokersPage/:id',
+    component: BrokerPageComponent
   },
   {
-    path: 'customerPage',
-    component: CustomerPageComponent
+    path: 'listRealEstate',
+    component: ListRealEstateComponent
   },
-
-
 ];
 
 @NgModule({

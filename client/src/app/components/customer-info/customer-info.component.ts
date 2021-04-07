@@ -1,12 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { debounceTime, tap } from 'rxjs/operators';
 import { CustomerModel } from 'src/app/models/customer';
 import { CustomerService } from 'src/app/services/customer.service';
 import Swal from 'sweetalert2';
-import { gender, occupation, sector, residenceType, currResidence, bookingPref, budget, possession, purpose, financeDetail } from '../form-customer/mydata';
 
 @Component({
   selector: 'app-customer-info',
@@ -14,24 +11,17 @@ import { gender, occupation, sector, residenceType, currResidence, bookingPref, 
   styleUrls: ['./customer-info.component.css']
 })
 export class CustomerInfoComponent implements OnInit {
-
   customerModel: CustomerModel = new CustomerModel()
+  customerForm: FormGroup;
   @Input() snapshotId: string
   constructor(
     private fb: FormBuilder, public DB: CustomerService, private router: Router,
-    private httpClient: HttpClient, private route: ActivatedRoute) { }
-
-  customerForm: FormGroup;
-  submitted = false;
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.createForms()
     if (this.snapshotId) {    // This will get one customer info only if snapshotid is returned
       this.getOneCustomer()
-    }
-
-    if (!this.snapshotId) {    // This will ignore email validations on edit functionality
-      this.checkEmails();
     }
 
     this.route.paramMap.subscribe(params => {
@@ -44,29 +34,29 @@ export class CustomerInfoComponent implements OnInit {
 
   createForms() {
     this.customerForm = this.fb.group({
-      firstName: [this.customerModel.firstName, [Validators.required, Validators.minLength(3)]],
-      lastName: [this.customerModel.lastName, Validators.required],
-      email: [this.customerModel.email, [Validators.email, Validators.required]],
-      phoneNumber: [this.customerModel.phoneNumber, [Validators.required, Validators.maxLength(10)]],
-      dateOfBirth: [this.customerModel.dateOfBirth, Validators.required],
-      gender: [this.customerModel.gender, Validators.required],
-      address: [this.customerModel.address, Validators.required],
-      city: [this.customerModel.city, Validators.required],
-      state: [this.customerModel.state, Validators.required],
-      zipcode: [this.customerModel.zipcode, Validators.required],
-      occupation: [this.customerModel.occupation],
-      orgName: [this.customerModel.orgName],
-      designation: [this.customerModel.designation],
-      officeLocation: [this.customerModel.officeLocation],
-      sector: [this.customerModel.sector],
-      residenceType: [this.customerModel.residenceType],
-      currResidence: [this.customerModel.currResidence],
-      bookingPref: [this.customerModel.bookingPref],
-      budget: [this.customerModel.budget],
-      possession: [this.customerModel.possession],
-      purpose: [this.customerModel.purpose],
-      financeDetail: [this.customerModel.financeDetail],
-      chFirmName: [this.customerModel.chFirmName],
+      firstName: [({ value: 'firstName', disabled: true })],
+      lastName: [({ value: 'lastName', disabled: true })],
+      email: [({ value: 'email', disabled: true })],
+      phoneNumber: [({ value: 'phoneNumber', disabled: true })],
+      dateOfBirth: [({ value: 'dateOfBirth', disabled: true })],
+      gender: [({ value: 'gender', disabled: true })],
+      address: [({ value: 'address', disabled: true })],
+      city: [({ value: 'city', disabled: true })],
+      state: [({ value: 'state', disabled: true })],
+      zipcode: [({ value: 'zipcode', disabled: true })],
+      occupation: [({ value: 'occupation', disabled: true })],
+      orgName: [({ value: 'orgName', disabled: true })],
+      designation: [({ value: 'designation', disabled: true })],
+      officeLocation: [({ value: 'officeLocation', disabled: true })],
+      sector: [({ value: 'sector', disabled: true })],
+      residenceType: [({ value: 'residenceType', disabled: true })],
+      currResidence: [({ value: 'currResidence', disabled: true })],
+      bookingPref: [({ value: 'bookingPref', disabled: true })],
+      budget: [({ value: 'budget', disabled: true })],
+      possession: [({ value: 'possession', disabled: true })],
+      purpose: [({ value: 'purpose', disabled: true })],
+      financeDetail: [({ value: 'financeDetail', disabled: true })],
+      chFirmName: [({ value: 'chFirmName', disabled: true })],
     })
   }
   /**
@@ -77,10 +67,9 @@ export class CustomerInfoComponent implements OnInit {
   getOneCustomer() {
     this.DB.getOneCustomer(this.snapshotId).subscribe(
       (customerModel: CustomerModel) => {
-        console.log(customerModel)
-        this.customerModel = customerModel
-        this.editCustomer()
-          , (err: any) => console.error(err);
+        console.log(customerModel.occupation)
+        this.customerModel = customerModel,
+          (err: any) => console.error(err);
       }
     )
   }
@@ -147,35 +136,7 @@ export class CustomerInfoComponent implements OnInit {
   get emailControl() {
     return this.customerForm.get('email') as FormControl
   }
-  checkEmails() {                             /* method to check email on each key press, tap and debounce in RxJS Library */
-    this.emailControl.valueChanges.pipe(      /* pipe will filter out email when typed on emailControl Field */
-      debounceTime(1000),                     /* Don't update the model with every keypress, instead wait 1s and then update */
-      tap(emailControl => {                   /* tap will check on each keypress, with 500ms debounce time */
-        if (emailControl !== '' && !this.emailControl.invalid) {
-          this.emailControl.markAsPending();
-        }
-        else {
-          this.emailControl.setErrors({ 'invalid': true });
-        }
-      })
-    ).subscribe(emailData => {
-      /**filter query to search by email */
-      const filterQuery = {
-        offset: 0, where: { 'email': emailData }
-      };
-      const newFilterQuery = encodeURIComponent(JSON.stringify(filterQuery));
-      this.httpClient.get(`http://localhost:3000/customer-infos?filter=${newFilterQuery}`)
-        .subscribe((customersArray: CustomerModel[]) => {
-          if (customersArray.length > 0) {
-            this.emailControl.markAsPending({ onlySelf: false });
-            this.emailControl.setErrors({ notUnique: true })
-          } else {
-            this.emailControl.markAsPending({ onlySelf: false });
-            this.emailControl.setErrors(null)
-          }
-        })
-    })
-  }
+
   deleteCustomerId(id) {
     Swal.fire({
       title: 'Are you sure?',
@@ -202,15 +163,4 @@ export class CustomerInfoComponent implements OnInit {
     })
 
   }
-  userGender: Array<String> = gender
-  userOccupation: Array<String> = occupation
-  userSector: Array<String> = sector
-  userResidence: Array<String> = residenceType
-  userCurrentRes: Array<String> = currResidence
-  userBookingPref: Array<String> = bookingPref
-  userBudget: Array<String> = budget
-  userPossession: Array<String> = possession
-  userPurpose: Array<String> = purpose
-  userFinance: Array<String> = financeDetail
-  companyArray = ['Our Broker Company', 'Vulcan', '360 Realtors']
 }

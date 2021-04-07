@@ -16,20 +16,20 @@ import {
   requestBody,
 } from '@loopback/rest';
 import {
-  CompanyBroker,
+  RealEstate,
   Broker,
 } from '../models';
-import {CompanyBrokerRepository} from '../repositories';
+import {RealEstateRepository} from '../repositories';
 
-export class CompanyBrokerBrokerController {
+export class RealEstateBrokerController {
   constructor(
-    @repository(CompanyBrokerRepository) protected companyBrokerRepository: CompanyBrokerRepository,
+    @repository(RealEstateRepository) protected realEstateRepository: RealEstateRepository,
   ) { }
 
-  @get('/company-brokers/{id}/brokers', {
+  @get('/real-estates/{id}/brokers', {
     responses: {
       '200': {
-        description: 'Array of CompanyBroker has many Broker',
+        description: 'Array of RealEstate has many Broker',
         content: {
           'application/json': {
             schema: {type: 'array', items: getModelSchemaRef(Broker)},
@@ -42,38 +42,38 @@ export class CompanyBrokerBrokerController {
     @param.path.string('id') id: string,
     @param.query.object('filter') filter?: Filter<Broker>,
   ): Promise<Broker[]> {
-    return this.companyBrokerRepository.brokers(id).find(filter);
+    return this.realEstateRepository.brokers(id).find(filter);
   }
 
-  @post('/company-brokers/{id}/brokers', {
+  @post('/real-estates/{id}/brokers', {
     responses: {
       '200': {
-        description: 'CompanyBroker model instance',
+        description: 'RealEstate model instance',
         content: {'application/json': {schema: getModelSchemaRef(Broker)}},
       },
     },
   })
   async create(
-    @param.path.string('id') id: typeof CompanyBroker.prototype.company,
+    @param.path.string('id') id: typeof RealEstate.prototype.id,
     @requestBody({
       content: {
         'application/json': {
           schema: getModelSchemaRef(Broker, {
-            title: 'NewBrokerInCompanyBroker',
-            exclude: ['email'],
-            optional: ['companyName']
+            title: 'NewBrokerInRealEstate',
+            exclude: ['id'],
+            optional: ['realEstateId']
           }),
         },
       },
-    }) broker: Omit<Broker, 'email'>,
+    }) broker: Omit<Broker, 'id'>,
   ): Promise<Broker> {
-    return this.companyBrokerRepository.brokers(id).create(broker);
+    return this.realEstateRepository.brokers(id).create(broker);
   }
 
-  @patch('/company-brokers/{id}/brokers', {
+  @patch('/real-estates/{id}/brokers', {
     responses: {
       '200': {
-        description: 'CompanyBroker.Broker PATCH success count',
+        description: 'RealEstate.Broker PATCH success count',
         content: {'application/json': {schema: CountSchema}},
       },
     },
@@ -90,13 +90,13 @@ export class CompanyBrokerBrokerController {
     broker: Partial<Broker>,
     @param.query.object('where', getWhereSchemaFor(Broker)) where?: Where<Broker>,
   ): Promise<Count> {
-    return this.companyBrokerRepository.brokers(id).patch(broker, where);
+    return this.realEstateRepository.brokers(id).patch(broker, where);
   }
 
-  @del('/company-brokers/{id}/brokers', {
+  @del('/real-estates/{id}/brokers', {
     responses: {
       '200': {
-        description: 'CompanyBroker.Broker DELETE success count',
+        description: 'RealEstate.Broker DELETE success count',
         content: {'application/json': {schema: CountSchema}},
       },
     },
@@ -105,6 +105,6 @@ export class CompanyBrokerBrokerController {
     @param.path.string('id') id: string,
     @param.query.object('where', getWhereSchemaFor(Broker)) where?: Where<Broker>,
   ): Promise<Count> {
-    return this.companyBrokerRepository.brokers(id).delete(where);
+    return this.realEstateRepository.brokers(id).delete(where);
   }
 }

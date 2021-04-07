@@ -2,12 +2,14 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CustomerModel } from "src/app/models/customer";
 import { CustomerService } from 'src/app/services/customer.service';
-import { bookingPref, budget, currResidence, financeDetail, gender, occupation, possession, purpose, residenceType, sector } from './mydata';
 import Swal from 'sweetalert2';
 import { ActivatedRoute, Router } from '@angular/router';
 import { tap, debounceTime } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
-
+import { RealEstate } from 'src/app/models/realEstate';
+import { RealEstateService } from 'src/app/services/realEstate.service';
+import { InformationForm } from 'src/app/models/informationForm';
+import { InformationFormService } from 'src/app/services/information.service';
 @Component({
   selector: 'app-form-customer',
   templateUrl: './form-customer.component.html',
@@ -18,17 +20,18 @@ export class FormCustomerComponent implements OnInit {
   customerModel: CustomerModel = new CustomerModel()
   @Input() snapshotId: string
   constructor(
-    private fb: FormBuilder, public DB: CustomerService, private router: Router,
-    private httpClient: HttpClient, private route: ActivatedRoute) { }
+    private fb: FormBuilder,
+    public DB: CustomerService,
+    private router: Router,
+    private httpClient: HttpClient,
+    private route: ActivatedRoute,
+    public RealEstateDB: RealEstateService,
+    public InfoFromDatabase: InformationFormService) { }
 
   customerForm: FormGroup;
-  submitted = false;
 
   ngOnInit(): void {
     this.createForms()
-    if (this.snapshotId) {    // This will get one customer info only if snapshotid is returned
-      this.getOneCustomer()
-    }
 
     if (!this.snapshotId) {    // This will ignore email validations on edit functionality
       this.checkEmails();
@@ -40,6 +43,8 @@ export class FormCustomerComponent implements OnInit {
         this.getOneCustomerById(cusID)
       }
     })
+    this.getRealEstateNames();
+    this.getInformationInfoArray();
   }
 
   createForms() {
@@ -99,27 +104,17 @@ export class FormCustomerComponent implements OnInit {
     }
   }
 
-  getOneCustomer() {
-    this.DB.getOneCustomer(this.snapshotId).subscribe(
-      (customerModel: CustomerModel) => {
-        console.log(customerModel)
-        this.customerModel = customerModel
-        this.editCustomer()
-          , (err: any) => console.error(err);
-      }
-    )
-  }
   /**
    * Mimics ngModel two way binding. contains edit by id function
    */
   getOneCustomerById(id: string) {
-    this.DB.getOneCustomer(id).subscribe(
-      (customerModel: CustomerModel) => {
+    this.DB.getOneCustomer(id)
+      .subscribe((customerModel: CustomerModel) => {
         console.log(customerModel);
         this.editCustomerById(customerModel),
           (err: any) => console.error(err);
       }
-    )
+      )
   }
   /** Patch method. Works the same way as ngModel two way binding  */
   editCustomerById(customerModel: CustomerModel) {
@@ -202,15 +197,30 @@ export class FormCustomerComponent implements OnInit {
     })
   }
 
-  userGender: Array<String> = gender
-  userOccupation: Array<String> = occupation
-  userSector: Array<String> = sector
-  userResidence: Array<String> = residenceType
-  userCurrentRes: Array<String> = currResidence
-  userBookingPref: Array<String> = bookingPref
-  userBudget: Array<String> = budget
-  userPossession: Array<String> = possession
-  userPurpose: Array<String> = purpose
-  userFinance: Array<String> = financeDetail
-  companyArray = ['Our Broker Company', 'Vulcan', '360 Realtors']
+  realEstateArray: RealEstate[] = [];
+  getRealEstateNames() {
+    this.RealEstateDB.getRealEstates()
+      .subscribe((realEstateArray: RealEstate[]) => {
+        this.realEstateArray = realEstateArray;
+      }, err => {
+        console.error(err);
+      }
+      )
+  }
+
+  informationInfoArray: InformationForm[] = []
+  getInformationInfoArray() {
+    this.InfoFromDatabase.getInformationForms()
+      .subscribe((informationInfoArray: InformationForm[]) => {
+        console.log(informationInfoArray);
+        this.informationInfoArray = informationInfoArray;
+      }, err => {
+        console.error(err);
+      }
+      )
+  }
+  onSubmit() {
+    console.log(this.customerForm.value);
+  }
+
 }// end of class

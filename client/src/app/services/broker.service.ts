@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Broker } from '../models/broker';
+
 @Injectable({
   providedIn: 'root'
 })
 export class BrokerService {
   private readonly URL: string = 'http://localhost:3000/brokers'
   constructor(private http: HttpClient) { }
+
   getBrokers() {
     return this.http.get(this.URL)
   }

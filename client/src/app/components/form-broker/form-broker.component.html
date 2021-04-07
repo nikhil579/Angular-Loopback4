@@ -1,64 +1,125 @@
 <div class="container">
-    <div class="card">
-        <div class="card-header">
-            <h4>Broker Information</h4>
-        </div>
-        <div class="card-body">
-            <form [formGroup]="brokerForm">
-                <div class="card-header">
-                    <h5>Broker Details</h5>
-                </div>
+    <form [formGroup]="brokerForm" #SENDFORM="ngForm">
+        <div class="card">
+            <div class="card-header">
+                <h4>Broker Information</h4>
+            </div>
+            <div class="card-body">
+
                 <!-- name -->
-                <div class="form-group">
-                    <label for='name'>Name</label>
-                    <input class="form-control" type="text" formControlName='name' placeholder="Enter Name" />
-                    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
-
-                        <div *ngIf="name.errors.required">
-                            Name is required.
-                        </div>
-                        <div *ngIf="name.errors.minlength">
-                            Name must be at least 3 characters long.
-                        </div>
-                    </div>
-                </div>
-                <!-- email -->
-                <div class="form-group">
-                    <label for='email'>Email </label>
-                    <input class="form-control" type="email" formControlName='email' placeholder="Enter Email" />
-                    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
-                        <div *ngIf="email.errors.required">
-                            Email is required.
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for='name'>Name </label>
+                            <input id="name" class="form-control" type="text" formControlName="name"
+                                placeholder="Enter Name" />
+                            <div *ngIf="getForm.name.invalid && (getForm.name.dirty || getForm.name.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="getForm.name.errors.required">
+                                    Name is required.
+                                </div>
+                                <div *ngIf="getForm.name.errors.minlength">
+                                    Name must be at least 3 characters long.
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="alert alert-danger" *ngIf="brokerExist">Email Already Exists</div>
-                </div>
-                <!-- company -->
-                <!-- <div class="form-group">
-                    <label> Company</label>
-                    <input class="form-control" type="text" formControlName='companyName' placeholder="Enter Company"
-                        required />
-                </div> -->
+                    <div class="col">
+                        <!-- email -->
+                        <div class="form-group">
+                            <label for='email'>Email </label>
+                            <input class="form-control" type="email" formControlName='email'
+                                [class.notValid]="emailControl.errors?.notUnique" placeholder="Enter Email" />
+                            <!-- <div *ngIf="getForm.email.invalid && (getForm.email.dirty || getForm.email.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="getForm.email.errors.required">
+                                    Email is required.
+                                </div>
+                            </div> -->
+                            <div class="alert alert-danger fade show"
+                                *ngIf="emailControl.touched && emailControl.invalid && !emailControl.errors?.notUnique">
+                                Email Required
+                            </div>
+                            <div class="alert alert-danger fade show" *ngIf="emailControl.errors?.notUnique">
+                                Email Already in Use
+                            </div>
+                            <div class="alert alert-warning fade show" *ngIf="emailControl.pending">
+                                Checking Availability...
+                            </div>
+                        </div>
 
-                <div class="form-group">
-                    <label for="companyName">Company</label>
-                    <select id="companyName" class="form-control" formControlName="companyName">
-                        <option *ngFor="let p of companyArray" [value]="p">{{p}}</option>
-                    </select>
-
-                    <div *ngIf="companyName.invalid && companyName.touched" class="alert alert-danger">
-                        <div *ngIf="companyName.errors.required">Company is required.</div>
+                    </div>
+                    <!-- phone -->
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="mobile">Mobile Number </label>
+                            <input class="form-control" type="number" formControlName='mobile'
+                                placeholder="Enter Phone Number" />
+                            <div *ngIf="getForm.mobile.invalid && (getForm.mobile.dirty || getForm.mobile.touched)"
+                                class="alert alert-danger">
+                                <div *ngIf="getForm.mobile.errors.required">
+                                    Mobile Number is required.
+                                </div>
+                                <div class="tag" *ngIf="getForm.mobile.errors.maxlength">Invalid Mobile Number
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <!-- address -->
-                <div class="form-group">
-                    <label> Address</label>
-                    <input class="form-control" type="text" formControlName='address' placeholder="Enter Address" />
-                    <div *ngIf="address.invalid && address.touched" class="alert alert-danger">
-                        <div *ngIf="address.errors.required">Address is required.</div>
+
+                <!-- <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for='companyName'>Company Name </label>
+                            <select id="companyName" formControlName="companyName" class="form-control"
+                                (change)="searchID(getForm.companyName.value)">
+                                <option selected [ngValue]="null">Choose...</option>
+                                <option *ngFor="let item of realEstateArray" [value]="item.companyName">
+                                    {{ item.companyName }}
+                                </option>
+                            </select>
+                        </div>
+                    </div> -->
+                <!-- company name -->
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for='companyName'>Company Name </label>
+                            <select id="companyName" formControlName="companyName" class="form-control"
+                                (change)='onSelectChange(getForm.companyName.value)'>
+                                <option selected [ngValue]=''>Choose...</option>
+                                <option *ngFor="let item of realEstateArray" [value]="item.companyName">
+                                    {{ item.companyName }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- real estate id -->
+                    <div class="col">
+                        <label for='realEstateId'>Your Real Estate Id is : </label>
+                        <input disabled id="realEstateId" class="form-control" type="text"
+                            formControlName="realEstateId" [value]="selectedObject" />
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for='location'>Location </label>
+                            <input id="location" class="form-control" type="text" formControlName="location"
+                                placeholder="Enter Location" />
+                        </div>
                     </div>
                 </div>
-
+                <div class="row">
+                    <div class="col">
+                        <label for='Rera_Number'>RERA Number </label>
+                        <input id="Rera_Number" class="form-control" type="text" formControlName="Rera_Number"
+                            placeholder="Enter RERA Number" />
+                    </div>
+                    <div class="col">
+                        <label for='GST_Number'>GST Number </label>
+                        <input id="GST_Number" class="form-control" type="text" formControlName="GST_Number"
+                            placeholder="Enter GST Number" />
+                    </div>
+                </div>
                 <!-- seperator -->
                 <div class="row">
                     <div class="col">
@@ -68,13 +129,14 @@
                 <!--  -->
                 <div class="row">
                     <div class="col">
-                        <button class="btn btn-success btn-block" (click)='createUser()' type="submit">Submit</button>
+                        <button class="btn btn-success btn-block" [disabled]="SENDFORM.invalid || SENDFORM.pending"
+                            (click)='send()' type="submit">Submit</button>
                     </div>
                     <div class="col">
                         <button class="btn btn-secondary btn-block " type="reset">Clear</button>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
-    </div>
+    </form>
 </div>
