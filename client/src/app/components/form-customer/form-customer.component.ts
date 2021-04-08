@@ -51,8 +51,8 @@ export class FormCustomerComponent implements OnInit {
     this.customerForm = this.fb.group({
       firstName: [this.customerModel.firstName, [Validators.required, Validators.minLength(3)]],
       lastName: [this.customerModel.lastName, Validators.required],
-      email: [this.customerModel.email, [Validators.email, Validators.required]],
-      phoneNumber: [this.customerModel.phoneNumber, [Validators.required, Validators.maxLength(10)]],
+      email: [this.customerModel.email, [Validators.required, Validators.email]],
+      phoneNumber: [this.customerModel.phoneNumber, [Validators.required, Validators.max(9999999999)]],
       dateOfBirth: [this.customerModel.dateOfBirth, Validators.required],
       gender: [this.customerModel.gender, Validators.required],
       address: [this.customerModel.address, Validators.required],
@@ -221,6 +221,11 @@ export class FormCustomerComponent implements OnInit {
   }
   onSubmit() {
     console.log(this.customerForm.value);
+  }
+  numericOnly(event) {
+    let patt = /^([0-9])$/;
+    let result = patt.test(event.key);
+    return result;
   }
 
 }// end of class

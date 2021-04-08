@@ -18,6 +18,7 @@ export class CustomerModel {
     currResidence: string
     bookingPref: string
     budget: string
+    budgetValue?: number
     possession: string
     purpose: string
     financeDetail: string

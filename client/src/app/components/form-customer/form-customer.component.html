@@ -47,25 +47,20 @@
                             <!-- email -->
                             <div class="form-group">
                                 <label for='email'>Email *</label>
-                                <input class="form-control" type="email" formControlName='email'
+                                <input class="form-control" id="email" type="email" formControlName='email'
                                     [class.notValid]="emailControl.errors?.notUnique" placeholder="Enter Email" />
-                                <!-- <div *ngIf="getForm.email.invalid && (getForm.email.dirty || getForm.email.touched)"
-                                class="alert alert-danger">
-                                <div *ngIf="getForm.email.errors.required">
-                                    Email is required.
-                                </div>
-                            </div> -->
-                                <div class="alert alert-danger fade show"
-                                    *ngIf="emailControl.touched && emailControl.invalid && !emailControl.errors?.notUnique">
-                                    Email Required
-                                </div>
-                                <div class="alert alert-danger fade show" *ngIf="emailControl.errors?.notUnique">
-                                    Email Already in Use
-                                </div>
-                                <div class="alert alert-warning fade show" *ngIf="emailControl.pending">
-                                    Checking Availability...
-                                </div>
                             </div>
+                            <div class="alert alert-danger fade show"
+                                *ngIf="emailControl.touched && emailControl.invalid && !emailControl.errors?.notUnique">
+                                Email Required
+                            </div>
+                            <div class="alert alert-danger fade show" *ngIf="emailControl.errors?.notUnique">
+                                Email Already Exists
+                            </div>
+                            <div class="alert alert-warning fade show" *ngIf="emailControl.pending">
+                                Checking Availability...
+                            </div>
+
 
                         </div>
                         <!-- phone -->
@@ -79,7 +74,7 @@
                                     <div *ngIf="getForm.phoneNumber.errors.required">
                                         Phone Number is required.
                                     </div>
-                                    <div class="tag" *ngIf="getForm.phoneNumber.errors.maxlength">Invalid Mobile Number
+                                    <div *ngIf="getForm.phoneNumber.errors?.max">Invalid Mobile Number
                                     </div>
                                 </div>
                             </div>

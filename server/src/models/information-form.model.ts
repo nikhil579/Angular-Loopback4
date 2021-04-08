@@ -53,6 +53,12 @@ export class InformationForm extends Entity {
 
   @property({
     type: 'array',
+    itemType: 'number',
+  })
+  budgetValue?: number[];
+
+  @property({
+    type: 'array',
     itemType: 'string',
   })
   possession?: string[];

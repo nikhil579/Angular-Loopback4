@@ -108,6 +108,12 @@ export class CustomerInfo extends Entity {
   budget?: string;
 
   @property({
+    type: 'array',
+    itemType: 'number',
+  })
+  budgetValue?: number[];
+
+  @property({
     type: 'string',
   })
   possession?: string;
