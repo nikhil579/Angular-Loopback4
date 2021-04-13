@@ -1,405 +1,381 @@
-<div class="container">
-    <form [formGroup]="customerForm" #SENDFORM="ngForm">
-        <ng-container *ngIf="informationInfoArray.length>0">
-            <div class="card">
-                <div class="card-header">
-                    <h4>Customer Information Form</h4>
-                </div>
-                <div class="card-body">
+<ng-container *ngIf="informationInfoArray.length>0">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Customer Information</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form [formGroup]="customerForm" #SENDFORM="ngForm" class="form-container">
+                <mat-tab-group [dynamicHeight]="true">
+                    <mat-tab label="Personal Information  (*)">
+                        <div class="card-body">
+                            <!-- name -->
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='firstName'>First Name *</label>
+                                        <input id="firstName" class="form-control" type="text"
+                                            formControlName="firstName" placeholder="Enter First Name" />
+                                        <div *ngIf="getForm.firstName.invalid && (getForm.firstName.dirty || getForm.firstName.touched)"
+                                            class="alert alert-danger">
+                                            <div *ngIf="getForm.firstName.errors.required">
+                                                Name is required.
+                                            </div>
+                                            <div *ngIf="getForm.firstName.errors.minlength">
+                                                Name must be at least 3 characters long.
+                                            </div>
+                                        </div>
+                                    </div>
 
-                    <!-- name -->
+                                    <div class="form-group">
+                                        <label for='lastName'>Last Name *</label>
+                                        <input class="form-control" type="text" formControlName="lastName"
+                                            placeholder="Enter Last Name" />
+                                        <div *ngIf="getForm.lastName.invalid && (getForm.lastName.dirty || getForm.lastName.touched)"
+                                            class="alert alert-danger">
+                                            <div *ngIf="getForm.lastName.errors.required">
+                                                Name is required.
+                                            </div>
+                                            <div *ngIf="getForm.lastName.errors.minlength">
+                                                Name must be at least 3 characters long.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <!-- email -->
+                                    <div class="form-group">
+                                        <label for='email'>Email *</label>
+                                        <input class="form-control" id="email" type="email" formControlName='email'
+                                            [class.notValid]="emailControl.errors?.notUnique"
+                                            placeholder="Enter Email" />
+                                    </div>
+                                    <div class="alert alert-danger fade show"
+                                        *ngIf="emailControl.touched && emailControl.invalid && !emailControl.errors?.notUnique">
+                                        Email Required
+                                    </div>
+                                    <div class="alert alert-danger fade show" *ngIf="emailControl.errors?.notUnique">
+                                        Email Already Exists
+                                    </div>
+                                    <div class="alert alert-warning fade show" *ngIf="emailControl.pending">
+                                        Checking Availability...
+                                    </div>
+
+
+                                </div>
+                                <!-- phone -->
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="phoneNumber">Phone Number *</label>
+                                        <input class="form-control" type="number" formControlName='phoneNumber'
+                                            placeholder="Enter Phone Number" />
+                                        <div *ngIf="getForm.phoneNumber.invalid && (getForm.phoneNumber.dirty || getForm.phoneNumber.touched)"
+                                            class="alert alert-danger">
+                                            <div *ngIf="getForm.phoneNumber.errors.required">
+                                                Phone Number is required.
+                                            </div>
+                                            <div *ngIf="getForm.phoneNumber.errors?.max">Invalid Mobile Number
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- gender -->
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='gender'>Gender *</label>
+                                        <select id="gender" formControlName="gender" class="form-control">
+                                            <option selected [ngValue]="null">Choose...</option>
+                                            <option *ngFor="let item of informationInfoArray[0].gender" [value]="item">
+                                                {{ item }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div *ngIf="getForm.gender.invalid && (getForm.gender.dirty || getForm.gender.touched)"
+                                        class="alert alert-danger">
+                                        <div *ngIf="getForm.gender.errors.required">
+                                            Gender is required.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='dateOfBirth'>Date of Birth *</label>
+                                        <input type="date" formControlName="dateOfBirth"
+                                            placeholder="Enter Date of Birth" class="form-control" />
+                                    </div>
+                                    <div *ngIf="getForm.dateOfBirth.invalid && (getForm.dateOfBirth.dirty || getForm.dateOfBirth.touched)"
+                                        class="alert alert-danger">
+                                        <div *ngIf="getForm.dateOfBirth.errors.required">
+                                            Date Of Birth is required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
+
+
+
+                    <!--  -->
+                    <!-- seperator -->
                     <div class="row">
                         <div class="col">
-                            <div class="form-group">
-                                <label for='firstName'>First Name *</label>
-                                <input id="firstName" class="form-control" type="text" formControlName="firstName"
-                                    placeholder="Enter First Name" />
-                                <div *ngIf="getForm.firstName.invalid && (getForm.firstName.dirty || getForm.firstName.touched)"
-                                    class="alert alert-danger">
-                                    <div *ngIf="getForm.firstName.errors.required">
-                                        Name is required.
-                                    </div>
-                                    <div *ngIf="getForm.firstName.errors.minlength">
-                                        Name must be at least 3 characters long.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label for='lastName'>Last Name *</label>
-                                <input class="form-control" type="text" formControlName="lastName"
-                                    placeholder="Enter Last Name" />
-                                <div *ngIf="getForm.lastName.invalid && (getForm.lastName.dirty || getForm.lastName.touched)"
-                                    class="alert alert-danger">
-                                    <div *ngIf="getForm.lastName.errors.required">
-                                        Name is required.
-                                    </div>
-                                    <div *ngIf="getForm.lastName.errors.minlength">
-                                        Name must be at least 3 characters long.
-                                    </div>
-                                </div>
-                            </div>
+                            <hr />
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <!-- email -->
-                            <div class="form-group">
-                                <label for='email'>Email *</label>
-                                <input class="form-control" id="email" type="email" formControlName='email'
-                                    [class.notValid]="emailControl.errors?.notUnique" placeholder="Enter Email" />
-                            </div>
-                            <div class="alert alert-danger fade show"
-                                *ngIf="emailControl.touched && emailControl.invalid && !emailControl.errors?.notUnique">
-                                Email Required
-                            </div>
-                            <div class="alert alert-danger fade show" *ngIf="emailControl.errors?.notUnique">
-                                Email Already Exists
-                            </div>
-                            <div class="alert alert-warning fade show" *ngIf="emailControl.pending">
-                                Checking Availability...
-                            </div>
-
-
-                        </div>
-                        <!-- phone -->
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="phoneNumber">Phone Number *</label>
-                                <input class="form-control" type="number" formControlName='phoneNumber'
-                                    placeholder="Enter Phone Number" />
-                                <div *ngIf="getForm.phoneNumber.invalid && (getForm.phoneNumber.dirty || getForm.phoneNumber.touched)"
-                                    class="alert alert-danger">
-                                    <div *ngIf="getForm.phoneNumber.errors.required">
-                                        Phone Number is required.
-                                    </div>
-                                    <div *ngIf="getForm.phoneNumber.errors?.max">Invalid Mobile Number
+                    <!-- address -->
+                    <mat-tab label="Address Information  (*)">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='address'> Address *</label>
+                                        <input class="form-control" type="text" formControlName='address'
+                                            placeholder="Enter Address" />
+                                        <div *ngIf="getForm.address.invalid && (getForm.address.dirty || getForm.address.touched)"
+                                            class="alert alert-danger">
+                                            <div *ngIf="getForm.address.errors.required">
+                                                Address is required.
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <!-- gender -->
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <label for='gender'>Gender *</label>
-                                <select id="gender" formControlName="gender" class="form-control">
-                                    <option selected [ngValue]="null">Choose...</option>
-                                    <option *ngFor="let item of informationInfoArray[0].gender" [value]="item">
-                                        {{ item }}
-                                    </option>
-                                </select>
-                            </div>
-                            <div *ngIf="getForm.gender.invalid && (getForm.gender.dirty || getForm.gender.touched)"
-                                class="alert alert-danger">
-                                <div *ngIf="getForm.gender.errors.required">
-                                    Gender is required.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label for='dateOfBirth'>Date of Birth *</label>
-                                <input type="date" formControlName="dateOfBirth" placeholder="Enter Date of Birth"
-                                    class="form-control" />
-                            </div>
-                            <div *ngIf="getForm.dateOfBirth.invalid && (getForm.dateOfBirth.dirty || getForm.dateOfBirth.touched)"
-                                class="alert alert-danger">
-                                <div *ngIf="getForm.dateOfBirth.errors.required">
-                                    Date Of Birth is required.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!--  -->
-            <!-- seperator -->
+                            <!-- city -->
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='city'> City *</label>
+                                        <input class="form-control" type="text" formControlName='city'
+                                            placeholder="Enter City" />
+                                        <div *ngIf="getForm.city.invalid && (getForm.city.dirty || getForm.city.touched)"
+                                            class="alert alert-danger">
+                                            <div *ngIf="getForm.city.errors.required">
+                                                City is required.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- State -->
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='state'> State *</label>
+                                        <input class="form-control" type="text" formControlName='state'
+                                            placeholder="Enter State" />
+                                        <div *ngIf="getForm.state.invalid && (getForm.state.dirty || getForm.state.touched)"
+                                            class="alert alert-danger">
+                                            <div *ngIf="getForm.state.errors.required">
+                                                State is required.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- zipcode -->
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='zipcode'> Zipcode *</label>
+                                        <input class="form-control" type="number" formControlName='zipcode'
+                                            placeholder="Enter Zipcode" />
+                                        <div *ngIf="getForm.zipcode.invalid && (getForm.zipcode.dirty || getForm.zipcode.touched)"
+                                            class="alert alert-danger">
+                                            <div *ngIf="getForm.zipcode.errors.required">
+                                                Zipcode is required.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
+
+                    <!-- work -->
+                    <mat-tab label="Work Information">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='occupation'> Occupation</label>
+                                        <select id="occupation" formControlName="occupation" class="form-control">
+                                            <option selected [ngValue]="null">Choose...</option>
+                                            <option *ngFor="let item of informationInfoArray[0].occupation"
+                                                [value]="item">
+                                                {{ item }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='orgName'> Organisation Name</label>
+                                        <input class="form-control" type="text" formControlName='orgName'
+                                            placeholder="Enter Organisation Name" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='sector'> Sector</label>
+                                        <select id="sector" formControlName="sector" class="form-control">
+                                            <option *ngFor="let item of informationInfoArray[0].sector" [value]="item">
+                                                {{ item }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- office location -->
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='officeLocation'> Office Location</label>
+                                        <input class="form-control" type="text" formControlName='officeLocation'
+                                            placeholder="Enter Office Location" />
+                                    </div>
+                                </div>
+                                <!-- designation -->
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='designation'> Designation </label>
+                                        <input class="form-control" type="text" formControlName='designation'
+                                            placeholder="Enter Designation" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
+
+                    <!-- residence -->
+                    <mat-tab label="Residence Information">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='residenceType'> Residence Type</label>
+                                        <select id="residenceType" formControlName="residenceType" class="form-control">
+                                            <option selected [ngValue]="null">Choose...</option>
+                                            <option *ngFor="let item of informationInfoArray[0].residenceType"
+                                                [value]="item">
+                                                {{ item }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='currResidence'> Current Residence </label>
+                                        <select id="currResidence" formControlName="currResidence" class="form-control">
+                                            <option selected [ngValue]="null">Choose...</option>
+                                            <option *ngFor="let item of informationInfoArray[0].currResidence"
+                                                [value]="item">
+                                                {{ item }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col">
+                                    <mat-label>Booking Preferences</mat-label><br>
+                                    <mat-form-field>
+                                        <mat-label>Choose multiple options</mat-label>
+                                        <mat-select disableRipple formControlName="bookingPref"
+                                            [value]="selectedBooking" multiple>
+                                            <mat-option *ngFor="let item of informationInfoArray[0].bookingPref"
+                                                [value]="item">
+                                                {{item}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='budget'> Budget </label>
+                                        <select id="budget" formControlName="budget" class="form-control">
+                                            <option selected [ngValue]="null">Choose...</option>
+                                            <option *ngFor="let item of informationInfoArray[0].budget" [value]="item">
+                                                {{ item }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='possession'> Possession </label>
+                                        <select id="possession" formControlName="possession" class="form-control">
+                                            <option selected [ngValue]="null">Choose...</option>
+                                            <option *ngFor="let item of informationInfoArray[0].possession"
+                                                [value]="item">
+                                                {{ item }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <mat-label>Purpose of Buying </mat-label><br>
+                                    <mat-form-field>
+                                        <mat-label>Choose multiple options</mat-label>
+                                        <mat-select disableRipple formControlName="purpose" [value]="selectedPurpose"
+                                            multiple>
+                                            <mat-option *ngFor="let item of informationInfoArray[0].purpose"
+                                                [value]="item">
+                                                {{item}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for='financeDetail'> Financing Details </label>
+                                        <select id="financeDetail" formControlName="financeDetail" class="form-control">
+                                            <option selected [ngValue]="null">Choose...</option>
+                                            <option *ngFor="let item of informationInfoArray[0].financeDetail"
+                                                [value]="item">
+                                                {{ item }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
+                    <!--  -->
+                    <mat-tab label="Channel Partner Details">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="chFirmName">Channel Partner Company</label>
+                                        <select id="chFirmName" class="form-control" formControlName="chFirmName">
+                                            <option selected [ngValue]=''>Choose...</option>
+                                            <option *ngFor="let item of realEstateArray" [value]="item.companyName">
+                                                {{ item.companyName }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+            </form>
+        </mat-card-content>
+
+        <mat-card-actions>
             <div class="row">
                 <div class="col">
-                    <hr />
+                    <button class="btn btn-success " [disabled]="SENDFORM.invalid || SENDFORM.pending" (click)='send()'
+                        type="submit">Submit</button>
+                    <!-- <button class="btn btn-success " (click)='onSubmit()' type="submit">Console Log</button> -->
+                    <button class="btn btn-secondary" type="reset">Clear</button>
                 </div>
             </div>
-            <!-- address -->
-            <div class="card">
-                <div class="card-header">
-                    <h4>Address Information</h4>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <label for='address'> Address *</label>
-                                <input class="form-control" type="text" formControlName='address'
-                                    placeholder="Enter Address" />
-                                <div *ngIf="getForm.address.invalid && (getForm.address.dirty || getForm.address.touched)"
-                                    class="alert alert-danger">
-                                    <div *ngIf="getForm.address.errors.required">
-                                        Address is required.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- city -->
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <label for='city'> City *</label>
-                                <input class="form-control" type="text" formControlName='city'
-                                    placeholder="Enter City" />
-                                <div *ngIf="getForm.city.invalid && (getForm.city.dirty || getForm.city.touched)"
-                                    class="alert alert-danger">
-                                    <div *ngIf="getForm.city.errors.required">
-                                        City is required.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- State -->
-                        <div class="col">
-                            <div class="form-group">
-                                <label for='state'> State *</label>
-                                <input class="form-control" type="text" formControlName='state'
-                                    placeholder="Enter State" />
-                                <div *ngIf="getForm.state.invalid && (getForm.state.dirty || getForm.state.touched)"
-                                    class="alert alert-danger">
-                                    <div *ngIf="getForm.state.errors.required">
-                                        State is required.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- zipcode -->
-                        <div class="col">
-                            <div class="form-group">
-                                <label for='zipcode'> Zipcode *</label>
-                                <input class="form-control" type="number" formControlName='zipcode'
-                                    placeholder="Enter Zipcode" />
-                                <div *ngIf="getForm.zipcode.invalid && (getForm.zipcode.dirty || getForm.zipcode.touched)"
-                                    class="alert alert-danger">
-                                    <div *ngIf="getForm.zipcode.errors.required">
-                                        Zipcode is required.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- seperator -->
-            <div class="row">
-                <div class="col">
-                    <hr />
-                </div>
-            </div>
-            <!-- work -->
-            <div class="card">
-                <div class="card-header">
-                    <h4>Work Information</h4>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <label for='occupation'> Occupation</label>
-                                <select id="occupation" formControlName="occupation" class="form-control">
-                                    <option selected [ngValue]="null">Choose...</option>
-                                    <option *ngFor="let item of informationInfoArray[0].occupation" [value]="item">
-                                        {{ item }}
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label for='orgName'> Organisation Name</label>
-                                <input class="form-control" type="text" formControlName='orgName'
-                                    placeholder="Enter Organisation Name" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label for='sector'> Sector</label>
-                                <select id="sector" formControlName="sector" class="form-control">
-                                    <option *ngFor="let item of informationInfoArray[0].sector" [value]="item">
-                                        {{ item }}
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- office location -->
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <label for='officeLocation'> Office Location</label>
-                                <input class="form-control" type="text" formControlName='officeLocation'
-                                    placeholder="Enter Office Location" />
-                            </div>
-                        </div>
-                        <!-- designation -->
-                        <div class="col">
-                            <div class="form-group">
-                                <label for='designation'> Designation </label>
-                                <input class="form-control" type="text" formControlName='designation'
-                                    placeholder="Enter Designation" />
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <!-- seperator -->
-            <div class="row">
-                <div class="col">
-                    <hr />
-                </div>
-            </div>
-            <!-- residence -->
-            <div class="card">
-                <div class="card-header">
-                    <h4>Residence Details</h4>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <label for='residenceType'> Residence Type</label>
-                                <select id="residenceType" formControlName="residenceType" class="form-control">
-                                    <option selected [ngValue]="null">Choose...</option>
-                                    <option *ngFor="let item of informationInfoArray[0].residenceType" [value]="item">
-                                        {{ item }}
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label for='currResidence'> Current Residence </label>
-                                <select id="currResidence" formControlName="currResidence" class="form-control">
-                                    <option selected [ngValue]="null">Choose...</option>
-                                    <option *ngFor="let item of informationInfoArray[0].currResidence" [value]="item">
-                                        {{ item }}
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label for='bookingPref'> Booking </label>
-                                <select id="bookingPref" formControlName="bookingPref" class="form-control">
-                                    <option selected [ngValue]="null">Choose...</option>
-                                    <option *ngFor="let item of informationInfoArray[0].bookingPref" [value]="item">
-                                        {{ item }}
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <label for='budget'> Budget </label>
-                                <select id="budget" formControlName="budget" class="form-control">
-                                    <option selected [ngValue]="null">Choose...</option>
-                                    <option *ngFor="let item of informationInfoArray[0].budget" [value]="item">
-                                        {{ item }}
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label for='possession'> Possession </label>
-                                <select id="possession" formControlName="possession" class="form-control">
-                                    <option selected [ngValue]="null">Choose...</option>
-                                    <option *ngFor="let item of informationInfoArray[0].possession" [value]="item">
-                                        {{ item }}
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label for='purpose'> Purpose of Buying </label>
-                                <select id="purpose" formControlName="purpose" class="form-control">
-                                    <option selected [ngValue]="null">Choose...</option>
-                                    <option *ngFor="let item of informationInfoArray[0].purpose" [value]="item">
-                                        {{ item }}
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-4">
-                            <div class="form-group">
-                                <label for='financeDetail'> Financing Details </label>
-                                <select id="financeDetail" formControlName="financeDetail" class="form-control">
-                                    <option selected [ngValue]="null">Choose...</option>
-                                    <option *ngFor="let item of informationInfoArray[0].financeDetail" [value]="item">
-                                        {{ item }}
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--  -->
-            <!-- seperator -->
-            <div class="row">
-                <div class="col">
-                    <hr />
-                </div>
-            </div>
-            <!--  -->
-            <div class="row">
-                <div class="col-6">
-                    <div class="form-group">
-                        <label for="chFirmName">Channel Partner Company</label>
-                        <select id="chFirmName" class="form-control" formControlName="chFirmName">
-                            <option selected [ngValue]=''>Choose...</option>
-                            <option *ngFor="let item of realEstateArray" [value]="item.companyName">
-                                {{ item.companyName }}
-                            </option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <!--  -->
-            <!-- seperator -->
-            <div class="row">
-                <div class="col">
-                    <hr />
-                </div>
-            </div>
-            <!--  -->
-
-            <div class="row">
-                <div class="col">
-                    <button class="btn btn-success btn-block" [disabled]="SENDFORM.invalid || SENDFORM.pending"
-                        (click)='send()' type="submit">Submit</button>
-                </div>
-                <div class="col">
-                    <button class="btn btn-secondary btn-block " type="reset">Clear</button>
-                </div>
-            </div>
-
-
-            <!-- seperator -->
-            <div class="row">
-                <div class="col">
-                    <hr />
-                </div>
-            </div>
-            <!--  -->
-        </ng-container>
-    </form>
-</div>
+        </mat-card-actions>
+    </mat-card>
+    <!--  -->
+</ng-container>

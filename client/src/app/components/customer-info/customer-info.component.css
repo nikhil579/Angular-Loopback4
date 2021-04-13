@@ -1,7 +1,41 @@
-form label {font-weight:500}
+
 #edit{
     margin: 0px 10px 0px 80%;
   }
 #delete{
     margin: 0px 10px 0px 90%;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+ 
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
+
+
+form label {font-weight:500}
+.form-container{
+  padding: 10px 0 0 0 ;
+}
+button{
+  margin: 10px;
+}
+.full-width{
+  width: 100%;
+}
+mat-label{
+padding: 0.75em 0;
+font-weight: 500;
+}
+
+mat-card{
+background-color: rgb(245, 245, 245);
 }

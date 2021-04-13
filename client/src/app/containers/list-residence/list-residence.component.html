@@ -1,0 +1,59 @@
+<app-nav></app-nav>
+
+<div class="container">
+    <div class="example-header">
+        <h4>Villa List</h4>
+        <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+        <span>
+            <button mat-raised-button color="basic" [routerLink]="['/newResidenceVilla']">New Villa</button>
+        </span>
+    </div>
+    <div>
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort>
+                <ng-container matColumnDef="societyName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.societyName}} </td>
+                </ng-container>
+                <ng-container matColumnDef="address">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
+                    <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+                </ng-container>
+                <ng-container matColumnDef="price">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+                    <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+                </ng-container>
+                <ng-container matColumnDef="details">
+                    <th mat-header-cell *matHeaderCellDef> Details </th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-icon-button color="basic" (click)="redirectToDetails(element.id)">
+                            <mat-icon class="mat-18">reorder</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="update">
+                    <th mat-header-cell *matHeaderCellDef> Update </th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-icon-button color="basic" (click)="redirectToUpdate(element.id)">
+                            <mat-icon class="mat-18">edit</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="delete">
+                    <th mat-header-cell *matHeaderCellDef> Delete </th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-icon-button color="warn" (click)='redirectToDelete(element.id) '>
+                            <mat-icon class="mat-18">delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[10,20,40]" showFirstLastButtons></mat-paginator>
+        </div>
+    </div>
+</div>

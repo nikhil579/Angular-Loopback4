@@ -98,9 +98,10 @@ export class CustomerInfo extends Entity {
   currResidence?: string;
 
   @property({
-    type: 'string',
+    type: 'array',
+    itemType: 'string',
   })
-  bookingPref?: string;
+  bookingPref?: string[];
 
   @property({
     type: 'string',
@@ -119,9 +120,10 @@ export class CustomerInfo extends Entity {
   possession?: string;
 
   @property({
-    type: 'string',
+    type: 'array',
+    itemType: 'string',
   })
-  purpose?: string;
+  purpose?: string[];
 
   @property({
     type: 'string',

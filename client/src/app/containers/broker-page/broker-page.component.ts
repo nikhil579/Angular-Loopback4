@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Broker } from 'src/app/models/broker';
 import { BrokerService } from 'src/app/services/broker.service';
-
 @Component({
   selector: 'app-broker-page',
   templateUrl: './broker-page.component.html',
   styleUrls: ['./broker-page.component.css']
 })
 export class BrokerPageComponent implements OnInit {
+
   brokerArray: Broker[] = []
   id: any
   constructor(private DB: BrokerService, private route: ActivatedRoute) {
@@ -16,7 +16,6 @@ export class BrokerPageComponent implements OnInit {
   }
   ngOnInit(): void {
     console.log(this.id);
-
     this.getBrokersPage()
   }
   getBrokersPage() {

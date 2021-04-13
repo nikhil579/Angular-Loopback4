@@ -16,7 +16,6 @@ export class CustomerPageComponent implements OnInit {
   }
   ngOnInit(): void {
     console.log(this.id);
-
     this.getCustomersPage()
   }
   getCustomersPage() {

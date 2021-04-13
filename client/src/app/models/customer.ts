@@ -16,11 +16,11 @@ export class CustomerModel {
     sector: string
     residenceType: string
     currResidence: string
-    bookingPref: string
+    bookingPref?: Array<String>
     budget: string
     budgetValue?: number
     possession: string
-    purpose: string
+    purpose?: Array<String>
     financeDetail: string
     chFirmName: string
     id?: string

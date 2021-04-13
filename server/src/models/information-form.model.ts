@@ -2,6 +2,7 @@ import { Entity, model, property } from '@loopback/repository';
 
 @model()
 export class InformationForm extends Entity {
+
   @property({
     type: 'string',
     id: true,

@@ -22,6 +22,16 @@ export class RealEstate extends Entity {
   })
   location: string;
 
+  @property({
+    type: 'string',
+  })
+  Rera_Number?: string;
+
+  @property({
+    type: 'string',
+  })
+  GST_Number?: string;
+
   @hasMany(() => Broker, { keyTo: 'realEstateId' })
   brokers: Broker[];
 

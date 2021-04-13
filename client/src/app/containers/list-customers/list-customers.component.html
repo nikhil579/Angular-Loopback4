@@ -1,16 +1,18 @@
 <app-nav></app-nav>
 
-<div class="container">
+<div class="container ">
     <div class="example-header">
+        <h4>Customers List</h4>
         <mat-form-field>
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
         </mat-form-field>
         <span>
-            <a mat-button [routerLink]="['/newCustomer']">New Customer</a>
+            <button mat-raised-button color="basic" [routerLink]="['/newCustomer']" mat-button>Add
+                Customer</button>
         </span>
     </div>
     <div>
-        <div class="mat-elevation-z8">
+        <div class="mat-elevation-z8 mat-app-background">
             <table mat-table [dataSource]="dataSource" matSort>
                 <ng-container matColumnDef="firstName">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>

@@ -2,11 +2,12 @@
 
 <div class="container">
     <div class="example-header">
+        <h4>Real Estate List</h4>
         <mat-form-field>
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
         </mat-form-field>
         <span>
-            <a mat-button [routerLink]="['/newBroker']">New Broker</a>
+            <button mat-raised-button color="basic" [routerLink]="['/newBroker']">New Broker</button>
         </span>
     </div>
     <div>

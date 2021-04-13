@@ -27,4 +27,7 @@
   .nav-dropdown-content.dropdown-extend-left {
     right: calc(100% - 75px);
   }
-  
+  h3{
+    color: darkslategrey;
+    text-align: center;
+  }

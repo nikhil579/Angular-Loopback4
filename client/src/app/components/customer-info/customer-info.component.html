@@ -1,286 +1,267 @@
 <div class="container">
     <form [formGroup]="customerForm" #SENDFORM="ngForm">
-        <div class="card">
-            <div class="card-header">
-                <h4>Customer Information Page</h4>
-                <span><button [routerLink]="['/editCustomer',snapshotId]" id='edit' class="btn btn-dark">Edit
-                    </button>
-                    <button (click)="deleteCustomerId(snapshotId)" class="btn btn-danger">Delete</button>
-                </span>
-            </div>
-            <div class="card-body">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>Customer Information</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-tab-group [dynamicHeight]="true">
+                    <mat-tab label="Personal Information  (*)">
+                        <div class="card-body">
+                            <!-- name -->
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='firstName'>First Name *</label>
+                                        <input id="firstName" class="form-control" type="text"
+                                            formControlName="firstName" placeholder="Enter First Name" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for='lastName'>Last Name *</label>
+                                        <input class="form-control" type="text" formControlName="lastName"
+                                            placeholder="Enter Last Name" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <!-- email -->
+                                    <div class="form-group">
+                                        <label for='email'>Email *</label>
+                                        <input class="form-control" id="email" type="email" formControlName='email' />
+                                    </div>
+                                </div>
+                                <!-- phone -->
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="phoneNumber">Phone Number *</label>
+                                        <input class="form-control" type="number" formControlName='phoneNumber'
+                                            placeholder="Enter Phone Number" />
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- gender -->
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='gender'>Gender *</label>
+                                        <select id="gender" formControlName="gender" class="form-control">
+                                            <option>
+                                                {{ customerModel.gender }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='dateOfBirth'>Date of Birth *</label>
+                                        <input type="date" formControlName="dateOfBirth"
+                                            placeholder="Enter Date of Birth" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
 
-                <!-- name -->
-                <div class="row">
-                    <div class="col">
-                        <div class="form-group">
-                            <label for='firstName'>First Name *</label>
-                            <input id="firstName" class="form-control" type="text" formControlName="firstName"
-                                placeholder="Enter First Name" />
 
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label for='lastName'>Last Name *</label>
-                            <input class="form-control" type="text" formControlName="lastName"
-                                placeholder="Enter Last Name" />
+                    <mat-tab label="Address Information  (*)">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='address'> Address *</label>
+                                        <input class="form-control" type="text" formControlName='address'
+                                            placeholder="Enter Address" />
+                                    </div>
+                                </div>
+                            </div>
 
+                            <!-- city -->
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='city'> City *</label>
+                                        <input class="form-control" type="text" formControlName='city'
+                                            placeholder="Enter City" />
+                                    </div>
+                                </div>
+                                <!-- State -->
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='state'> State *</label>
+                                        <input class="form-control" type="text" formControlName='state'
+                                            placeholder="Enter State" />
+                                    </div>
+                                </div>
+                                <!-- zipcode -->
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='zipcode'> Zipcode *</label>
+                                        <input class="form-control" type="number" formControlName='zipcode'
+                                            placeholder="Enter Zipcode" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <!-- email -->
-                        <div class="form-group">
-                            <label for='email'>Email *</label>
-                            <input class="form-control" type="email" formControlName='email'
-                                [class.notValid]="emailControl.errors?.notUnique" placeholder="Enter Email" />
+                    </mat-tab>
 
+                    <!-- work -->
+                    <mat-tab label="Work Information">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='occupation'> Occupation</label>
+                                        <select id="occupation" formControlName="occupation" class="form-control">
+                                            <option>
+                                                {{ customerModel.occupation }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='orgName'> Organisation Name</label>
+                                        <input class="form-control" type="text" formControlName='orgName'
+                                            placeholder="Enter Organisation Name" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='sector'> Sector</label>
+                                        <select id="sector" formControlName="sector" class="form-control">
+                                            <option>
+                                                {{ customerModel.sector }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- office location -->
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='officeLocation'> Office Location</label>
+                                        <input class="form-control" type="text" formControlName='officeLocation'
+                                            placeholder="Enter Office Location" />
+                                    </div>
+                                </div>
+                                <!-- designation -->
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='designation'> Designation </label>
+                                        <input class="form-control" type="text" formControlName='designation'
+                                            placeholder="Enter Designation" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                    </mat-tab>
 
-                    </div>
-                    <!-- phone -->
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="phoneNumber">Phone Number *</label>
-                            <input class="form-control" type="number" formControlName='phoneNumber'
-                                placeholder="Enter Phone Number" />
+                    <!-- residence -->
+                    <mat-tab label="Residence Information">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='residenceType'> Residence Type</label>
+                                        <select id="residenceType" formControlName="residenceType" class="form-control">
+                                            <option>
+                                                {{ customerModel.residenceType }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='currResidence'> Current Residence </label>
+                                        <select id="currResidence" formControlName="currResidence" class="form-control">
+                                            <option>
+                                                {{ customerModel.currResidence }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='bookingPref'> Booking Preferences </label>
+                                        <select id="bookingPref" formControlName="bookingPref" class="form-control">
+                                            <option>{{customerModel.bookingPref}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='budget'> Budget </label>
+                                        <select id="budget" formControlName="budget" class="form-control">
+                                            <option>
+                                                {{ customerModel.budget }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='possession'> Possession </label>
+                                        <select id="possession" formControlName="possession" class="form-control">
+                                            <option>
+                                                {{ customerModel.possession }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for='purpose'> Purpose of Buying </label>
+                                        <select id="purpose" formControlName="purpose" class="form-control">
+                                            <option>{{customerModel.purpose}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for='financeDetail'> Financing Details </label>
+                                        <select id="financeDetail" formControlName="financeDetail" class="form-control">
+                                            <option>
+                                                {{ customerModel.financeDetail }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
+                    <!--  -->
+                    <mat-tab label="Channel Partner Details">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="chFirmName">Channel Partner Company</label>
+                                        <select id="chFirmName" class="form-control" formControlName="chFirmName">
+                                            <option>
+                                                {{ customerModel.chFirmName }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+            </mat-card-content>
 
-                        </div>
-                    </div>
-                </div>
-                <!-- gender -->
-                <div class="row">
-                    <div class="col">
-                        <div class="form-group">
-                            <label for='gender'>Gender *</label>
-                            <select id="gender" formControlName="gender" class="form-control">
-                                <option>{{customerModel.gender}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label for='dateOfBirth'>Date of Birth *</label>
-                            <input type="date" formControlName="dateOfBirth" placeholder="Enter Date of Birth"
-                                class="form-control" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+            <mat-card-actions>
 
-        <!--  -->
-        <!-- seperator -->
-        <div class="row">
-            <div class="col">
-                <hr />
-            </div>
-        </div>
-        <!-- address -->
-        <div class="card">
-            <div class="card-header">
-                <h4>Address Information</h4>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col">
-                        <div class="form-group">
-                            <label for='address'> Address *</label>
-                            <input class="form-control" type="text" formControlName='address'
-                                placeholder="Enter Address" />
-                        </div>
-                    </div>
-                </div>
+                <button [routerLink]="['/editCustomer',snapshotId]" id='edit' class="btn btn-dark">Edit
+                </button>
+                <button (click)="deleteCustomerId(snapshotId)" class="btn btn-danger">Delete</button>
 
-                <!-- city -->
-                <div class="row">
-                    <div class="col">
-                        <div class="form-group">
-                            <label for='city'> City *</label>
-                            <input class="form-control" type="text" formControlName='city' placeholder="Enter City" />
-                        </div>
-                    </div>
-                    <!-- State -->
-                    <div class="col">
-                        <div class="form-group">
-                            <label for='state'> State *</label>
-                            <input class="form-control" type="text" formControlName='state' placeholder="Enter State" />
-                        </div>
-                    </div>
-                    <!-- zipcode -->
-                    <div class="col">
-                        <div class="form-group">
-                            <label for='zipcode'> Zipcode *</label>
-                            <input class="form-control" type="number" formControlName='zipcode'
-                                placeholder="Enter Zipcode" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- seperator -->
-        <div class="row">
-            <div class="col">
-                <hr />
-            </div>
-        </div>
-        <!-- work -->
-        <div class="card">
-            <div class="card-header">
-                <h4>Work Information</h4>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col">
-                        <div class="form-group">
-                            <label for='occupation'> Occupation</label>
-                            <select id="occupation" formControlName="occupation" class="form-control">
-                                <option>{{customerModel.occupation}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label for='orgName'> Organisation Name</label>
-                            <input class="form-control" type="text" formControlName='orgName'
-                                placeholder="Enter Organisation Name" />
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label for='sector'> Sector</label>
-                            <select id="sector" formControlName="sector" class="form-control">
-                                <option>{{customerModel.sector}}</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <!-- office location -->
-                <div class="row">
-                    <div class="col">
-                        <div class="form-group">
-                            <label for='officeLocation'> Office Location</label>
-                            <input class="form-control" type="text" formControlName='officeLocation'
-                                placeholder="Enter Office Location" />
-                        </div>
-                    </div>
-                    <!-- designation -->
-                    <div class="col">
-                        <div class="form-group">
-                            <label for='designation'> Designation </label>
-                            <input class="form-control" type="text" formControlName='designation'
-                                placeholder="Enter Designation" />
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <!-- seperator -->
-        <div class="row">
-            <div class="col">
-                <hr />
-            </div>
-        </div>
-        <!-- residence -->
-        <div class="card">
-            <div class="card-header">
-                <h4>Residence Details</h4>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col">
-                        <div class="form-group">
-                            <label for='residenceType'> Residence Type</label>
-                            <select id="residenceType" formControlName="residenceType" class="form-control">
-                                <option>{{customerModel.residenceType}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label for='currResidence'> Current Residence </label>
-                            <select id="currResidence" formControlName="currResidence" class="form-control">
-                                <option>{{customerModel.currResidence}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label for='bookingPref'> Booking </label>
-                            <select id="bookingPref" formControlName="bookingPref" class="form-control">
-                                <option>{{customerModel.bookingPref}}</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="form-group">
-                            <label for='budget'> Budget </label>
-                            <select id="budget" formControlName="budget" class="form-control">
-                                <option>{{customerModel.budget}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label for='possession'> Possession </label>
-                            <select id="possession" formControlName="possession" class="form-control">
-                                <option>{{customerModel.possession}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label for='purpose'> Purpose of Buying </label>
-                            <select id="purpose" formControlName="purpose" class="form-control">
-                                <option>{{customerModel.purpose}}</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-4">
-                        <div class="form-group">
-                            <label for='financeDetail'> Financing Details </label>
-                            <select id="financeDetail" formControlName="financeDetail" class="form-control">
-                                <option>{{customerModel.financeDetail}}</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--  -->
-        <!-- seperator -->
-        <div class="row">
-            <div class="col">
-                <hr />
-            </div>
-        </div>
-        <!--  -->
-        <div class="row">
-            <div class="col-6">
-                <div class="form-group">
-                    <label for="chFirmName">Channel Partner Company</label>
-                    <select id="chFirmName" class="form-control" formControlName="chFirmName">
-                        <option>{{customerModel.chFirmName}}</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <!--  -->
-        <!-- seperator -->
-        <div class="row">
-            <div class="col">
-                <hr />
-            </div>
-        </div>
-        <!--  -->
-        <!--  -->
+            </mat-card-actions>
+        </mat-card>
     </form>
 </div>

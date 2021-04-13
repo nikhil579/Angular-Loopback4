@@ -10,6 +10,7 @@ import { RealEstate } from 'src/app/models/realEstate';
 import { RealEstateService } from 'src/app/services/realEstate.service';
 import { InformationForm } from 'src/app/models/informationForm';
 import { InformationFormService } from 'src/app/services/information.service';
+
 @Component({
   selector: 'app-form-customer',
   templateUrl: './form-customer.component.html',
@@ -219,13 +220,10 @@ export class FormCustomerComponent implements OnInit {
       }
       )
   }
+  selectedBooking;
+  selectedPurpose;
   onSubmit() {
     console.log(this.customerForm.value);
-  }
-  numericOnly(event) {
-    let patt = /^([0-9])$/;
-    let result = patt.test(event.key);
-    return result;
   }
 
 }// end of class

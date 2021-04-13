@@ -1,4 +1,18 @@
-a{
+a, button{
     text-decoration: none;
     color: white;
+}
+.custom-atag{
+    text-decoration: none;
+    color: black;
+}
+mat-sidenav-container{
+    height: 100%;
+}
+mat-sidenav, mat-sidenav-content{
+    padding: 1rem;
+}
+mat-sidenav{
+    background-color: darkslategrey;
+    width: 200px;
 }
