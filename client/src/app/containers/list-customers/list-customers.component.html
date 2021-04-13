@@ -4,7 +4,7 @@
     <div class="example-header">
         <h4>Customers List</h4>
         <mat-form-field>
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            <input style="color: white;" matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
         </mat-form-field>
         <span>
             <button mat-raised-button color="basic" [routerLink]="['/newCustomer']" mat-button>Add

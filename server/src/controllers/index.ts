@@ -10,3 +10,5 @@ export * from './residence-apartment.controller';
 export * from './information-residence-apartment.controller';
 export * from './residence-house.controller';
 export * from './information-residence-house.controller';
+export * from './commercial-property.controller';
+export * from './information-commercial-property.controller';

@@ -107,8 +107,7 @@ const routes: Routes = [
   {
     path: 'editResidenceHouse/:id',
     component: NewResidenceHouseComponent
-  },
-
+  }
 ];
 
 @NgModule({

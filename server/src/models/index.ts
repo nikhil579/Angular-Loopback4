@@ -8,3 +8,5 @@ export * from './residence-apartment.model';
 export * from './information-residence-apartment.model';
 export * from './residence-house.model';
 export * from './information-residence-house.model';
+export * from './commercial-property.model';
+export * from './information-commercial-property.model';

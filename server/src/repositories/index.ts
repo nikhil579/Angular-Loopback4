@@ -8,3 +8,5 @@ export * from './information-residence-apartment.repository';
 export * from './residence-apartment.repository';
 export * from './residence-house.repository';
 export * from './information-residence-house.repository';
+export * from './commercial-property.repository';
+export * from './information-commercial-property.repository';
