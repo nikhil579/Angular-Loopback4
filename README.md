@@ -1,9 +1,9 @@
-#Admin Dashboard with Forms
+Admin Dashboard with Forms
 
-#CRUD Operation Done
+CRUD Operation Done
 
-#Login / Register Functionality Pending
+Login / Register Functionality Pending
 
-#Authorization and Authentication Pending
+Authorization and Authentication Pending
 
-#Deployment Pending
+Deployment Pending
