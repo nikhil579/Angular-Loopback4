@@ -1,0 +1,157 @@
+<div class="container">
+    <form [formGroup]="commercialPropertyForm" #SENDFORM="ngForm">
+        <ng-container *ngIf="informationInfoArray.length>0">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Commercial Property Form</h4>
+                </div>
+                <div class="card-body">
+
+                    <!-- name -->
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for='name'>Name </label>
+                                <input id="name" class=" form-control" type="text" formControlName="name"
+                                    placeholder="Enter Name" />
+                                <div *ngIf="getForm.name.invalid && (getForm.name.dirty || getForm.name.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="getForm.name.errors.required">
+                                        Field is required.
+                                    </div>
+                                    <div *ngIf="getForm.name.errors.minlength">
+                                        Field must be at least 3 characters long.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <!-- email -->
+                            <div class="form-group">
+                                <label for='address'>Address </label>
+                                <input class="form-control" type="text" formControlName='address'
+                                    placeholder="Enter Address" />
+                                <div *ngIf="getForm.address.invalid && (getForm.address.dirty || getForm.address.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="getForm.address.errors.required">
+                                        Address is required.
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- phone -->
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="ageOfProperty">Age of Property</label>
+                                <input class="form-control" type="text" formControlName='ageOfProperty'
+                                    placeholder="Enter Age of Property" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for='area'>Area </label>
+                                <input class="form-control" type="number" formControlName='area' placeholder="sq.ft" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for='price'>Price </label>
+                                <input class="form-control" type="text" formControlName='price' placeholder='Rs.' />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for='totalUnits'>Total Units </label>
+                                <input class="form-control" type="number" formControlName='totalUnits'
+                                    placeholder='No. of units' />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for='description'>Description </label>
+                                <input class="form-control" type="text" formControlName='description'
+                                    placeholder='Describe your property details here' />
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for='approvals'>Approvals available</label>
+                                <select id="approvals" formControlName="approvals" class="form-control">
+                                    <option selected [value]="null">Choose</option>
+                                    <option *ngFor="let item of informationInfoArray[0].approvals" [value]="item">
+                                        {{ item }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for='timeToVisit'>Best time to visit property </label>
+                                <input id="timeToVisit" class="form-control" type="text" formControlName="timeToVisit"
+                                    placeholder='Specify day or time ' />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for='loanRequired'>Loan Required</label>
+                                <select id="loanRequired" formControlName="loanRequired" class="form-control">
+                                    <option selected [value]="null">Choose</option>
+                                    <option *ngFor="let item of informationInfoArray[0].loanRequired" [value]="item">
+                                        {{ item }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <mat-label>Amenities</mat-label><br>
+                                <mat-form-field class="full-width">
+                                    <mat-label>Choose options</mat-label>
+                                    <mat-select disableRipple formControlName="amenities" [value]="selectedAmenities"
+                                        multiple>
+                                        <mat-option *ngFor="let item of informationInfoArray[0].amenities"
+                                            [value]="item">
+                                            {{item}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for='areaBand'>Area Band </label>
+                                <input class="form-control" type="number" formControlName='areaBand'
+                                    placeholder="Shop/Office(area band- ex from 200 to 2000 sqft)" />
+                            </div>
+                        </div>
+                    </div>
+                    <!--  -->
+                    <div class="row">
+                        <div class="col">
+                            <hr />
+                        </div>
+                    </div>
+                    <!--  -->
+                    <mat-card-actions>
+                        <div class="row">
+                            <div class="col">
+                                <button class="btn btn-success " [disabled]="SENDFORM.invalid || SENDFORM.pending"
+                                    (click)='send()' type="submit">Submit</button>
+                                <button class="btn btn-success " (click)='onSubmit()' type="submit">Console Log</button>
+                                <button class="btn btn-secondary" type="reset">Clear</button>
+                            </div>
+                        </div>
+                    </mat-card-actions>
+                </div>
+            </div>
+        </ng-container>
+    </form>
+</div>

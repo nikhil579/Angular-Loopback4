@@ -1,4 +1,5 @@
 export class CustomerModel {
+    id?: string
     firstName: string
     lastName: string
     email: string
@@ -23,5 +24,4 @@ export class CustomerModel {
     purpose?: Array<String>
     financeDetail: string
     chFirmName: string
-    id?: string
 }

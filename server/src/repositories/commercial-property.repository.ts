@@ -1,7 +1,7 @@
-import {inject} from '@loopback/core';
-import {DefaultCrudRepository} from '@loopback/repository';
-import {MongoDsDataSource} from '../datasources';
-import {CommercialProperty, CommercialPropertyRelations} from '../models';
+import { inject } from '@loopback/core';
+import { DefaultCrudRepository } from '@loopback/repository';
+import { MongoDsDataSource } from '../datasources';
+import { CommercialProperty, CommercialPropertyRelations } from '../models';
 
 export class CommercialPropertyRepository extends DefaultCrudRepository<
   CommercialProperty,

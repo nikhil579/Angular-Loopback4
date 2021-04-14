@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { BrokerPageComponent } from './containers/broker-page/broker-page.component';
+import { CommercialPropertyPageComponent } from './containers/commercial-property-page/commercial-property-page.component';
 import { CustomerPageComponent } from './containers/customer-page/customer-page.component';
 import { ListBrokerComponent } from './containers/list-broker/list-broker.component';
+import { ListCommercialPropertyComponent } from './containers/list-commercial-property/list-commercial-property.component';
 import { ListCustomersComponent } from './containers/list-customers/list-customers.component';
 import { ListRealEstateComponent } from './containers/list-real-estate/list-real-estate.component';
 import { ListResidenceApartmentComponent } from './containers/list-residence-apartment/list-residence-apartment.component';
@@ -10,6 +13,7 @@ import { ListResidenceHouseComponent } from './containers/list-residence-house/l
 import { ListResidenceComponent } from './containers/list-residence/list-residence.component';
 import { MainComponent } from './containers/main/main.component';
 import { NewBrokerComponent } from './containers/new-broker/new-broker.component';
+import { NewCommercialPropertyComponent } from './containers/new-commercial-property/new-commercial-property.component';
 import { NewCustomerComponent } from './containers/new-customer/new-customer.component';
 import { NewResidenceApartmentComponent } from './containers/new-residence-apartment/new-residence-apartment.component';
 import { NewResidenceHouseComponent } from './containers/new-residence-house/new-residence-house.component';
@@ -61,15 +65,15 @@ const routes: Routes = [
     component: ListRealEstateComponent
   },
   {
-    path: 'listResidenceVilla',
+    path: 'listResidence/Villa',
     component: ListResidenceComponent
   },
   {
-    path: 'listResidenceApartment',
+    path: 'listResidence/Apartment',
     component: ListResidenceApartmentComponent
   },
   {
-    path: 'listResidenceHouse',
+    path: 'listResidence/House',
     component: ListResidenceHouseComponent
   },
   {
@@ -107,7 +111,27 @@ const routes: Routes = [
   {
     path: 'editResidenceHouse/:id',
     component: NewResidenceHouseComponent
-  }
+  },
+  {
+    path: 'listCommercialProperty',
+    component: ListCommercialPropertyComponent
+  },
+  {
+    path: 'newCommercialProperty',
+    component: NewCommercialPropertyComponent
+  },
+  {
+    path: 'editCommercialProperty/:id',
+    component: NewCommercialPropertyComponent
+  },
+  {
+    path: 'commercialPropertyPage/:id',
+    component: CommercialPropertyPageComponent
+  },
+  {
+    path: '**',
+    component: ErrorPageComponent
+  },
 ];
 
 @NgModule({

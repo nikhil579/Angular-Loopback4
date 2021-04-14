@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CustomerModel } from 'src/app/models/customer';
-import { CustomerInfoComponent } from "src/app/components/customer-info/customer-info.component";
 import { CustomerService } from 'src/app/services/customer.service';
 import { ActivatedRoute } from '@angular/router';
 @Component({

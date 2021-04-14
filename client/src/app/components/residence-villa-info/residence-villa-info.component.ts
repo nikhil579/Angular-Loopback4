@@ -14,8 +14,7 @@ export class ResidenceVillaInfoComponent implements OnInit {
   residenceVillaModel: ResidenceVilla = new ResidenceVilla()
   residenceVillaForm: FormGroup
   @Input() snapshotId: string
-  constructor(private fb: FormBuilder, public DB: ResidenceVillaService, private router: Router,
-    private route: ActivatedRoute) { }
+  constructor(private fb: FormBuilder, public DB: ResidenceVillaService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.createForms()
@@ -29,7 +28,6 @@ export class ResidenceVillaInfoComponent implements OnInit {
       }
     })
   }
-  submitted = false
   createForms() {
     this.residenceVillaForm = this.fb.group({
       societyName: [({ value: 'societyName', disabled: true }), [Validators.required, Validators.minLength(3)]],
@@ -43,7 +41,6 @@ export class ResidenceVillaInfoComponent implements OnInit {
       timeToVisit: [({ value: 'timeToVisit', disabled: true })],
       loanRequired: [({ value: 'loanRequired', disabled: true })],//select
       amenities: [({ value: 'amenities', disabled: true })], //multi-select
-
     })
   }
   getOneResidenceVilla() {
@@ -91,7 +88,7 @@ export class ResidenceVillaInfoComponent implements OnInit {
           'Customer Edited Successfully',
           'success'
         )
-        this.router.navigateByUrl('/listResidenceVilla')
+        this.router.navigateByUrl('/listResidence/Villa')
       },
         err => {
           console.error(err);
@@ -115,7 +112,7 @@ export class ResidenceVillaInfoComponent implements OnInit {
             'Customer has been deleted.',
             'success'
           )
-          this.router.navigateByUrl('/listResidenceVilla')
+          this.router.navigateByUrl('/listResidence/Villa')
         },
           err => {
             console.error(err);

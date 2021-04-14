@@ -1,17 +1,16 @@
 <nav>
-    <a mat-button [routerLink]="['/']">Home<span class="sr-only">(current)</span></a>
-    <a mat-button [routerLink]="['/listCustomers']">Customers List</a>
-    <a mat-button [routerLink]="['/listBrokers']">Brokers List</a>
-    <a mat-button [routerLink]="['/listRealEstate']">Real Estate List</a>
-    <!-- <a mat-button [routerLink]="['/listResidence']">Residence List</a> -->
-    <button mat-button [matMenuTriggerFor]="menu">Residence List</button>
+    <a disableRipple mat-button [routerLink]="['/']">Home<span class="sr-only">(current)</span></a>
+    <a disableRipple mat-button [routerLink]="['/listCustomers']">Customers</a>
+    <a disableRipple mat-button [routerLink]="['/listBrokers']">Brokers</a>
+    <a disableRipple mat-button [routerLink]="['/listRealEstate']">Real Estates</a>
+    <button disableRipple mat-button [matMenuTriggerFor]="menu">Residences</button>
     <mat-menu #menu="matMenu" class="bg-dark">
-        <a style="color: white;" class="custom-atag" mat-menu-item [routerLink]="['/listResidenceVilla']">Villas</a>
-        <a style="color: white;" class='custom-atag' mat-menu-item
-            [routerLink]="['/listResidenceApartment']">Apartments</a>
-        <a style="color: white;" class='custom-atag' mat-menu-item [routerLink]="['/listResidenceHouse']">Apartments</a>
+        <a disableRipple style="color: white;" class="custom-atag" mat-menu-item
+            [routerLink]="['/listResidence/Villa']">Villas</a>
+        <a disableRipple style="color: white;" class='custom-atag' mat-menu-item
+            [routerLink]="['/listResidence/Apartment']">Apartments</a>
+        <a disableRipple style="color: white;" class='custom-atag' mat-menu-item
+            [routerLink]="['/listResidence/House']">House</a>
     </mat-menu>
-    <!-- <a mat-icon-button routerLink="search" matTooltip="Search">
-        <mat-icon>search</mat-icon>
-    </a> -->
+    <a disableRipple mat-button [routerLink]="['/listCommercialProperty']">Commercial Property</a>
 </nav>

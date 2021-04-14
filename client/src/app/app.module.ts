@@ -44,6 +44,12 @@ import { ResidenceHouseInfoComponent } from './components/residence-house-info/r
 import { ResidenceHousePageComponent } from './containers/residence-house-page/residence-house-page.component';
 import { ListResidenceHouseComponent } from './containers/list-residence-house/list-residence-house.component';
 import { NewResidenceHouseComponent } from './containers/new-residence-house/new-residence-house.component';
+import { ErrorPageComponent } from './components/error-page/error-page.component';
+import { FormCommercialPropertyComponent } from './components/form-commercial-property/form-commercial-property.component';
+import { NewCommercialPropertyComponent } from './containers/new-commercial-property/new-commercial-property.component';
+import { CommercialPropertyPageComponent } from './containers/commercial-property-page/commercial-property-page.component';
+import { ListCommercialPropertyComponent } from './containers/list-commercial-property/list-commercial-property.component';
+import { CommercialInfoComponent } from './components/commercial-info/commercial-info.component';
 
 
 @NgModule({
@@ -79,7 +85,13 @@ import { NewResidenceHouseComponent } from './containers/new-residence-house/new
     ResidenceHouseInfoComponent,
     ResidenceHousePageComponent,
     ListResidenceHouseComponent,
-    NewResidenceHouseComponent
+    NewResidenceHouseComponent,
+    ErrorPageComponent,
+    FormCommercialPropertyComponent,
+    NewCommercialPropertyComponent,
+    CommercialPropertyPageComponent,
+    ListCommercialPropertyComponent,
+    CommercialInfoComponent
 
   ],
   imports: [

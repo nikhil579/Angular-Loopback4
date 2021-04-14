@@ -97,7 +97,7 @@ export class ResidenceApartmentInfoComponent implements OnInit {
           'Customer Edited Successfully',
           'success'
         )
-        this.router.navigateByUrl('/listResidenceApartment')
+        this.router.navigateByUrl('/listResidence/Apartment')
       },
         err => {
           console.error(err);
@@ -121,7 +121,7 @@ export class ResidenceApartmentInfoComponent implements OnInit {
             'Customer has been deleted.',
             'success'
           )
-          this.router.navigateByUrl('/listResidenceApartment')
+          this.router.navigateByUrl('/listResidence/Apartment')
         },
           err => {
             console.error(err);

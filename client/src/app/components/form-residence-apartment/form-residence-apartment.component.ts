@@ -56,8 +56,8 @@ export class FormResidenceApartmentComponent implements OnInit {
     })
   }
   get getForm() { return this.residenceApartmentForm.controls; }
-  //post
 
+  //post
   post() {
     this.DB.postResidenceApartment(this.residenceApartmentForm.value).subscribe(res => {
       console.log(res);
@@ -66,7 +66,7 @@ export class FormResidenceApartmentComponent implements OnInit {
         'Customer Created Successfully',
         'success'
       )
-      this.router.navigateByUrl('/listResidenceApartment')
+      this.router.navigateByUrl('/listResidence/Apartment')
     },
       err => {
         console.error(err)
@@ -121,7 +121,7 @@ export class FormResidenceApartmentComponent implements OnInit {
           'Customer Edited Successfully',
           'success'
         )
-        this.router.navigateByUrl('/listResidenceApartment')
+        this.router.navigateByUrl('/listResidence/Apartment')
       },
         err => {
           console.error(err);
@@ -145,14 +145,13 @@ export class FormResidenceApartmentComponent implements OnInit {
             'Customer has been deleted.',
             'success'
           )
-          this.router.navigateByUrl('/listResidenceApartment')
+          this.router.navigateByUrl('/listResidence/Apartment')
         },
           err => {
             console.error(err);
           })
       }
     })
-
   }
   informationInfoArray: InformationResidenceApartment[] = []
   getInformationInfoArray() {

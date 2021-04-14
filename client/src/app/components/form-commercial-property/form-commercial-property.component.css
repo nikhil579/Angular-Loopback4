@@ -10,9 +10,10 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+
 input.ng-invalid.ng-touched, input.notValid{
-  border:0px solid red;
-  border-right: 0px solid red;
+  border:1px solid red;
+  border-right: 1px solid red;
   box-shadow: 0 0 0 0.2rem rgba(255, 64, 32, .25);
 }
 input.ng-pending{
@@ -20,25 +21,5 @@ input.ng-pending{
   border-right: 1px solid orange;
   box-shadow: 0 0 0 0.2rem rgba(255, 128, 2, .25);
 }
-.matInput{
-  display: inline-flex;
-}
-form label {font-weight:500}
-/* .form-container{
-  padding: 10px 0 0 0 ;
-} */
-button{
-  margin: 10px;
-}
-.full-width{
-  width: 100%;
-}
-/* mat-label{
-padding: 0.75em 0;
-font-weight: 500;
-} */
 
-@import url('https://fonts.googleapis.com/css?family=Lato:400,700,900');
-.container{
-  font-family: 'Lato', sans-serif;
-}
+form label {font-weight:500}

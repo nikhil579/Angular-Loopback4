@@ -62,7 +62,7 @@ export class FormResidenceVillaComponent implements OnInit {
         'Customer Created Successfully',
         'success'
       )
-      this.router.navigateByUrl('/listResidenceVilla')
+      this.router.navigateByUrl('/listResidence/Villa')
     },
       err => {
         console.error(err)
@@ -114,7 +114,7 @@ export class FormResidenceVillaComponent implements OnInit {
           'Customer Edited Successfully',
           'success'
         )
-        this.router.navigateByUrl('/listResidenceVilla')
+        this.router.navigateByUrl('/listResidence/Villa')
       },
         err => {
           console.error(err);
@@ -138,7 +138,7 @@ export class FormResidenceVillaComponent implements OnInit {
             'Customer has been deleted.',
             'success'
           )
-          this.router.navigateByUrl('/listResidenceVilla')
+          this.router.navigateByUrl('/listResidence/Villa')
         },
           err => {
             console.error(err);

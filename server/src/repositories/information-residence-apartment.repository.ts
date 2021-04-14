@@ -1,7 +1,7 @@
-import {inject} from '@loopback/core';
-import {DefaultCrudRepository} from '@loopback/repository';
-import {MongoDsDataSource} from '../datasources';
-import {InformationResidenceApartment, InformationResidenceApartmentRelations} from '../models';
+import { inject } from '@loopback/core';
+import { DefaultCrudRepository } from '@loopback/repository';
+import { MasterDataSource } from '../datasources/master.datasource';
+import { InformationResidenceApartment, InformationResidenceApartmentRelations } from '../models';
 
 export class InformationResidenceApartmentRepository extends DefaultCrudRepository<
   InformationResidenceApartment,
@@ -9,7 +9,7 @@ export class InformationResidenceApartmentRepository extends DefaultCrudReposito
   InformationResidenceApartmentRelations
 > {
   constructor(
-    @inject('datasources.mongoDS') dataSource: MongoDsDataSource,
+    @inject('datasources.master') dataSource: MasterDataSource,
   ) {
     super(InformationResidenceApartment, dataSource);
   }

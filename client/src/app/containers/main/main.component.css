@@ -31,3 +31,13 @@
     color: darkslategrey;
     text-align: center;
   }
+  .card-body{
+    width: auto;
+    height: auto;
+  }
+  #inner-card{
+    width: 15rem;
+    height: 10rem;
+    text-align: center;
+    margin: 1rem;
+  }

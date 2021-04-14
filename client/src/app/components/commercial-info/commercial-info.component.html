@@ -1,16 +1,17 @@
 <div class="container">
-    <form [formGroup]="residenceVillaForm" #SENDFORM="ngForm">
+    <form [formGroup]="commercialPropertyForm" #SENDFORM="ngForm">
         <div class="card">
             <div class="card-header">
-                <h4>Residence - Villa Information</h4>
+                <h4>Commercial Property Form</h4>
             </div>
             <div class="card-body">
                 <!-- name -->
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label for='societyName'>Society Name </label>
-                            <input id="societyName" class=" form-control" type="text" formControlName="societyName" />
+                            <label for='name'>Name </label>
+                            <input id="name" class=" form-control" type="text" formControlName="name" />
+
                         </div>
                     </div>
                     <div class="col">
@@ -18,13 +19,14 @@
                         <div class="form-group">
                             <label for='address'>Address </label>
                             <input class="form-control" type="text" formControlName='address' />
+
                         </div>
 
                     </div>
                     <!-- phone -->
                     <div class="col">
                         <div class="form-group">
-                            <label for="ageOfProperty">Age of Property </label>
+                            <label for="ageOfProperty">Age of Property</label>
                             <input class="form-control" type="text" formControlName='ageOfProperty' />
                         </div>
                     </div>
@@ -40,30 +42,30 @@
                     <div class="col">
                         <div class="form-group">
                             <label for='price'>Price </label>
-                            <input class="form-control" type="number" formControlName='price' />
+                            <input class="form-control" type="text" formControlName='price' />
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label for='description'>Description </label>
-                            <input class="form-control" type="text" formControlName='description' />
+                            <label for='totalUnits'>Total Units </label>
+                            <input class="form-control" type="number" formControlName='totalUnits' />
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
-                            <label for='parking'>Parking </label>
-                            <select id="parking" formControlName="parking" class="form-control">
-                                <option>{{residenceVillaModel.parking}}</option>
-                            </select>
+                            <label for='description'>Description </label>
+                            <input class="form-control" type="text" formControlName='description' />
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-4">
                         <div class="form-group">
-                            <label for='furnishingStatus'>Furnishing status </label>
-                            <select id="furnishingStatus" formControlName="furnishingStatus" class="form-control">
-                                <option>{{residenceVillaModel.furnishingStatus}}</option>
+                            <label for='approvals'>Approvals available</label>
+                            <select id="approvals" formControlName="approvals" class="form-control">
+                                <option>
+                                    {{ commercialPropertyModel.approvals }}
+                                </option>
                             </select>
                         </div>
                     </div>
@@ -77,9 +79,11 @@
                 <div class="row">
                     <div class="col-4">
                         <div class="form-group">
-                            <label for='loanRequired'>Any existing loan on property/Loan required</label>
+                            <label for='loanRequired'>Loan Required</label>
                             <select id="loanRequired" formControlName="loanRequired" class="form-control">
-                                <option>{{residenceVillaModel.loanRequired}}</option>
+                                <option>
+                                    {{ commercialPropertyModel.loanRequired }}
+                                </option>
                             </select>
                         </div>
                     </div>
@@ -87,8 +91,14 @@
                         <div class="form-group">
                             <label for='amenities'> Amenities </label>
                             <select id="amenities" formControlName="amenities" class="form-control">
-                                <option>{{residenceVillaModel.amenities}}</option>
+                                <option>{{commercialPropertyModel.amenities}}</option>
                             </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for='areaBand'>Area Band </label>
+                            <input class="form-control" type="number" formControlName='areaBand' />
                         </div>
                     </div>
                 </div>
@@ -99,13 +109,15 @@
                     </div>
                 </div>
                 <!--  -->
-                <div class="row">
-                    <div class="col">
-                        <button [routerLink]="['/editResidenceVilla',snapshotId]" id='edit'
-                            class="btn btn-dark">Edit</button>
-                        <button (click)="deleteResidenceVilla(snapshotId)" class="btn btn-danger">Delete</button>
+                <mat-card-actions>
+                    <div class="row">
+                        <div class="col">
+                            <button [routerLink]="['/editCommercialProperty',snapshotId]" id='edit'
+                                class="btn btn-dark">Edit</button>
+                            <button (click)="deleteCommercial(snapshotId)" class="btn btn-danger">Delete</button>
+                        </div>
                     </div>
-                </div>
+                </mat-card-actions>
             </div>
         </div>
     </form>
