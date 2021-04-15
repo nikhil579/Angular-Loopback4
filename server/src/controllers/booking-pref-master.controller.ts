@@ -17,134 +17,134 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {BookingPrefMaster} from '../models';
-import {BookingPrefMasterRepository} from '../repositories';
+import { BookingPref } from '../models';
+import { BookingPrefRepository } from '../repositories';
 
-export class BookingPrefMasterController {
+export class BookingPrefController {
   constructor(
-    @repository(BookingPrefMasterRepository)
-    public bookingPrefMasterRepository : BookingPrefMasterRepository,
-  ) {}
+    @repository(BookingPrefRepository)
+    public bookingPrefRepository: BookingPrefRepository,
+  ) { }
 
-  @post('/booking-pref-masters')
+  @post('/booking-pref-master')
   @response(200, {
-    description: 'BookingPrefMaster model instance',
-    content: {'application/json': {schema: getModelSchemaRef(BookingPrefMaster)}},
+    description: 'BookingPref model instance',
+    content: { 'application/json': { schema: getModelSchemaRef(BookingPref) } },
   })
   async create(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(BookingPrefMaster, {
-            title: 'NewBookingPrefMaster',
+          schema: getModelSchemaRef(BookingPref, {
+            title: 'NewBookingPref',
             exclude: ['id'],
           }),
         },
       },
     })
-    bookingPrefMaster: Omit<BookingPrefMaster, 'id'>,
-  ): Promise<BookingPrefMaster> {
-    return this.bookingPrefMasterRepository.create(bookingPrefMaster);
+    bookingPref: Omit<BookingPref, 'id'>,
+  ): Promise<BookingPref> {
+    return this.bookingPrefRepository.create(bookingPref);
   }
 
-  @get('/booking-pref-masters/count')
+  @get('/booking-pref-master/count')
   @response(200, {
-    description: 'BookingPrefMaster model count',
-    content: {'application/json': {schema: CountSchema}},
+    description: 'BookingPref model count',
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
-    @param.where(BookingPrefMaster) where?: Where<BookingPrefMaster>,
+    @param.where(BookingPref) where?: Where<BookingPref>,
   ): Promise<Count> {
-    return this.bookingPrefMasterRepository.count(where);
+    return this.bookingPrefRepository.count(where);
   }
 
-  @get('/booking-pref-masters')
+  @get('/booking-pref-master')
   @response(200, {
-    description: 'Array of BookingPrefMaster model instances',
+    description: 'Array of BookingPref model instances',
     content: {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(BookingPrefMaster, {includeRelations: true}),
+          items: getModelSchemaRef(BookingPref, { includeRelations: true }),
         },
       },
     },
   })
   async find(
-    @param.filter(BookingPrefMaster) filter?: Filter<BookingPrefMaster>,
-  ): Promise<BookingPrefMaster[]> {
-    return this.bookingPrefMasterRepository.find(filter);
+    @param.filter(BookingPref) filter?: Filter<BookingPref>,
+  ): Promise<BookingPref[]> {
+    return this.bookingPrefRepository.find(filter);
   }
 
-  @patch('/booking-pref-masters')
+  @patch('/booking-pref-master')
   @response(200, {
-    description: 'BookingPrefMaster PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    description: 'BookingPref PATCH success count',
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(BookingPrefMaster, {partial: true}),
+          schema: getModelSchemaRef(BookingPref, { partial: true }),
         },
       },
     })
-    bookingPrefMaster: BookingPrefMaster,
-    @param.where(BookingPrefMaster) where?: Where<BookingPrefMaster>,
+    bookingPref: BookingPref,
+    @param.where(BookingPref) where?: Where<BookingPref>,
   ): Promise<Count> {
-    return this.bookingPrefMasterRepository.updateAll(bookingPrefMaster, where);
+    return this.bookingPrefRepository.updateAll(bookingPref, where);
   }
 
-  @get('/booking-pref-masters/{id}')
+  @get('/booking-pref-master/{id}')
   @response(200, {
-    description: 'BookingPrefMaster model instance',
+    description: 'BookingPref model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(BookingPrefMaster, {includeRelations: true}),
+        schema: getModelSchemaRef(BookingPref, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(BookingPrefMaster, {exclude: 'where'}) filter?: FilterExcludingWhere<BookingPrefMaster>
-  ): Promise<BookingPrefMaster> {
-    return this.bookingPrefMasterRepository.findById(id, filter);
+    @param.filter(BookingPref, { exclude: 'where' }) filter?: FilterExcludingWhere<BookingPref>
+  ): Promise<BookingPref> {
+    return this.bookingPrefRepository.findById(id, filter);
   }
 
-  @patch('/booking-pref-masters/{id}')
+  @patch('/booking-pref-master/{id}')
   @response(204, {
-    description: 'BookingPrefMaster PATCH success',
+    description: 'BookingPref PATCH success',
   })
   async updateById(
     @param.path.string('id') id: string,
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(BookingPrefMaster, {partial: true}),
+          schema: getModelSchemaRef(BookingPref, { partial: true }),
         },
       },
     })
-    bookingPrefMaster: BookingPrefMaster,
+    bookingPref: BookingPref,
   ): Promise<void> {
-    await this.bookingPrefMasterRepository.updateById(id, bookingPrefMaster);
+    await this.bookingPrefRepository.updateById(id, bookingPref);
   }
 
-  @put('/booking-pref-masters/{id}')
+  @put('/booking-pref-master/{id}')
   @response(204, {
-    description: 'BookingPrefMaster PUT success',
+    description: 'BookingPref PUT success',
   })
   async replaceById(
     @param.path.string('id') id: string,
-    @requestBody() bookingPrefMaster: BookingPrefMaster,
+    @requestBody() bookingPref: BookingPref,
   ): Promise<void> {
-    await this.bookingPrefMasterRepository.replaceById(id, bookingPrefMaster);
+    await this.bookingPrefRepository.replaceById(id, bookingPref);
   }
 
-  @del('/booking-pref-masters/{id}')
+  @del('/booking-pref-master/{id}')
   @response(204, {
-    description: 'BookingPrefMaster DELETE success',
+    description: 'BookingPref DELETE success',
   })
   async deleteById(@param.path.string('id') id: string): Promise<void> {
-    await this.bookingPrefMasterRepository.deleteById(id);
+    await this.bookingPrefRepository.deleteById(id);
   }
 }

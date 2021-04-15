@@ -17,134 +17,134 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {ApprovalsMaster} from '../models';
-import {ApprovalsMasterRepository} from '../repositories';
+import { Approvals } from '../models';
+import { ApprovalsRepository } from '../repositories';
 
-export class ApprovalsMasterController {
+export class ApprovalsController {
   constructor(
-    @repository(ApprovalsMasterRepository)
-    public approvalsMasterRepository : ApprovalsMasterRepository,
-  ) {}
+    @repository(ApprovalsRepository)
+    public approvalsRepository: ApprovalsRepository,
+  ) { }
 
-  @post('/approvals-masters')
+  @post('/approvals-master')
   @response(200, {
-    description: 'ApprovalsMaster model instance',
-    content: {'application/json': {schema: getModelSchemaRef(ApprovalsMaster)}},
+    description: 'Approvals model instance',
+    content: { 'application/json': { schema: getModelSchemaRef(Approvals) } },
   })
   async create(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(ApprovalsMaster, {
-            title: 'NewApprovalsMaster',
+          schema: getModelSchemaRef(Approvals, {
+            title: 'NewApprovals',
             exclude: ['id'],
           }),
         },
       },
     })
-    approvalsMaster: Omit<ApprovalsMaster, 'id'>,
-  ): Promise<ApprovalsMaster> {
-    return this.approvalsMasterRepository.create(approvalsMaster);
+    approvals: Omit<Approvals, 'id'>,
+  ): Promise<Approvals> {
+    return this.approvalsRepository.create(approvals);
   }
 
-  @get('/approvals-masters/count')
+  @get('/approvals-master/count')
   @response(200, {
-    description: 'ApprovalsMaster model count',
-    content: {'application/json': {schema: CountSchema}},
+    description: 'Approvals model count',
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
-    @param.where(ApprovalsMaster) where?: Where<ApprovalsMaster>,
+    @param.where(Approvals) where?: Where<Approvals>,
   ): Promise<Count> {
-    return this.approvalsMasterRepository.count(where);
+    return this.approvalsRepository.count(where);
   }
 
-  @get('/approvals-masters')
+  @get('/approvals-master')
   @response(200, {
-    description: 'Array of ApprovalsMaster model instances',
+    description: 'Array of Approvals model instances',
     content: {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(ApprovalsMaster, {includeRelations: true}),
+          items: getModelSchemaRef(Approvals, { includeRelations: true }),
         },
       },
     },
   })
   async find(
-    @param.filter(ApprovalsMaster) filter?: Filter<ApprovalsMaster>,
-  ): Promise<ApprovalsMaster[]> {
-    return this.approvalsMasterRepository.find(filter);
+    @param.filter(Approvals) filter?: Filter<Approvals>,
+  ): Promise<Approvals[]> {
+    return this.approvalsRepository.find(filter);
   }
 
-  @patch('/approvals-masters')
+  @patch('/approvals-master')
   @response(200, {
-    description: 'ApprovalsMaster PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    description: 'Approvals PATCH success count',
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(ApprovalsMaster, {partial: true}),
+          schema: getModelSchemaRef(Approvals, { partial: true }),
         },
       },
     })
-    approvalsMaster: ApprovalsMaster,
-    @param.where(ApprovalsMaster) where?: Where<ApprovalsMaster>,
+    approvals: Approvals,
+    @param.where(Approvals) where?: Where<Approvals>,
   ): Promise<Count> {
-    return this.approvalsMasterRepository.updateAll(approvalsMaster, where);
+    return this.approvalsRepository.updateAll(approvals, where);
   }
 
-  @get('/approvals-masters/{id}')
+  @get('/approvals-master/{id}')
   @response(200, {
-    description: 'ApprovalsMaster model instance',
+    description: 'Approvals model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(ApprovalsMaster, {includeRelations: true}),
+        schema: getModelSchemaRef(Approvals, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(ApprovalsMaster, {exclude: 'where'}) filter?: FilterExcludingWhere<ApprovalsMaster>
-  ): Promise<ApprovalsMaster> {
-    return this.approvalsMasterRepository.findById(id, filter);
+    @param.filter(Approvals, { exclude: 'where' }) filter?: FilterExcludingWhere<Approvals>
+  ): Promise<Approvals> {
+    return this.approvalsRepository.findById(id, filter);
   }
 
-  @patch('/approvals-masters/{id}')
+  @patch('/approvals-master/{id}')
   @response(204, {
-    description: 'ApprovalsMaster PATCH success',
+    description: 'Approvals PATCH success',
   })
   async updateById(
     @param.path.string('id') id: string,
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(ApprovalsMaster, {partial: true}),
+          schema: getModelSchemaRef(Approvals, { partial: true }),
         },
       },
     })
-    approvalsMaster: ApprovalsMaster,
+    approvals: Approvals,
   ): Promise<void> {
-    await this.approvalsMasterRepository.updateById(id, approvalsMaster);
+    await this.approvalsRepository.updateById(id, approvals);
   }
 
-  @put('/approvals-masters/{id}')
+  @put('/approvals-master/{id}')
   @response(204, {
-    description: 'ApprovalsMaster PUT success',
+    description: 'Approvals PUT success',
   })
   async replaceById(
     @param.path.string('id') id: string,
-    @requestBody() approvalsMaster: ApprovalsMaster,
+    @requestBody() approvals: Approvals,
   ): Promise<void> {
-    await this.approvalsMasterRepository.replaceById(id, approvalsMaster);
+    await this.approvalsRepository.replaceById(id, approvals);
   }
 
-  @del('/approvals-masters/{id}')
+  @del('/approvals-master/{id}')
   @response(204, {
-    description: 'ApprovalsMaster DELETE success',
+    description: 'Approvals DELETE success',
   })
   async deleteById(@param.path.string('id') id: string): Promise<void> {
-    await this.approvalsMasterRepository.deleteById(id);
+    await this.approvalsRepository.deleteById(id);
   }
 }

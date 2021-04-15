@@ -5,6 +5,8 @@ import { CommercialProperty } from "src/app/models/commercial-property";
 import { InformationCommercialProperty } from 'src/app/models/information-commercial-property';
 import { CommercialService } from 'src/app/services/commercial-property.service';
 import { InformationCommercialService } from 'src/app/services/information-commercial.service';
+import { Boolean } from "src/app/api/models/boolean";
+import { BooleanControllerService } from "src/app/api/services/boolean-controller.service";
 import Swal from 'sweetalert2';
 
 @Component({
@@ -21,11 +23,13 @@ export class FormCommercialPropertyComponent implements OnInit {
     public DB: CommercialService,
     private router: Router,
     private route: ActivatedRoute,
-    public InfoFromDatabase: InformationCommercialService) { }
+    public InfoFromDatabase: InformationCommercialService,
+    private booleanService: BooleanControllerService) { }
 
   commercialPropertyForm: FormGroup
   selectedAmenities
   selectedApprovals
+
   ngOnInit(): void {
     this.createForms()
 
@@ -36,6 +40,7 @@ export class FormCommercialPropertyComponent implements OnInit {
       }
     })
     this.getInformationInfoArray();
+    this.getBoolean()
   }
   createForms() {
     this.commercialPropertyForm = this.fb.group({
@@ -159,5 +164,9 @@ export class FormCommercialPropertyComponent implements OnInit {
   }
   onSubmit() {
     console.log(this.commercialPropertyForm.value);
+  }
+  booleanMaster: Boolean[]
+  getBoolean(): void {
+    this.booleanService.find().subscribe(booleanMaster => { this.booleanMaster = booleanMaster })
   }
 }

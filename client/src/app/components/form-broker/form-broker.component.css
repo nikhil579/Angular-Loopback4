@@ -9,8 +9,6 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
-
-
 input.ng-invalid.ng-touched, input.notValid{
   border:1px solid red;
   border-right: 1px solid red;

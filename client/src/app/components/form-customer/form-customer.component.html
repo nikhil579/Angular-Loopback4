@@ -93,8 +93,8 @@
                                                 <label for='gender'>Gender *</label>
                                                 <select id="gender" formControlName="gender" class="form-control">
                                                     <option selected [ngValue]="null">Choose...</option>
-                                                    <option *ngFor="let item of genderMaster" [value]="item.genderType">
-                                                        {{ item.genderType }}
+                                                    <option *ngFor="let item of genderMaster" [value]="item.name">
+                                                        {{ item.name }}
                                                     </option>
                                                 </select>
                                             </div>

@@ -17,134 +17,134 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {LoanRequiredMaster} from '../models';
-import {LoanRequiredMasterRepository} from '../repositories';
+import { LoanRequired } from '../models';
+import { LoanRequiredRepository } from '../repositories';
 
-export class LoanRequiredMasterController {
+export class LoanRequiredController {
   constructor(
-    @repository(LoanRequiredMasterRepository)
-    public loanRequiredMasterRepository : LoanRequiredMasterRepository,
-  ) {}
+    @repository(LoanRequiredRepository)
+    public loanRequiredRepository: LoanRequiredRepository,
+  ) { }
 
-  @post('/loan-required-masters')
+  @post('/loan-required-master')
   @response(200, {
-    description: 'LoanRequiredMaster model instance',
-    content: {'application/json': {schema: getModelSchemaRef(LoanRequiredMaster)}},
+    description: 'LoanRequired model instance',
+    content: { 'application/json': { schema: getModelSchemaRef(LoanRequired) } },
   })
   async create(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(LoanRequiredMaster, {
-            title: 'NewLoanRequiredMaster',
+          schema: getModelSchemaRef(LoanRequired, {
+            title: 'NewLoanRequired',
             exclude: ['id'],
           }),
         },
       },
     })
-    loanRequiredMaster: Omit<LoanRequiredMaster, 'id'>,
-  ): Promise<LoanRequiredMaster> {
-    return this.loanRequiredMasterRepository.create(loanRequiredMaster);
+    loanRequired: Omit<LoanRequired, 'id'>,
+  ): Promise<LoanRequired> {
+    return this.loanRequiredRepository.create(loanRequired);
   }
 
-  @get('/loan-required-masters/count')
+  @get('/loan-required-master/count')
   @response(200, {
-    description: 'LoanRequiredMaster model count',
-    content: {'application/json': {schema: CountSchema}},
+    description: 'LoanRequired model count',
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
-    @param.where(LoanRequiredMaster) where?: Where<LoanRequiredMaster>,
+    @param.where(LoanRequired) where?: Where<LoanRequired>,
   ): Promise<Count> {
-    return this.loanRequiredMasterRepository.count(where);
+    return this.loanRequiredRepository.count(where);
   }
 
-  @get('/loan-required-masters')
+  @get('/loan-required-master')
   @response(200, {
-    description: 'Array of LoanRequiredMaster model instances',
+    description: 'Array of LoanRequired model instances',
     content: {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(LoanRequiredMaster, {includeRelations: true}),
+          items: getModelSchemaRef(LoanRequired, { includeRelations: true }),
         },
       },
     },
   })
   async find(
-    @param.filter(LoanRequiredMaster) filter?: Filter<LoanRequiredMaster>,
-  ): Promise<LoanRequiredMaster[]> {
-    return this.loanRequiredMasterRepository.find(filter);
+    @param.filter(LoanRequired) filter?: Filter<LoanRequired>,
+  ): Promise<LoanRequired[]> {
+    return this.loanRequiredRepository.find(filter);
   }
 
-  @patch('/loan-required-masters')
+  @patch('/loan-required-master')
   @response(200, {
-    description: 'LoanRequiredMaster PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    description: 'LoanRequired PATCH success count',
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(LoanRequiredMaster, {partial: true}),
+          schema: getModelSchemaRef(LoanRequired, { partial: true }),
         },
       },
     })
-    loanRequiredMaster: LoanRequiredMaster,
-    @param.where(LoanRequiredMaster) where?: Where<LoanRequiredMaster>,
+    loanRequired: LoanRequired,
+    @param.where(LoanRequired) where?: Where<LoanRequired>,
   ): Promise<Count> {
-    return this.loanRequiredMasterRepository.updateAll(loanRequiredMaster, where);
+    return this.loanRequiredRepository.updateAll(loanRequired, where);
   }
 
-  @get('/loan-required-masters/{id}')
+  @get('/loan-required-master/{id}')
   @response(200, {
-    description: 'LoanRequiredMaster model instance',
+    description: 'LoanRequired model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(LoanRequiredMaster, {includeRelations: true}),
+        schema: getModelSchemaRef(LoanRequired, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(LoanRequiredMaster, {exclude: 'where'}) filter?: FilterExcludingWhere<LoanRequiredMaster>
-  ): Promise<LoanRequiredMaster> {
-    return this.loanRequiredMasterRepository.findById(id, filter);
+    @param.filter(LoanRequired, { exclude: 'where' }) filter?: FilterExcludingWhere<LoanRequired>
+  ): Promise<LoanRequired> {
+    return this.loanRequiredRepository.findById(id, filter);
   }
 
-  @patch('/loan-required-masters/{id}')
+  @patch('/loan-required-master/{id}')
   @response(204, {
-    description: 'LoanRequiredMaster PATCH success',
+    description: 'LoanRequired PATCH success',
   })
   async updateById(
     @param.path.string('id') id: string,
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(LoanRequiredMaster, {partial: true}),
+          schema: getModelSchemaRef(LoanRequired, { partial: true }),
         },
       },
     })
-    loanRequiredMaster: LoanRequiredMaster,
+    loanRequired: LoanRequired,
   ): Promise<void> {
-    await this.loanRequiredMasterRepository.updateById(id, loanRequiredMaster);
+    await this.loanRequiredRepository.updateById(id, loanRequired);
   }
 
-  @put('/loan-required-masters/{id}')
+  @put('/loan-required-master/{id}')
   @response(204, {
-    description: 'LoanRequiredMaster PUT success',
+    description: 'LoanRequired PUT success',
   })
   async replaceById(
     @param.path.string('id') id: string,
-    @requestBody() loanRequiredMaster: LoanRequiredMaster,
+    @requestBody() loanRequired: LoanRequired,
   ): Promise<void> {
-    await this.loanRequiredMasterRepository.replaceById(id, loanRequiredMaster);
+    await this.loanRequiredRepository.replaceById(id, loanRequired);
   }
 
-  @del('/loan-required-masters/{id}')
+  @del('/loan-required-master/{id}')
   @response(204, {
-    description: 'LoanRequiredMaster DELETE success',
+    description: 'LoanRequired DELETE success',
   })
   async deleteById(@param.path.string('id') id: string): Promise<void> {
-    await this.loanRequiredMasterRepository.deleteById(id);
+    await this.loanRequiredRepository.deleteById(id);
   }
 }

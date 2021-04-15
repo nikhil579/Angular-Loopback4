@@ -17,134 +17,134 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import { CurrentResidenceMaster } from '../models';
-import { CurrentResidenceMasterRepository } from '../repositories';
+import { CurrentResidence } from '../models';
+import { CurrentResidenceRepository } from '../repositories';
 
-export class CurrentResidenceMasterController {
+export class CurrentResidenceController {
   constructor(
-    @repository(CurrentResidenceMasterRepository)
-    public currentResidenceMasterRepository: CurrentResidenceMasterRepository,
+    @repository(CurrentResidenceRepository)
+    public currentResidenceRepository: CurrentResidenceRepository,
   ) { }
 
-  @post('/current-residence-masters')
+  @post('/current-residence-master')
   @response(200, {
-    description: 'CurrentResidenceMaster model instance',
-    content: { 'application/json': { schema: getModelSchemaRef(CurrentResidenceMaster) } },
+    description: 'CurrentResidence model instance',
+    content: { 'application/json': { schema: getModelSchemaRef(CurrentResidence) } },
   })
   async create(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(CurrentResidenceMaster, {
-            title: 'NewCurrentResidenceMaster',
+          schema: getModelSchemaRef(CurrentResidence, {
+            title: 'NewCurrentResidence',
             exclude: ['id'],
           }),
         },
       },
     })
-    currentResidenceMaster: Omit<CurrentResidenceMaster, 'id'>,
-  ): Promise<CurrentResidenceMaster> {
-    return this.currentResidenceMasterRepository.create(currentResidenceMaster);
+    currentResidence: Omit<CurrentResidence, 'id'>,
+  ): Promise<CurrentResidence> {
+    return this.currentResidenceRepository.create(currentResidence);
   }
 
-  @get('/current-residence-masters/count')
+  @get('/current-residence-master/count')
   @response(200, {
-    description: 'CurrentResidenceMaster model count',
+    description: 'CurrentResidence model count',
     content: { 'application/json': { schema: CountSchema } },
   })
   async count(
-    @param.where(CurrentResidenceMaster) where?: Where<CurrentResidenceMaster>,
+    @param.where(CurrentResidence) where?: Where<CurrentResidence>,
   ): Promise<Count> {
-    return this.currentResidenceMasterRepository.count(where);
+    return this.currentResidenceRepository.count(where);
   }
 
-  @get('/current-residence-masters')
+  @get('/current-residence-master')
   @response(200, {
-    description: 'Array of CurrentResidenceMaster model instances',
+    description: 'Array of CurrentResidence model instances',
     content: {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(CurrentResidenceMaster, { includeRelations: true }),
+          items: getModelSchemaRef(CurrentResidence, { includeRelations: true }),
         },
       },
     },
   })
   async find(
-    @param.filter(CurrentResidenceMaster) filter?: Filter<CurrentResidenceMaster>,
-  ): Promise<CurrentResidenceMaster[]> {
-    return this.currentResidenceMasterRepository.find(filter);
+    @param.filter(CurrentResidence) filter?: Filter<CurrentResidence>,
+  ): Promise<CurrentResidence[]> {
+    return this.currentResidenceRepository.find(filter);
   }
 
-  @patch('/current-residence-masters')
+  @patch('/current-residence-master')
   @response(200, {
-    description: 'CurrentResidenceMaster PATCH success count',
+    description: 'CurrentResidence PATCH success count',
     content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(CurrentResidenceMaster, { partial: true }),
+          schema: getModelSchemaRef(CurrentResidence, { partial: true }),
         },
       },
     })
-    currentResidenceMaster: CurrentResidenceMaster,
-    @param.where(CurrentResidenceMaster) where?: Where<CurrentResidenceMaster>,
+    currentResidence: CurrentResidence,
+    @param.where(CurrentResidence) where?: Where<CurrentResidence>,
   ): Promise<Count> {
-    return this.currentResidenceMasterRepository.updateAll(currentResidenceMaster, where);
+    return this.currentResidenceRepository.updateAll(currentResidence, where);
   }
 
-  @get('/current-residence-masters/{id}')
+  @get('/current-residence-master/{id}')
   @response(200, {
-    description: 'CurrentResidenceMaster model instance',
+    description: 'CurrentResidence model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(CurrentResidenceMaster, { includeRelations: true }),
+        schema: getModelSchemaRef(CurrentResidence, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(CurrentResidenceMaster, { exclude: 'where' }) filter?: FilterExcludingWhere<CurrentResidenceMaster>
-  ): Promise<CurrentResidenceMaster> {
-    return this.currentResidenceMasterRepository.findById(id, filter);
+    @param.filter(CurrentResidence, { exclude: 'where' }) filter?: FilterExcludingWhere<CurrentResidence>
+  ): Promise<CurrentResidence> {
+    return this.currentResidenceRepository.findById(id, filter);
   }
 
-  @patch('/current-residence-masters/{id}')
+  @patch('/current-residence-master/{id}')
   @response(204, {
-    description: 'CurrentResidenceMaster PATCH success',
+    description: 'CurrentResidence PATCH success',
   })
   async updateById(
     @param.path.string('id') id: string,
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(CurrentResidenceMaster, { partial: true }),
+          schema: getModelSchemaRef(CurrentResidence, { partial: true }),
         },
       },
     })
-    currentResidenceMaster: CurrentResidenceMaster,
+    currentResidence: CurrentResidence,
   ): Promise<void> {
-    await this.currentResidenceMasterRepository.updateById(id, currentResidenceMaster);
+    await this.currentResidenceRepository.updateById(id, currentResidence);
   }
 
-  @put('/current-residence-masters/{id}')
+  @put('/current-residence-master/{id}')
   @response(204, {
-    description: 'CurrentResidenceMaster PUT success',
+    description: 'CurrentResidence PUT success',
   })
   async replaceById(
     @param.path.string('id') id: string,
-    @requestBody() currentResidenceMaster: CurrentResidenceMaster,
+    @requestBody() currentResidence: CurrentResidence,
   ): Promise<void> {
-    await this.currentResidenceMasterRepository.replaceById(id, currentResidenceMaster);
+    await this.currentResidenceRepository.replaceById(id, currentResidence);
   }
 
-  @del('/current-residence-masters/{id}')
+  @del('/current-residence-master/{id}')
   @response(204, {
-    description: 'CurrentResidenceMaster DELETE success',
+    description: 'CurrentResidence DELETE success',
   })
   async deleteById(@param.path.string('id') id: string): Promise<void> {
-    await this.currentResidenceMasterRepository.deleteById(id);
+    await this.currentResidenceRepository.deleteById(id);
   }
 }

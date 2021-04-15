@@ -12,7 +12,7 @@ export class BaseMaster extends Entity {
   @property({
     type: 'string',
   })
-  typeName?: string;//to be changed to Name
+  name?: string;//to be changed to Name
 
 
   constructor(data?: Partial<BaseMaster>) {

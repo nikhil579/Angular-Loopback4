@@ -17,134 +17,134 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {SectorMaster} from '../models';
-import {SectorMasterRepository} from '../repositories';
+import { Sector } from '../models';
+import { SectorRepository } from '../repositories';
 
-export class SectorMasterController {
+export class SectorController {
   constructor(
-    @repository(SectorMasterRepository)
-    public sectorMasterRepository : SectorMasterRepository,
-  ) {}
+    @repository(SectorRepository)
+    public sectorRepository: SectorRepository,
+  ) { }
 
-  @post('/sector-masters')
+  @post('/sector-master')
   @response(200, {
-    description: 'SectorMaster model instance',
-    content: {'application/json': {schema: getModelSchemaRef(SectorMaster)}},
+    description: 'Sector model instance',
+    content: { 'application/json': { schema: getModelSchemaRef(Sector) } },
   })
   async create(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(SectorMaster, {
-            title: 'NewSectorMaster',
+          schema: getModelSchemaRef(Sector, {
+            title: 'NewSector',
             exclude: ['id'],
           }),
         },
       },
     })
-    sectorMaster: Omit<SectorMaster, 'id'>,
-  ): Promise<SectorMaster> {
-    return this.sectorMasterRepository.create(sectorMaster);
+    sector: Omit<Sector, 'id'>,
+  ): Promise<Sector> {
+    return this.sectorRepository.create(sector);
   }
 
-  @get('/sector-masters/count')
+  @get('/sector-master/count')
   @response(200, {
-    description: 'SectorMaster model count',
-    content: {'application/json': {schema: CountSchema}},
+    description: 'Sector model count',
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
-    @param.where(SectorMaster) where?: Where<SectorMaster>,
+    @param.where(Sector) where?: Where<Sector>,
   ): Promise<Count> {
-    return this.sectorMasterRepository.count(where);
+    return this.sectorRepository.count(where);
   }
 
-  @get('/sector-masters')
+  @get('/sector-master')
   @response(200, {
-    description: 'Array of SectorMaster model instances',
+    description: 'Array of Sector model instances',
     content: {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(SectorMaster, {includeRelations: true}),
+          items: getModelSchemaRef(Sector, { includeRelations: true }),
         },
       },
     },
   })
   async find(
-    @param.filter(SectorMaster) filter?: Filter<SectorMaster>,
-  ): Promise<SectorMaster[]> {
-    return this.sectorMasterRepository.find(filter);
+    @param.filter(Sector) filter?: Filter<Sector>,
+  ): Promise<Sector[]> {
+    return this.sectorRepository.find(filter);
   }
 
-  @patch('/sector-masters')
+  @patch('/sector-master')
   @response(200, {
-    description: 'SectorMaster PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    description: 'Sector PATCH success count',
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(SectorMaster, {partial: true}),
+          schema: getModelSchemaRef(Sector, { partial: true }),
         },
       },
     })
-    sectorMaster: SectorMaster,
-    @param.where(SectorMaster) where?: Where<SectorMaster>,
+    sector: Sector,
+    @param.where(Sector) where?: Where<Sector>,
   ): Promise<Count> {
-    return this.sectorMasterRepository.updateAll(sectorMaster, where);
+    return this.sectorRepository.updateAll(sector, where);
   }
 
-  @get('/sector-masters/{id}')
+  @get('/sector-master/{id}')
   @response(200, {
-    description: 'SectorMaster model instance',
+    description: 'Sector model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(SectorMaster, {includeRelations: true}),
+        schema: getModelSchemaRef(Sector, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(SectorMaster, {exclude: 'where'}) filter?: FilterExcludingWhere<SectorMaster>
-  ): Promise<SectorMaster> {
-    return this.sectorMasterRepository.findById(id, filter);
+    @param.filter(Sector, { exclude: 'where' }) filter?: FilterExcludingWhere<Sector>
+  ): Promise<Sector> {
+    return this.sectorRepository.findById(id, filter);
   }
 
-  @patch('/sector-masters/{id}')
+  @patch('/sector-master/{id}')
   @response(204, {
-    description: 'SectorMaster PATCH success',
+    description: 'Sector PATCH success',
   })
   async updateById(
     @param.path.string('id') id: string,
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(SectorMaster, {partial: true}),
+          schema: getModelSchemaRef(Sector, { partial: true }),
         },
       },
     })
-    sectorMaster: SectorMaster,
+    sector: Sector,
   ): Promise<void> {
-    await this.sectorMasterRepository.updateById(id, sectorMaster);
+    await this.sectorRepository.updateById(id, sector);
   }
 
-  @put('/sector-masters/{id}')
+  @put('/sector-master/{id}')
   @response(204, {
-    description: 'SectorMaster PUT success',
+    description: 'Sector PUT success',
   })
   async replaceById(
     @param.path.string('id') id: string,
-    @requestBody() sectorMaster: SectorMaster,
+    @requestBody() sector: Sector,
   ): Promise<void> {
-    await this.sectorMasterRepository.replaceById(id, sectorMaster);
+    await this.sectorRepository.replaceById(id, sector);
   }
 
-  @del('/sector-masters/{id}')
+  @del('/sector-master/{id}')
   @response(204, {
-    description: 'SectorMaster DELETE success',
+    description: 'Sector DELETE success',
   })
   async deleteById(@param.path.string('id') id: string): Promise<void> {
-    await this.sectorMasterRepository.deleteById(id);
+    await this.sectorRepository.deleteById(id);
   }
 }

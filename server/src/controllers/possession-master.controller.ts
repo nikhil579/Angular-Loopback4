@@ -17,134 +17,134 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {PossessionMaster} from '../models';
-import {PossessionMasterRepository} from '../repositories';
+import { Possession } from '../models';
+import { PossessionRepository } from '../repositories';
 
-export class PossessionMasterController {
+export class PossessionController {
   constructor(
-    @repository(PossessionMasterRepository)
-    public possessionMasterRepository : PossessionMasterRepository,
-  ) {}
+    @repository(PossessionRepository)
+    public possessionRepository: PossessionRepository,
+  ) { }
 
-  @post('/possession-masters')
+  @post('/possession-master')
   @response(200, {
-    description: 'PossessionMaster model instance',
-    content: {'application/json': {schema: getModelSchemaRef(PossessionMaster)}},
+    description: 'Possession model instance',
+    content: { 'application/json': { schema: getModelSchemaRef(Possession) } },
   })
   async create(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(PossessionMaster, {
-            title: 'NewPossessionMaster',
+          schema: getModelSchemaRef(Possession, {
+            title: 'NewPossession',
             exclude: ['id'],
           }),
         },
       },
     })
-    possessionMaster: Omit<PossessionMaster, 'id'>,
-  ): Promise<PossessionMaster> {
-    return this.possessionMasterRepository.create(possessionMaster);
+    possession: Omit<Possession, 'id'>,
+  ): Promise<Possession> {
+    return this.possessionRepository.create(possession);
   }
 
-  @get('/possession-masters/count')
+  @get('/possession-master/count')
   @response(200, {
-    description: 'PossessionMaster model count',
-    content: {'application/json': {schema: CountSchema}},
+    description: 'Possession model count',
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
-    @param.where(PossessionMaster) where?: Where<PossessionMaster>,
+    @param.where(Possession) where?: Where<Possession>,
   ): Promise<Count> {
-    return this.possessionMasterRepository.count(where);
+    return this.possessionRepository.count(where);
   }
 
-  @get('/possession-masters')
+  @get('/possession-master')
   @response(200, {
-    description: 'Array of PossessionMaster model instances',
+    description: 'Array of Possession model instances',
     content: {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(PossessionMaster, {includeRelations: true}),
+          items: getModelSchemaRef(Possession, { includeRelations: true }),
         },
       },
     },
   })
   async find(
-    @param.filter(PossessionMaster) filter?: Filter<PossessionMaster>,
-  ): Promise<PossessionMaster[]> {
-    return this.possessionMasterRepository.find(filter);
+    @param.filter(Possession) filter?: Filter<Possession>,
+  ): Promise<Possession[]> {
+    return this.possessionRepository.find(filter);
   }
 
-  @patch('/possession-masters')
+  @patch('/possession-master')
   @response(200, {
-    description: 'PossessionMaster PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    description: 'Possession PATCH success count',
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(PossessionMaster, {partial: true}),
+          schema: getModelSchemaRef(Possession, { partial: true }),
         },
       },
     })
-    possessionMaster: PossessionMaster,
-    @param.where(PossessionMaster) where?: Where<PossessionMaster>,
+    possession: Possession,
+    @param.where(Possession) where?: Where<Possession>,
   ): Promise<Count> {
-    return this.possessionMasterRepository.updateAll(possessionMaster, where);
+    return this.possessionRepository.updateAll(possession, where);
   }
 
-  @get('/possession-masters/{id}')
+  @get('/possession-master/{id}')
   @response(200, {
-    description: 'PossessionMaster model instance',
+    description: 'Possession model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(PossessionMaster, {includeRelations: true}),
+        schema: getModelSchemaRef(Possession, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(PossessionMaster, {exclude: 'where'}) filter?: FilterExcludingWhere<PossessionMaster>
-  ): Promise<PossessionMaster> {
-    return this.possessionMasterRepository.findById(id, filter);
+    @param.filter(Possession, { exclude: 'where' }) filter?: FilterExcludingWhere<Possession>
+  ): Promise<Possession> {
+    return this.possessionRepository.findById(id, filter);
   }
 
-  @patch('/possession-masters/{id}')
+  @patch('/possession-master/{id}')
   @response(204, {
-    description: 'PossessionMaster PATCH success',
+    description: 'Possession PATCH success',
   })
   async updateById(
     @param.path.string('id') id: string,
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(PossessionMaster, {partial: true}),
+          schema: getModelSchemaRef(Possession, { partial: true }),
         },
       },
     })
-    possessionMaster: PossessionMaster,
+    possession: Possession,
   ): Promise<void> {
-    await this.possessionMasterRepository.updateById(id, possessionMaster);
+    await this.possessionRepository.updateById(id, possession);
   }
 
-  @put('/possession-masters/{id}')
+  @put('/possession-master/{id}')
   @response(204, {
-    description: 'PossessionMaster PUT success',
+    description: 'Possession PUT success',
   })
   async replaceById(
     @param.path.string('id') id: string,
-    @requestBody() possessionMaster: PossessionMaster,
+    @requestBody() possession: Possession,
   ): Promise<void> {
-    await this.possessionMasterRepository.replaceById(id, possessionMaster);
+    await this.possessionRepository.replaceById(id, possession);
   }
 
-  @del('/possession-masters/{id}')
+  @del('/possession-master/{id}')
   @response(204, {
-    description: 'PossessionMaster DELETE success',
+    description: 'Possession DELETE success',
   })
   async deleteById(@param.path.string('id') id: string): Promise<void> {
-    await this.possessionMasterRepository.deleteById(id);
+    await this.possessionRepository.deleteById(id);
   }
 }

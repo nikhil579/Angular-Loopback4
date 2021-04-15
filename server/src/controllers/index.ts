@@ -28,3 +28,4 @@ export * from './purpose-master.controller';
 export * from './residence-type-master.controller';
 export * from './sector-master.controller';
 export * from './unit-layout-master.controller';
+export * from './boolean.controller';

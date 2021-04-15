@@ -9,7 +9,6 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
-
 input.ng-invalid.ng-touched, input.notValid{
   border:0px solid red;
   border-right: 0px solid red;
@@ -24,21 +23,10 @@ input.ng-pending{
   display: inline-flex;
 }
 form label {font-weight:500}
-/* .form-container{
-  padding: 10px 0 0 0 ;
-} */
+
 button{
   margin: 10px;
 }
 .full-width{
   width: 100%;
-}
-/* mat-label{
-padding: 0.75em 0;
-font-weight: 500;
-} */
-
-@import url('https://fonts.googleapis.com/css?family=Lato:400,700,900');
-.container{
-  font-family: 'Lato', sans-serif;
 }

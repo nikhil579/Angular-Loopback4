@@ -17,134 +17,134 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {OccupationMaster} from '../models';
-import {OccupationMasterRepository} from '../repositories';
+import { Occupation } from '../models';
+import { OccupationRepository } from '../repositories';
 
-export class OccupationMasterController {
+export class OccupationController {
   constructor(
-    @repository(OccupationMasterRepository)
-    public occupationMasterRepository : OccupationMasterRepository,
-  ) {}
+    @repository(OccupationRepository)
+    public occupationRepository: OccupationRepository,
+  ) { }
 
-  @post('/occupation-masters')
+  @post('/occupation-master')
   @response(200, {
-    description: 'OccupationMaster model instance',
-    content: {'application/json': {schema: getModelSchemaRef(OccupationMaster)}},
+    description: 'Occupation model instance',
+    content: { 'application/json': { schema: getModelSchemaRef(Occupation) } },
   })
   async create(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(OccupationMaster, {
-            title: 'NewOccupationMaster',
+          schema: getModelSchemaRef(Occupation, {
+            title: 'NewOccupation',
             exclude: ['id'],
           }),
         },
       },
     })
-    occupationMaster: Omit<OccupationMaster, 'id'>,
-  ): Promise<OccupationMaster> {
-    return this.occupationMasterRepository.create(occupationMaster);
+    occupation: Omit<Occupation, 'id'>,
+  ): Promise<Occupation> {
+    return this.occupationRepository.create(occupation);
   }
 
-  @get('/occupation-masters/count')
+  @get('/occupation-master/count')
   @response(200, {
-    description: 'OccupationMaster model count',
-    content: {'application/json': {schema: CountSchema}},
+    description: 'Occupation model count',
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
-    @param.where(OccupationMaster) where?: Where<OccupationMaster>,
+    @param.where(Occupation) where?: Where<Occupation>,
   ): Promise<Count> {
-    return this.occupationMasterRepository.count(where);
+    return this.occupationRepository.count(where);
   }
 
-  @get('/occupation-masters')
+  @get('/occupation-master')
   @response(200, {
-    description: 'Array of OccupationMaster model instances',
+    description: 'Array of Occupation model instances',
     content: {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(OccupationMaster, {includeRelations: true}),
+          items: getModelSchemaRef(Occupation, { includeRelations: true }),
         },
       },
     },
   })
   async find(
-    @param.filter(OccupationMaster) filter?: Filter<OccupationMaster>,
-  ): Promise<OccupationMaster[]> {
-    return this.occupationMasterRepository.find(filter);
+    @param.filter(Occupation) filter?: Filter<Occupation>,
+  ): Promise<Occupation[]> {
+    return this.occupationRepository.find(filter);
   }
 
-  @patch('/occupation-masters')
+  @patch('/occupation-master')
   @response(200, {
-    description: 'OccupationMaster PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    description: 'Occupation PATCH success count',
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(OccupationMaster, {partial: true}),
+          schema: getModelSchemaRef(Occupation, { partial: true }),
         },
       },
     })
-    occupationMaster: OccupationMaster,
-    @param.where(OccupationMaster) where?: Where<OccupationMaster>,
+    occupation: Occupation,
+    @param.where(Occupation) where?: Where<Occupation>,
   ): Promise<Count> {
-    return this.occupationMasterRepository.updateAll(occupationMaster, where);
+    return this.occupationRepository.updateAll(occupation, where);
   }
 
-  @get('/occupation-masters/{id}')
+  @get('/occupation-master/{id}')
   @response(200, {
-    description: 'OccupationMaster model instance',
+    description: 'Occupation model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(OccupationMaster, {includeRelations: true}),
+        schema: getModelSchemaRef(Occupation, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(OccupationMaster, {exclude: 'where'}) filter?: FilterExcludingWhere<OccupationMaster>
-  ): Promise<OccupationMaster> {
-    return this.occupationMasterRepository.findById(id, filter);
+    @param.filter(Occupation, { exclude: 'where' }) filter?: FilterExcludingWhere<Occupation>
+  ): Promise<Occupation> {
+    return this.occupationRepository.findById(id, filter);
   }
 
-  @patch('/occupation-masters/{id}')
+  @patch('/occupation-master/{id}')
   @response(204, {
-    description: 'OccupationMaster PATCH success',
+    description: 'Occupation PATCH success',
   })
   async updateById(
     @param.path.string('id') id: string,
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(OccupationMaster, {partial: true}),
+          schema: getModelSchemaRef(Occupation, { partial: true }),
         },
       },
     })
-    occupationMaster: OccupationMaster,
+    occupation: Occupation,
   ): Promise<void> {
-    await this.occupationMasterRepository.updateById(id, occupationMaster);
+    await this.occupationRepository.updateById(id, occupation);
   }
 
-  @put('/occupation-masters/{id}')
+  @put('/occupation-master/{id}')
   @response(204, {
-    description: 'OccupationMaster PUT success',
+    description: 'Occupation PUT success',
   })
   async replaceById(
     @param.path.string('id') id: string,
-    @requestBody() occupationMaster: OccupationMaster,
+    @requestBody() occupation: Occupation,
   ): Promise<void> {
-    await this.occupationMasterRepository.replaceById(id, occupationMaster);
+    await this.occupationRepository.replaceById(id, occupation);
   }
 
-  @del('/occupation-masters/{id}')
+  @del('/occupation-master/{id}')
   @response(204, {
-    description: 'OccupationMaster DELETE success',
+    description: 'Occupation DELETE success',
   })
   async deleteById(@param.path.string('id') id: string): Promise<void> {
-    await this.occupationMasterRepository.deleteById(id);
+    await this.occupationRepository.deleteById(id);
   }
 }

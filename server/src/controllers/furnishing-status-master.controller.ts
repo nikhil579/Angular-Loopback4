@@ -17,134 +17,134 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {FurnishingStatusMaster} from '../models';
-import {FurnishingStatusMasterRepository} from '../repositories';
+import { FurnishingStatus } from '../models';
+import { FurnishingStatusRepository } from '../repositories';
 
-export class FurnishingStatusMasterController {
+export class FurnishingStatusController {
   constructor(
-    @repository(FurnishingStatusMasterRepository)
-    public furnishingStatusMasterRepository : FurnishingStatusMasterRepository,
-  ) {}
+    @repository(FurnishingStatusRepository)
+    public furnishingStatusRepository: FurnishingStatusRepository,
+  ) { }
 
-  @post('/furnishing-status-masters')
+  @post('/furnishing-status-master')
   @response(200, {
-    description: 'FurnishingStatusMaster model instance',
-    content: {'application/json': {schema: getModelSchemaRef(FurnishingStatusMaster)}},
+    description: 'FurnishingStatus model instance',
+    content: { 'application/json': { schema: getModelSchemaRef(FurnishingStatus) } },
   })
   async create(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(FurnishingStatusMaster, {
-            title: 'NewFurnishingStatusMaster',
+          schema: getModelSchemaRef(FurnishingStatus, {
+            title: 'NewFurnishingStatus',
             exclude: ['id'],
           }),
         },
       },
     })
-    furnishingStatusMaster: Omit<FurnishingStatusMaster, 'id'>,
-  ): Promise<FurnishingStatusMaster> {
-    return this.furnishingStatusMasterRepository.create(furnishingStatusMaster);
+    furnishingStatus: Omit<FurnishingStatus, 'id'>,
+  ): Promise<FurnishingStatus> {
+    return this.furnishingStatusRepository.create(furnishingStatus);
   }
 
-  @get('/furnishing-status-masters/count')
+  @get('/furnishing-status-master/count')
   @response(200, {
-    description: 'FurnishingStatusMaster model count',
-    content: {'application/json': {schema: CountSchema}},
+    description: 'FurnishingStatus model count',
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
-    @param.where(FurnishingStatusMaster) where?: Where<FurnishingStatusMaster>,
+    @param.where(FurnishingStatus) where?: Where<FurnishingStatus>,
   ): Promise<Count> {
-    return this.furnishingStatusMasterRepository.count(where);
+    return this.furnishingStatusRepository.count(where);
   }
 
-  @get('/furnishing-status-masters')
+  @get('/furnishing-status-master')
   @response(200, {
-    description: 'Array of FurnishingStatusMaster model instances',
+    description: 'Array of FurnishingStatus model instances',
     content: {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(FurnishingStatusMaster, {includeRelations: true}),
+          items: getModelSchemaRef(FurnishingStatus, { includeRelations: true }),
         },
       },
     },
   })
   async find(
-    @param.filter(FurnishingStatusMaster) filter?: Filter<FurnishingStatusMaster>,
-  ): Promise<FurnishingStatusMaster[]> {
-    return this.furnishingStatusMasterRepository.find(filter);
+    @param.filter(FurnishingStatus) filter?: Filter<FurnishingStatus>,
+  ): Promise<FurnishingStatus[]> {
+    return this.furnishingStatusRepository.find(filter);
   }
 
-  @patch('/furnishing-status-masters')
+  @patch('/furnishing-status-master')
   @response(200, {
-    description: 'FurnishingStatusMaster PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    description: 'FurnishingStatus PATCH success count',
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(FurnishingStatusMaster, {partial: true}),
+          schema: getModelSchemaRef(FurnishingStatus, { partial: true }),
         },
       },
     })
-    furnishingStatusMaster: FurnishingStatusMaster,
-    @param.where(FurnishingStatusMaster) where?: Where<FurnishingStatusMaster>,
+    furnishingStatus: FurnishingStatus,
+    @param.where(FurnishingStatus) where?: Where<FurnishingStatus>,
   ): Promise<Count> {
-    return this.furnishingStatusMasterRepository.updateAll(furnishingStatusMaster, where);
+    return this.furnishingStatusRepository.updateAll(furnishingStatus, where);
   }
 
-  @get('/furnishing-status-masters/{id}')
+  @get('/furnishing-status-master/{id}')
   @response(200, {
-    description: 'FurnishingStatusMaster model instance',
+    description: 'FurnishingStatus model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(FurnishingStatusMaster, {includeRelations: true}),
+        schema: getModelSchemaRef(FurnishingStatus, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(FurnishingStatusMaster, {exclude: 'where'}) filter?: FilterExcludingWhere<FurnishingStatusMaster>
-  ): Promise<FurnishingStatusMaster> {
-    return this.furnishingStatusMasterRepository.findById(id, filter);
+    @param.filter(FurnishingStatus, { exclude: 'where' }) filter?: FilterExcludingWhere<FurnishingStatus>
+  ): Promise<FurnishingStatus> {
+    return this.furnishingStatusRepository.findById(id, filter);
   }
 
-  @patch('/furnishing-status-masters/{id}')
+  @patch('/furnishing-status-master/{id}')
   @response(204, {
-    description: 'FurnishingStatusMaster PATCH success',
+    description: 'FurnishingStatus PATCH success',
   })
   async updateById(
     @param.path.string('id') id: string,
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(FurnishingStatusMaster, {partial: true}),
+          schema: getModelSchemaRef(FurnishingStatus, { partial: true }),
         },
       },
     })
-    furnishingStatusMaster: FurnishingStatusMaster,
+    furnishingStatus: FurnishingStatus,
   ): Promise<void> {
-    await this.furnishingStatusMasterRepository.updateById(id, furnishingStatusMaster);
+    await this.furnishingStatusRepository.updateById(id, furnishingStatus);
   }
 
-  @put('/furnishing-status-masters/{id}')
+  @put('/furnishing-status-master/{id}')
   @response(204, {
-    description: 'FurnishingStatusMaster PUT success',
+    description: 'FurnishingStatus PUT success',
   })
   async replaceById(
     @param.path.string('id') id: string,
-    @requestBody() furnishingStatusMaster: FurnishingStatusMaster,
+    @requestBody() furnishingStatus: FurnishingStatus,
   ): Promise<void> {
-    await this.furnishingStatusMasterRepository.replaceById(id, furnishingStatusMaster);
+    await this.furnishingStatusRepository.replaceById(id, furnishingStatus);
   }
 
-  @del('/furnishing-status-masters/{id}')
+  @del('/furnishing-status-master/{id}')
   @response(204, {
-    description: 'FurnishingStatusMaster DELETE success',
+    description: 'FurnishingStatus DELETE success',
   })
   async deleteById(@param.path.string('id') id: string): Promise<void> {
-    await this.furnishingStatusMasterRepository.deleteById(id);
+    await this.furnishingStatusRepository.deleteById(id);
   }
 }

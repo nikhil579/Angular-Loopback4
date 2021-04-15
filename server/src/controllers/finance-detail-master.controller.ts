@@ -17,134 +17,134 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {FinanceDetailMaster} from '../models';
-import {FinanceDetailMasterRepository} from '../repositories';
+import { FinanceDetail } from '../models';
+import { FinanceDetailRepository } from '../repositories';
 
-export class FinanceDetailMasterController {
+export class FinanceDetailController {
   constructor(
-    @repository(FinanceDetailMasterRepository)
-    public financeDetailMasterRepository : FinanceDetailMasterRepository,
-  ) {}
+    @repository(FinanceDetailRepository)
+    public financeDetailRepository: FinanceDetailRepository,
+  ) { }
 
-  @post('/finance-detail-masters')
+  @post('/finance-detail-master')
   @response(200, {
-    description: 'FinanceDetailMaster model instance',
-    content: {'application/json': {schema: getModelSchemaRef(FinanceDetailMaster)}},
+    description: 'FinanceDetail model instance',
+    content: { 'application/json': { schema: getModelSchemaRef(FinanceDetail) } },
   })
   async create(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(FinanceDetailMaster, {
-            title: 'NewFinanceDetailMaster',
+          schema: getModelSchemaRef(FinanceDetail, {
+            title: 'NewFinanceDetail',
             exclude: ['id'],
           }),
         },
       },
     })
-    financeDetailMaster: Omit<FinanceDetailMaster, 'id'>,
-  ): Promise<FinanceDetailMaster> {
-    return this.financeDetailMasterRepository.create(financeDetailMaster);
+    financeDetail: Omit<FinanceDetail, 'id'>,
+  ): Promise<FinanceDetail> {
+    return this.financeDetailRepository.create(financeDetail);
   }
 
-  @get('/finance-detail-masters/count')
+  @get('/finance-detail-master/count')
   @response(200, {
-    description: 'FinanceDetailMaster model count',
-    content: {'application/json': {schema: CountSchema}},
+    description: 'FinanceDetail model count',
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
-    @param.where(FinanceDetailMaster) where?: Where<FinanceDetailMaster>,
+    @param.where(FinanceDetail) where?: Where<FinanceDetail>,
   ): Promise<Count> {
-    return this.financeDetailMasterRepository.count(where);
+    return this.financeDetailRepository.count(where);
   }
 
-  @get('/finance-detail-masters')
+  @get('/finance-detail-master')
   @response(200, {
-    description: 'Array of FinanceDetailMaster model instances',
+    description: 'Array of FinanceDetail model instances',
     content: {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(FinanceDetailMaster, {includeRelations: true}),
+          items: getModelSchemaRef(FinanceDetail, { includeRelations: true }),
         },
       },
     },
   })
   async find(
-    @param.filter(FinanceDetailMaster) filter?: Filter<FinanceDetailMaster>,
-  ): Promise<FinanceDetailMaster[]> {
-    return this.financeDetailMasterRepository.find(filter);
+    @param.filter(FinanceDetail) filter?: Filter<FinanceDetail>,
+  ): Promise<FinanceDetail[]> {
+    return this.financeDetailRepository.find(filter);
   }
 
-  @patch('/finance-detail-masters')
+  @patch('/finance-detail-master')
   @response(200, {
-    description: 'FinanceDetailMaster PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    description: 'FinanceDetail PATCH success count',
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(FinanceDetailMaster, {partial: true}),
+          schema: getModelSchemaRef(FinanceDetail, { partial: true }),
         },
       },
     })
-    financeDetailMaster: FinanceDetailMaster,
-    @param.where(FinanceDetailMaster) where?: Where<FinanceDetailMaster>,
+    financeDetail: FinanceDetail,
+    @param.where(FinanceDetail) where?: Where<FinanceDetail>,
   ): Promise<Count> {
-    return this.financeDetailMasterRepository.updateAll(financeDetailMaster, where);
+    return this.financeDetailRepository.updateAll(financeDetail, where);
   }
 
-  @get('/finance-detail-masters/{id}')
+  @get('/finance-detail-master/{id}')
   @response(200, {
-    description: 'FinanceDetailMaster model instance',
+    description: 'FinanceDetail model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(FinanceDetailMaster, {includeRelations: true}),
+        schema: getModelSchemaRef(FinanceDetail, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(FinanceDetailMaster, {exclude: 'where'}) filter?: FilterExcludingWhere<FinanceDetailMaster>
-  ): Promise<FinanceDetailMaster> {
-    return this.financeDetailMasterRepository.findById(id, filter);
+    @param.filter(FinanceDetail, { exclude: 'where' }) filter?: FilterExcludingWhere<FinanceDetail>
+  ): Promise<FinanceDetail> {
+    return this.financeDetailRepository.findById(id, filter);
   }
 
-  @patch('/finance-detail-masters/{id}')
+  @patch('/finance-detail-master/{id}')
   @response(204, {
-    description: 'FinanceDetailMaster PATCH success',
+    description: 'FinanceDetail PATCH success',
   })
   async updateById(
     @param.path.string('id') id: string,
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(FinanceDetailMaster, {partial: true}),
+          schema: getModelSchemaRef(FinanceDetail, { partial: true }),
         },
       },
     })
-    financeDetailMaster: FinanceDetailMaster,
+    financeDetail: FinanceDetail,
   ): Promise<void> {
-    await this.financeDetailMasterRepository.updateById(id, financeDetailMaster);
+    await this.financeDetailRepository.updateById(id, financeDetail);
   }
 
-  @put('/finance-detail-masters/{id}')
+  @put('/finance-detail-master/{id}')
   @response(204, {
-    description: 'FinanceDetailMaster PUT success',
+    description: 'FinanceDetail PUT success',
   })
   async replaceById(
     @param.path.string('id') id: string,
-    @requestBody() financeDetailMaster: FinanceDetailMaster,
+    @requestBody() financeDetail: FinanceDetail,
   ): Promise<void> {
-    await this.financeDetailMasterRepository.replaceById(id, financeDetailMaster);
+    await this.financeDetailRepository.replaceById(id, financeDetail);
   }
 
-  @del('/finance-detail-masters/{id}')
+  @del('/finance-detail-master/{id}')
   @response(204, {
-    description: 'FinanceDetailMaster DELETE success',
+    description: 'FinanceDetail DELETE success',
   })
   async deleteById(@param.path.string('id') id: string): Promise<void> {
-    await this.financeDetailMasterRepository.deleteById(id);
+    await this.financeDetailRepository.deleteById(id);
   }
 }

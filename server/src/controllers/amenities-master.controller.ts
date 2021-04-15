@@ -17,134 +17,134 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {AmenitiesMaster} from '../models';
-import {AmenitiesMasterRepository} from '../repositories';
+import { Amenities } from '../models';
+import { AmenitiesRepository } from '../repositories';
 
-export class AmenitiesMasterController {
+export class AmenitiesController {
   constructor(
-    @repository(AmenitiesMasterRepository)
-    public amenitiesMasterRepository : AmenitiesMasterRepository,
-  ) {}
+    @repository(AmenitiesRepository)
+    public amenitiesRepository: AmenitiesRepository,
+  ) { }
 
-  @post('/amenities-masters')
+  @post('/amenities-master')
   @response(200, {
-    description: 'AmenitiesMaster model instance',
-    content: {'application/json': {schema: getModelSchemaRef(AmenitiesMaster)}},
+    description: 'Amenities model instance',
+    content: { 'application/json': { schema: getModelSchemaRef(Amenities) } },
   })
   async create(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(AmenitiesMaster, {
-            title: 'NewAmenitiesMaster',
+          schema: getModelSchemaRef(Amenities, {
+            title: 'NewAmenities',
             exclude: ['id'],
           }),
         },
       },
     })
-    amenitiesMaster: Omit<AmenitiesMaster, 'id'>,
-  ): Promise<AmenitiesMaster> {
-    return this.amenitiesMasterRepository.create(amenitiesMaster);
+    amenities: Omit<Amenities, 'id'>,
+  ): Promise<Amenities> {
+    return this.amenitiesRepository.create(amenities);
   }
 
-  @get('/amenities-masters/count')
+  @get('/amenities-master/count')
   @response(200, {
-    description: 'AmenitiesMaster model count',
-    content: {'application/json': {schema: CountSchema}},
+    description: 'Amenities model count',
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
-    @param.where(AmenitiesMaster) where?: Where<AmenitiesMaster>,
+    @param.where(Amenities) where?: Where<Amenities>,
   ): Promise<Count> {
-    return this.amenitiesMasterRepository.count(where);
+    return this.amenitiesRepository.count(where);
   }
 
-  @get('/amenities-masters')
+  @get('/amenities-master')
   @response(200, {
-    description: 'Array of AmenitiesMaster model instances',
+    description: 'Array of Amenities model instances',
     content: {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(AmenitiesMaster, {includeRelations: true}),
+          items: getModelSchemaRef(Amenities, { includeRelations: true }),
         },
       },
     },
   })
   async find(
-    @param.filter(AmenitiesMaster) filter?: Filter<AmenitiesMaster>,
-  ): Promise<AmenitiesMaster[]> {
-    return this.amenitiesMasterRepository.find(filter);
+    @param.filter(Amenities) filter?: Filter<Amenities>,
+  ): Promise<Amenities[]> {
+    return this.amenitiesRepository.find(filter);
   }
 
-  @patch('/amenities-masters')
+  @patch('/amenities-master')
   @response(200, {
-    description: 'AmenitiesMaster PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    description: 'Amenities PATCH success count',
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(AmenitiesMaster, {partial: true}),
+          schema: getModelSchemaRef(Amenities, { partial: true }),
         },
       },
     })
-    amenitiesMaster: AmenitiesMaster,
-    @param.where(AmenitiesMaster) where?: Where<AmenitiesMaster>,
+    amenities: Amenities,
+    @param.where(Amenities) where?: Where<Amenities>,
   ): Promise<Count> {
-    return this.amenitiesMasterRepository.updateAll(amenitiesMaster, where);
+    return this.amenitiesRepository.updateAll(amenities, where);
   }
 
-  @get('/amenities-masters/{id}')
+  @get('/amenities-master/{id}')
   @response(200, {
-    description: 'AmenitiesMaster model instance',
+    description: 'Amenities model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(AmenitiesMaster, {includeRelations: true}),
+        schema: getModelSchemaRef(Amenities, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(AmenitiesMaster, {exclude: 'where'}) filter?: FilterExcludingWhere<AmenitiesMaster>
-  ): Promise<AmenitiesMaster> {
-    return this.amenitiesMasterRepository.findById(id, filter);
+    @param.filter(Amenities, { exclude: 'where' }) filter?: FilterExcludingWhere<Amenities>
+  ): Promise<Amenities> {
+    return this.amenitiesRepository.findById(id, filter);
   }
 
-  @patch('/amenities-masters/{id}')
+  @patch('/amenities-master/{id}')
   @response(204, {
-    description: 'AmenitiesMaster PATCH success',
+    description: 'Amenities PATCH success',
   })
   async updateById(
     @param.path.string('id') id: string,
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(AmenitiesMaster, {partial: true}),
+          schema: getModelSchemaRef(Amenities, { partial: true }),
         },
       },
     })
-    amenitiesMaster: AmenitiesMaster,
+    amenities: Amenities,
   ): Promise<void> {
-    await this.amenitiesMasterRepository.updateById(id, amenitiesMaster);
+    await this.amenitiesRepository.updateById(id, amenities);
   }
 
-  @put('/amenities-masters/{id}')
+  @put('/amenities-master/{id}')
   @response(204, {
-    description: 'AmenitiesMaster PUT success',
+    description: 'Amenities PUT success',
   })
   async replaceById(
     @param.path.string('id') id: string,
-    @requestBody() amenitiesMaster: AmenitiesMaster,
+    @requestBody() amenities: Amenities,
   ): Promise<void> {
-    await this.amenitiesMasterRepository.replaceById(id, amenitiesMaster);
+    await this.amenitiesRepository.replaceById(id, amenities);
   }
 
-  @del('/amenities-masters/{id}')
+  @del('/amenities-master/{id}')
   @response(204, {
-    description: 'AmenitiesMaster DELETE success',
+    description: 'Amenities DELETE success',
   })
   async deleteById(@param.path.string('id') id: string): Promise<void> {
-    await this.amenitiesMasterRepository.deleteById(id);
+    await this.amenitiesRepository.deleteById(id);
   }
 }

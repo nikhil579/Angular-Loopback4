@@ -17,134 +17,134 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {PurposeMaster} from '../models';
-import {PurposeMasterRepository} from '../repositories';
+import { Purpose } from '../models';
+import { PurposeRepository } from '../repositories';
 
-export class PurposeMasterController {
+export class PurposeController {
   constructor(
-    @repository(PurposeMasterRepository)
-    public purposeMasterRepository : PurposeMasterRepository,
-  ) {}
+    @repository(PurposeRepository)
+    public purposeRepository: PurposeRepository,
+  ) { }
 
-  @post('/purpose-masters')
+  @post('/purpose-master')
   @response(200, {
-    description: 'PurposeMaster model instance',
-    content: {'application/json': {schema: getModelSchemaRef(PurposeMaster)}},
+    description: 'Purpose model instance',
+    content: { 'application/json': { schema: getModelSchemaRef(Purpose) } },
   })
   async create(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(PurposeMaster, {
-            title: 'NewPurposeMaster',
+          schema: getModelSchemaRef(Purpose, {
+            title: 'NewPurpose',
             exclude: ['id'],
           }),
         },
       },
     })
-    purposeMaster: Omit<PurposeMaster, 'id'>,
-  ): Promise<PurposeMaster> {
-    return this.purposeMasterRepository.create(purposeMaster);
+    purpose: Omit<Purpose, 'id'>,
+  ): Promise<Purpose> {
+    return this.purposeRepository.create(purpose);
   }
 
-  @get('/purpose-masters/count')
+  @get('/purpose-master/count')
   @response(200, {
-    description: 'PurposeMaster model count',
-    content: {'application/json': {schema: CountSchema}},
+    description: 'Purpose model count',
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
-    @param.where(PurposeMaster) where?: Where<PurposeMaster>,
+    @param.where(Purpose) where?: Where<Purpose>,
   ): Promise<Count> {
-    return this.purposeMasterRepository.count(where);
+    return this.purposeRepository.count(where);
   }
 
-  @get('/purpose-masters')
+  @get('/purpose-master')
   @response(200, {
-    description: 'Array of PurposeMaster model instances',
+    description: 'Array of Purpose model instances',
     content: {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(PurposeMaster, {includeRelations: true}),
+          items: getModelSchemaRef(Purpose, { includeRelations: true }),
         },
       },
     },
   })
   async find(
-    @param.filter(PurposeMaster) filter?: Filter<PurposeMaster>,
-  ): Promise<PurposeMaster[]> {
-    return this.purposeMasterRepository.find(filter);
+    @param.filter(Purpose) filter?: Filter<Purpose>,
+  ): Promise<Purpose[]> {
+    return this.purposeRepository.find(filter);
   }
 
-  @patch('/purpose-masters')
+  @patch('/purpose-master')
   @response(200, {
-    description: 'PurposeMaster PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    description: 'Purpose PATCH success count',
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(PurposeMaster, {partial: true}),
+          schema: getModelSchemaRef(Purpose, { partial: true }),
         },
       },
     })
-    purposeMaster: PurposeMaster,
-    @param.where(PurposeMaster) where?: Where<PurposeMaster>,
+    purpose: Purpose,
+    @param.where(Purpose) where?: Where<Purpose>,
   ): Promise<Count> {
-    return this.purposeMasterRepository.updateAll(purposeMaster, where);
+    return this.purposeRepository.updateAll(purpose, where);
   }
 
-  @get('/purpose-masters/{id}')
+  @get('/purpose-master/{id}')
   @response(200, {
-    description: 'PurposeMaster model instance',
+    description: 'Purpose model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(PurposeMaster, {includeRelations: true}),
+        schema: getModelSchemaRef(Purpose, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(PurposeMaster, {exclude: 'where'}) filter?: FilterExcludingWhere<PurposeMaster>
-  ): Promise<PurposeMaster> {
-    return this.purposeMasterRepository.findById(id, filter);
+    @param.filter(Purpose, { exclude: 'where' }) filter?: FilterExcludingWhere<Purpose>
+  ): Promise<Purpose> {
+    return this.purposeRepository.findById(id, filter);
   }
 
-  @patch('/purpose-masters/{id}')
+  @patch('/purpose-master/{id}')
   @response(204, {
-    description: 'PurposeMaster PATCH success',
+    description: 'Purpose PATCH success',
   })
   async updateById(
     @param.path.string('id') id: string,
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(PurposeMaster, {partial: true}),
+          schema: getModelSchemaRef(Purpose, { partial: true }),
         },
       },
     })
-    purposeMaster: PurposeMaster,
+    purpose: Purpose,
   ): Promise<void> {
-    await this.purposeMasterRepository.updateById(id, purposeMaster);
+    await this.purposeRepository.updateById(id, purpose);
   }
 
-  @put('/purpose-masters/{id}')
+  @put('/purpose-master/{id}')
   @response(204, {
-    description: 'PurposeMaster PUT success',
+    description: 'Purpose PUT success',
   })
   async replaceById(
     @param.path.string('id') id: string,
-    @requestBody() purposeMaster: PurposeMaster,
+    @requestBody() purpose: Purpose,
   ): Promise<void> {
-    await this.purposeMasterRepository.replaceById(id, purposeMaster);
+    await this.purposeRepository.replaceById(id, purpose);
   }
 
-  @del('/purpose-masters/{id}')
+  @del('/purpose-master/{id}')
   @response(204, {
-    description: 'PurposeMaster DELETE success',
+    description: 'Purpose DELETE success',
   })
   async deleteById(@param.path.string('id') id: string): Promise<void> {
-    await this.purposeMasterRepository.deleteById(id);
+    await this.purposeRepository.deleteById(id);
   }
 }

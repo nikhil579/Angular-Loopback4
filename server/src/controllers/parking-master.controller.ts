@@ -17,134 +17,134 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {ParkingMaster} from '../models';
-import {ParkingMasterRepository} from '../repositories';
+import { Parking } from '../models';
+import { ParkingRepository } from '../repositories';
 
-export class ParkingMasterController {
+export class ParkingController {
   constructor(
-    @repository(ParkingMasterRepository)
-    public parkingMasterRepository : ParkingMasterRepository,
-  ) {}
+    @repository(ParkingRepository)
+    public parkingRepository: ParkingRepository,
+  ) { }
 
-  @post('/parking-masters')
+  @post('/parking-master')
   @response(200, {
-    description: 'ParkingMaster model instance',
-    content: {'application/json': {schema: getModelSchemaRef(ParkingMaster)}},
+    description: 'Parking model instance',
+    content: { 'application/json': { schema: getModelSchemaRef(Parking) } },
   })
   async create(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(ParkingMaster, {
-            title: 'NewParkingMaster',
+          schema: getModelSchemaRef(Parking, {
+            title: 'NewParking',
             exclude: ['id'],
           }),
         },
       },
     })
-    parkingMaster: Omit<ParkingMaster, 'id'>,
-  ): Promise<ParkingMaster> {
-    return this.parkingMasterRepository.create(parkingMaster);
+    parking: Omit<Parking, 'id'>,
+  ): Promise<Parking> {
+    return this.parkingRepository.create(parking);
   }
 
-  @get('/parking-masters/count')
+  @get('/parking-master/count')
   @response(200, {
-    description: 'ParkingMaster model count',
-    content: {'application/json': {schema: CountSchema}},
+    description: 'Parking model count',
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
-    @param.where(ParkingMaster) where?: Where<ParkingMaster>,
+    @param.where(Parking) where?: Where<Parking>,
   ): Promise<Count> {
-    return this.parkingMasterRepository.count(where);
+    return this.parkingRepository.count(where);
   }
 
-  @get('/parking-masters')
+  @get('/parking-master')
   @response(200, {
-    description: 'Array of ParkingMaster model instances',
+    description: 'Array of Parking model instances',
     content: {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(ParkingMaster, {includeRelations: true}),
+          items: getModelSchemaRef(Parking, { includeRelations: true }),
         },
       },
     },
   })
   async find(
-    @param.filter(ParkingMaster) filter?: Filter<ParkingMaster>,
-  ): Promise<ParkingMaster[]> {
-    return this.parkingMasterRepository.find(filter);
+    @param.filter(Parking) filter?: Filter<Parking>,
+  ): Promise<Parking[]> {
+    return this.parkingRepository.find(filter);
   }
 
-  @patch('/parking-masters')
+  @patch('/parking-master')
   @response(200, {
-    description: 'ParkingMaster PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    description: 'Parking PATCH success count',
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(ParkingMaster, {partial: true}),
+          schema: getModelSchemaRef(Parking, { partial: true }),
         },
       },
     })
-    parkingMaster: ParkingMaster,
-    @param.where(ParkingMaster) where?: Where<ParkingMaster>,
+    parking: Parking,
+    @param.where(Parking) where?: Where<Parking>,
   ): Promise<Count> {
-    return this.parkingMasterRepository.updateAll(parkingMaster, where);
+    return this.parkingRepository.updateAll(parking, where);
   }
 
-  @get('/parking-masters/{id}')
+  @get('/parking-master/{id}')
   @response(200, {
-    description: 'ParkingMaster model instance',
+    description: 'Parking model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(ParkingMaster, {includeRelations: true}),
+        schema: getModelSchemaRef(Parking, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(ParkingMaster, {exclude: 'where'}) filter?: FilterExcludingWhere<ParkingMaster>
-  ): Promise<ParkingMaster> {
-    return this.parkingMasterRepository.findById(id, filter);
+    @param.filter(Parking, { exclude: 'where' }) filter?: FilterExcludingWhere<Parking>
+  ): Promise<Parking> {
+    return this.parkingRepository.findById(id, filter);
   }
 
-  @patch('/parking-masters/{id}')
+  @patch('/parking-master/{id}')
   @response(204, {
-    description: 'ParkingMaster PATCH success',
+    description: 'Parking PATCH success',
   })
   async updateById(
     @param.path.string('id') id: string,
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(ParkingMaster, {partial: true}),
+          schema: getModelSchemaRef(Parking, { partial: true }),
         },
       },
     })
-    parkingMaster: ParkingMaster,
+    parking: Parking,
   ): Promise<void> {
-    await this.parkingMasterRepository.updateById(id, parkingMaster);
+    await this.parkingRepository.updateById(id, parking);
   }
 
-  @put('/parking-masters/{id}')
+  @put('/parking-master/{id}')
   @response(204, {
-    description: 'ParkingMaster PUT success',
+    description: 'Parking PUT success',
   })
   async replaceById(
     @param.path.string('id') id: string,
-    @requestBody() parkingMaster: ParkingMaster,
+    @requestBody() parking: Parking,
   ): Promise<void> {
-    await this.parkingMasterRepository.replaceById(id, parkingMaster);
+    await this.parkingRepository.replaceById(id, parking);
   }
 
-  @del('/parking-masters/{id}')
+  @del('/parking-master/{id}')
   @response(204, {
-    description: 'ParkingMaster DELETE success',
+    description: 'Parking DELETE success',
   })
   async deleteById(@param.path.string('id') id: string): Promise<void> {
-    await this.parkingMasterRepository.deleteById(id);
+    await this.parkingRepository.deleteById(id);
   }
 }

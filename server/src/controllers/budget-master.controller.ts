@@ -17,134 +17,134 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {BudgetMaster} from '../models';
-import {BudgetMasterRepository} from '../repositories';
+import { Budget } from '../models';
+import { BudgetRepository } from '../repositories';
 
-export class BudgetMasterController {
+export class BudgetController {
   constructor(
-    @repository(BudgetMasterRepository)
-    public budgetMasterRepository : BudgetMasterRepository,
-  ) {}
+    @repository(BudgetRepository)
+    public budgetRepository: BudgetRepository,
+  ) { }
 
-  @post('/budget-masters')
+  @post('/budget-master')
   @response(200, {
-    description: 'BudgetMaster model instance',
-    content: {'application/json': {schema: getModelSchemaRef(BudgetMaster)}},
+    description: 'Budget model instance',
+    content: { 'application/json': { schema: getModelSchemaRef(Budget) } },
   })
   async create(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(BudgetMaster, {
-            title: 'NewBudgetMaster',
+          schema: getModelSchemaRef(Budget, {
+            title: 'NewBudget',
             exclude: ['id'],
           }),
         },
       },
     })
-    budgetMaster: Omit<BudgetMaster, 'id'>,
-  ): Promise<BudgetMaster> {
-    return this.budgetMasterRepository.create(budgetMaster);
+    budget: Omit<Budget, 'id'>,
+  ): Promise<Budget> {
+    return this.budgetRepository.create(budget);
   }
 
-  @get('/budget-masters/count')
+  @get('/budget-master/count')
   @response(200, {
-    description: 'BudgetMaster model count',
-    content: {'application/json': {schema: CountSchema}},
+    description: 'Budget model count',
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
-    @param.where(BudgetMaster) where?: Where<BudgetMaster>,
+    @param.where(Budget) where?: Where<Budget>,
   ): Promise<Count> {
-    return this.budgetMasterRepository.count(where);
+    return this.budgetRepository.count(where);
   }
 
-  @get('/budget-masters')
+  @get('/budget-master')
   @response(200, {
-    description: 'Array of BudgetMaster model instances',
+    description: 'Array of Budget model instances',
     content: {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(BudgetMaster, {includeRelations: true}),
+          items: getModelSchemaRef(Budget, { includeRelations: true }),
         },
       },
     },
   })
   async find(
-    @param.filter(BudgetMaster) filter?: Filter<BudgetMaster>,
-  ): Promise<BudgetMaster[]> {
-    return this.budgetMasterRepository.find(filter);
+    @param.filter(Budget) filter?: Filter<Budget>,
+  ): Promise<Budget[]> {
+    return this.budgetRepository.find(filter);
   }
 
-  @patch('/budget-masters')
+  @patch('/budget-master')
   @response(200, {
-    description: 'BudgetMaster PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    description: 'Budget PATCH success count',
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(BudgetMaster, {partial: true}),
+          schema: getModelSchemaRef(Budget, { partial: true }),
         },
       },
     })
-    budgetMaster: BudgetMaster,
-    @param.where(BudgetMaster) where?: Where<BudgetMaster>,
+    budget: Budget,
+    @param.where(Budget) where?: Where<Budget>,
   ): Promise<Count> {
-    return this.budgetMasterRepository.updateAll(budgetMaster, where);
+    return this.budgetRepository.updateAll(budget, where);
   }
 
-  @get('/budget-masters/{id}')
+  @get('/budget-master/{id}')
   @response(200, {
-    description: 'BudgetMaster model instance',
+    description: 'Budget model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(BudgetMaster, {includeRelations: true}),
+        schema: getModelSchemaRef(Budget, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(BudgetMaster, {exclude: 'where'}) filter?: FilterExcludingWhere<BudgetMaster>
-  ): Promise<BudgetMaster> {
-    return this.budgetMasterRepository.findById(id, filter);
+    @param.filter(Budget, { exclude: 'where' }) filter?: FilterExcludingWhere<Budget>
+  ): Promise<Budget> {
+    return this.budgetRepository.findById(id, filter);
   }
 
-  @patch('/budget-masters/{id}')
+  @patch('/budget-master/{id}')
   @response(204, {
-    description: 'BudgetMaster PATCH success',
+    description: 'Budget PATCH success',
   })
   async updateById(
     @param.path.string('id') id: string,
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(BudgetMaster, {partial: true}),
+          schema: getModelSchemaRef(Budget, { partial: true }),
         },
       },
     })
-    budgetMaster: BudgetMaster,
+    budget: Budget,
   ): Promise<void> {
-    await this.budgetMasterRepository.updateById(id, budgetMaster);
+    await this.budgetRepository.updateById(id, budget);
   }
 
-  @put('/budget-masters/{id}')
+  @put('/budget-master/{id}')
   @response(204, {
-    description: 'BudgetMaster PUT success',
+    description: 'Budget PUT success',
   })
   async replaceById(
     @param.path.string('id') id: string,
-    @requestBody() budgetMaster: BudgetMaster,
+    @requestBody() budget: Budget,
   ): Promise<void> {
-    await this.budgetMasterRepository.replaceById(id, budgetMaster);
+    await this.budgetRepository.replaceById(id, budget);
   }
 
-  @del('/budget-masters/{id}')
+  @del('/budget-master/{id}')
   @response(204, {
-    description: 'BudgetMaster DELETE success',
+    description: 'Budget DELETE success',
   })
   async deleteById(@param.path.string('id') id: string): Promise<void> {
-    await this.budgetMasterRepository.deleteById(id);
+    await this.budgetRepository.deleteById(id);
   }
 }

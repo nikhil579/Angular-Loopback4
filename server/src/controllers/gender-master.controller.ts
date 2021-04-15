@@ -17,134 +17,134 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {GenderMaster} from '../models';
-import {GenderMasterRepository} from '../repositories';
+import { Gender } from '../models';
+import { GenderRepository } from '../repositories';
 
-export class GenderMasterController {
+export class GenderController {
   constructor(
-    @repository(GenderMasterRepository)
-    public genderMasterRepository : GenderMasterRepository,
-  ) {}
+    @repository(GenderRepository)
+    public genderRepository: GenderRepository,
+  ) { }
 
-  @post('/gender-masters')
+  @post('/gender-master')
   @response(200, {
-    description: 'GenderMaster model instance',
-    content: {'application/json': {schema: getModelSchemaRef(GenderMaster)}},
+    description: 'Gender model instance',
+    content: { 'application/json': { schema: getModelSchemaRef(Gender) } },
   })
   async create(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(GenderMaster, {
-            title: 'NewGenderMaster',
+          schema: getModelSchemaRef(Gender, {
+            title: 'NewGender',
             exclude: ['id'],
           }),
         },
       },
     })
-    genderMaster: Omit<GenderMaster, 'id'>,
-  ): Promise<GenderMaster> {
-    return this.genderMasterRepository.create(genderMaster);
+    gender: Omit<Gender, 'id'>,
+  ): Promise<Gender> {
+    return this.genderRepository.create(gender);
   }
 
-  @get('/gender-masters/count')
+  @get('/gender-master/count')
   @response(200, {
-    description: 'GenderMaster model count',
-    content: {'application/json': {schema: CountSchema}},
+    description: 'Gender model count',
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
-    @param.where(GenderMaster) where?: Where<GenderMaster>,
+    @param.where(Gender) where?: Where<Gender>,
   ): Promise<Count> {
-    return this.genderMasterRepository.count(where);
+    return this.genderRepository.count(where);
   }
 
-  @get('/gender-masters')
+  @get('/gender-master')
   @response(200, {
-    description: 'Array of GenderMaster model instances',
+    description: 'Array of Gender model instances',
     content: {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(GenderMaster, {includeRelations: true}),
+          items: getModelSchemaRef(Gender, { includeRelations: true }),
         },
       },
     },
   })
   async find(
-    @param.filter(GenderMaster) filter?: Filter<GenderMaster>,
-  ): Promise<GenderMaster[]> {
-    return this.genderMasterRepository.find(filter);
+    @param.filter(Gender) filter?: Filter<Gender>,
+  ): Promise<Gender[]> {
+    return this.genderRepository.find(filter);
   }
 
-  @patch('/gender-masters')
+  @patch('/gender-master')
   @response(200, {
-    description: 'GenderMaster PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    description: 'Gender PATCH success count',
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(GenderMaster, {partial: true}),
+          schema: getModelSchemaRef(Gender, { partial: true }),
         },
       },
     })
-    genderMaster: GenderMaster,
-    @param.where(GenderMaster) where?: Where<GenderMaster>,
+    gender: Gender,
+    @param.where(Gender) where?: Where<Gender>,
   ): Promise<Count> {
-    return this.genderMasterRepository.updateAll(genderMaster, where);
+    return this.genderRepository.updateAll(gender, where);
   }
 
-  @get('/gender-masters/{id}')
+  @get('/gender-master/{id}')
   @response(200, {
-    description: 'GenderMaster model instance',
+    description: 'Gender model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(GenderMaster, {includeRelations: true}),
+        schema: getModelSchemaRef(Gender, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(GenderMaster, {exclude: 'where'}) filter?: FilterExcludingWhere<GenderMaster>
-  ): Promise<GenderMaster> {
-    return this.genderMasterRepository.findById(id, filter);
+    @param.filter(Gender, { exclude: 'where' }) filter?: FilterExcludingWhere<Gender>
+  ): Promise<Gender> {
+    return this.genderRepository.findById(id, filter);
   }
 
-  @patch('/gender-masters/{id}')
+  @patch('/gender-master/{id}')
   @response(204, {
-    description: 'GenderMaster PATCH success',
+    description: 'Gender PATCH success',
   })
   async updateById(
     @param.path.string('id') id: string,
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(GenderMaster, {partial: true}),
+          schema: getModelSchemaRef(Gender, { partial: true }),
         },
       },
     })
-    genderMaster: GenderMaster,
+    gender: Gender,
   ): Promise<void> {
-    await this.genderMasterRepository.updateById(id, genderMaster);
+    await this.genderRepository.updateById(id, gender);
   }
 
-  @put('/gender-masters/{id}')
+  @put('/gender-master/{id}')
   @response(204, {
-    description: 'GenderMaster PUT success',
+    description: 'Gender PUT success',
   })
   async replaceById(
     @param.path.string('id') id: string,
-    @requestBody() genderMaster: GenderMaster,
+    @requestBody() gender: Gender,
   ): Promise<void> {
-    await this.genderMasterRepository.replaceById(id, genderMaster);
+    await this.genderRepository.replaceById(id, gender);
   }
 
-  @del('/gender-masters/{id}')
+  @del('/gender-master/{id}')
   @response(204, {
-    description: 'GenderMaster DELETE success',
+    description: 'Gender DELETE success',
   })
   async deleteById(@param.path.string('id') id: string): Promise<void> {
-    await this.genderMasterRepository.deleteById(id);
+    await this.genderRepository.deleteById(id);
   }
 }

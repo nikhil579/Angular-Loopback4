@@ -17,134 +17,134 @@ import {
   requestBody,
   response,
 } from '@loopback/rest';
-import {ResidenceTypeMaster} from '../models';
-import {ResidenceTypeMasterRepository} from '../repositories';
+import { ResidenceType } from '../models';
+import { ResidenceTypeRepository } from '../repositories';
 
-export class ResidenceTypeMasterController {
+export class ResidenceTypeController {
   constructor(
-    @repository(ResidenceTypeMasterRepository)
-    public residenceTypeMasterRepository : ResidenceTypeMasterRepository,
-  ) {}
+    @repository(ResidenceTypeRepository)
+    public residenceTypeRepository: ResidenceTypeRepository,
+  ) { }
 
-  @post('/residence-type-masters')
+  @post('/residence-type-master')
   @response(200, {
-    description: 'ResidenceTypeMaster model instance',
-    content: {'application/json': {schema: getModelSchemaRef(ResidenceTypeMaster)}},
+    description: 'ResidenceType model instance',
+    content: { 'application/json': { schema: getModelSchemaRef(ResidenceType) } },
   })
   async create(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(ResidenceTypeMaster, {
-            title: 'NewResidenceTypeMaster',
+          schema: getModelSchemaRef(ResidenceType, {
+            title: 'NewResidenceType',
             exclude: ['id'],
           }),
         },
       },
     })
-    residenceTypeMaster: Omit<ResidenceTypeMaster, 'id'>,
-  ): Promise<ResidenceTypeMaster> {
-    return this.residenceTypeMasterRepository.create(residenceTypeMaster);
+    residenceType: Omit<ResidenceType, 'id'>,
+  ): Promise<ResidenceType> {
+    return this.residenceTypeRepository.create(residenceType);
   }
 
-  @get('/residence-type-masters/count')
+  @get('/residence-type-master/count')
   @response(200, {
-    description: 'ResidenceTypeMaster model count',
-    content: {'application/json': {schema: CountSchema}},
+    description: 'ResidenceType model count',
+    content: { 'application/json': { schema: CountSchema } },
   })
   async count(
-    @param.where(ResidenceTypeMaster) where?: Where<ResidenceTypeMaster>,
+    @param.where(ResidenceType) where?: Where<ResidenceType>,
   ): Promise<Count> {
-    return this.residenceTypeMasterRepository.count(where);
+    return this.residenceTypeRepository.count(where);
   }
 
-  @get('/residence-type-masters')
+  @get('/residence-type-master')
   @response(200, {
-    description: 'Array of ResidenceTypeMaster model instances',
+    description: 'Array of ResidenceType model instances',
     content: {
       'application/json': {
         schema: {
           type: 'array',
-          items: getModelSchemaRef(ResidenceTypeMaster, {includeRelations: true}),
+          items: getModelSchemaRef(ResidenceType, { includeRelations: true }),
         },
       },
     },
   })
   async find(
-    @param.filter(ResidenceTypeMaster) filter?: Filter<ResidenceTypeMaster>,
-  ): Promise<ResidenceTypeMaster[]> {
-    return this.residenceTypeMasterRepository.find(filter);
+    @param.filter(ResidenceType) filter?: Filter<ResidenceType>,
+  ): Promise<ResidenceType[]> {
+    return this.residenceTypeRepository.find(filter);
   }
 
-  @patch('/residence-type-masters')
+  @patch('/residence-type-master')
   @response(200, {
-    description: 'ResidenceTypeMaster PATCH success count',
-    content: {'application/json': {schema: CountSchema}},
+    description: 'ResidenceType PATCH success count',
+    content: { 'application/json': { schema: CountSchema } },
   })
   async updateAll(
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(ResidenceTypeMaster, {partial: true}),
+          schema: getModelSchemaRef(ResidenceType, { partial: true }),
         },
       },
     })
-    residenceTypeMaster: ResidenceTypeMaster,
-    @param.where(ResidenceTypeMaster) where?: Where<ResidenceTypeMaster>,
+    residenceType: ResidenceType,
+    @param.where(ResidenceType) where?: Where<ResidenceType>,
   ): Promise<Count> {
-    return this.residenceTypeMasterRepository.updateAll(residenceTypeMaster, where);
+    return this.residenceTypeRepository.updateAll(residenceType, where);
   }
 
-  @get('/residence-type-masters/{id}')
+  @get('/residence-type-master/{id}')
   @response(200, {
-    description: 'ResidenceTypeMaster model instance',
+    description: 'ResidenceType model instance',
     content: {
       'application/json': {
-        schema: getModelSchemaRef(ResidenceTypeMaster, {includeRelations: true}),
+        schema: getModelSchemaRef(ResidenceType, { includeRelations: true }),
       },
     },
   })
   async findById(
     @param.path.string('id') id: string,
-    @param.filter(ResidenceTypeMaster, {exclude: 'where'}) filter?: FilterExcludingWhere<ResidenceTypeMaster>
-  ): Promise<ResidenceTypeMaster> {
-    return this.residenceTypeMasterRepository.findById(id, filter);
+    @param.filter(ResidenceType, { exclude: 'where' }) filter?: FilterExcludingWhere<ResidenceType>
+  ): Promise<ResidenceType> {
+    return this.residenceTypeRepository.findById(id, filter);
   }
 
-  @patch('/residence-type-masters/{id}')
+  @patch('/residence-type-master/{id}')
   @response(204, {
-    description: 'ResidenceTypeMaster PATCH success',
+    description: 'ResidenceType PATCH success',
   })
   async updateById(
     @param.path.string('id') id: string,
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(ResidenceTypeMaster, {partial: true}),
+          schema: getModelSchemaRef(ResidenceType, { partial: true }),
         },
       },
     })
-    residenceTypeMaster: ResidenceTypeMaster,
+    residenceType: ResidenceType,
   ): Promise<void> {
-    await this.residenceTypeMasterRepository.updateById(id, residenceTypeMaster);
+    await this.residenceTypeRepository.updateById(id, residenceType);
   }
 
-  @put('/residence-type-masters/{id}')
+  @put('/residence-type-master/{id}')
   @response(204, {
-    description: 'ResidenceTypeMaster PUT success',
+    description: 'ResidenceType PUT success',
   })
   async replaceById(
     @param.path.string('id') id: string,
-    @requestBody() residenceTypeMaster: ResidenceTypeMaster,
+    @requestBody() residenceType: ResidenceType,
   ): Promise<void> {
-    await this.residenceTypeMasterRepository.replaceById(id, residenceTypeMaster);
+    await this.residenceTypeRepository.replaceById(id, residenceType);
   }
 
-  @del('/residence-type-masters/{id}')
+  @del('/residence-type-master/{id}')
   @response(204, {
-    description: 'ResidenceTypeMaster DELETE success',
+    description: 'ResidenceType DELETE success',
   })
   async deleteById(@param.path.string('id') id: string): Promise<void> {
-    await this.residenceTypeMasterRepository.deleteById(id);
+    await this.residenceTypeRepository.deleteById(id);
   }
 }

@@ -11,8 +11,8 @@ import { RealEstateService } from 'src/app/services/realEstate.service';
 import { InformationForm } from 'src/app/models/informationForm';
 import { InformationFormService } from 'src/app/services/information.service';
 //by loopback open api spec
-import { GenderMaster } from "src/app/api/models";
-import { GenderMasterControllerService } from "src/app/api/services";
+import { Gender } from "src/app/api/models";
+import { GenderControllerService } from "src/app/api/services";
 
 @Component({
   selector: 'app-form-customer',
@@ -31,7 +31,7 @@ export class FormCustomerComponent implements OnInit {
     private route: ActivatedRoute,
     public RealEstateDB: RealEstateService,
     public InfoFromDatabase: InformationFormService,
-    private genderService: GenderMasterControllerService) { }
+    private genderService: GenderControllerService) { }
 
   customerForm: FormGroup;
 
@@ -50,7 +50,7 @@ export class FormCustomerComponent implements OnInit {
     })
     this.getRealEstateNames();
     this.getInformationInfoArray();
-    this.getGenderMaster();
+    this.getGender();
   }
 
   createForms() {
@@ -230,8 +230,8 @@ export class FormCustomerComponent implements OnInit {
   onSubmit() {
     console.log(this.customerForm.value);
   }
-  genderMaster: GenderMaster[]
-  getGenderMaster(): void {
+  genderMaster: Gender[]
+  getGender(): void {
     this.genderService.find().subscribe(genderMaster => { this.genderMaster = genderMaster })
   }
 }// end of class
