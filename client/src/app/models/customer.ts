@@ -16,7 +16,7 @@ export class CustomerModel {
     officeLocation: string
     sector: string
     residenceType: string
-    currResidence: string
+    currentResidence: string
     bookingPref?: Array<String>
     budget: string
     budgetValue?: number

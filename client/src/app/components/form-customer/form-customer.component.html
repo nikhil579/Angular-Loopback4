@@ -93,9 +93,8 @@
                                                 <label for='gender'>Gender *</label>
                                                 <select id="gender" formControlName="gender" class="form-control">
                                                     <option selected [ngValue]="null">Choose...</option>
-                                                    <option *ngFor="let item of informationInfoArray[0].gender"
-                                                        [value]="item">
-                                                        {{ item }}
+                                                    <option *ngFor="let item of genderMaster" [value]="item.genderType">
+                                                        {{ item.genderType }}
                                                     </option>
                                                 </select>
                                             </div>
@@ -274,11 +273,12 @@
                                         </div>
                                         <div class="col">
                                             <div class="form-group">
-                                                <label for='currResidence'> Current Residence </label>
-                                                <select id="currResidence" formControlName="currResidence"
+                                                <label for='currentResidence'> Current Residence </label>
+                                                <select id="currentResidence" formControlName="currentResidence"
                                                     class="form-control">
                                                     <option selected [ngValue]="null">Choose...</option>
-                                                    <option *ngFor="let item of informationInfoArray[0].currResidence"
+                                                    <option
+                                                        *ngFor="let item of informationInfoArray[0].currentResidence"
                                                         [value]="item">
                                                         {{ item }}
                                                     </option>
@@ -386,7 +386,7 @@
                     <div class="col">
                         <button class="btn btn-success " [disabled]="SENDFORM.invalid || SENDFORM.pending"
                             (click)='send()' type="submit">Submit</button>
-                        <!-- <button class="btn btn-success " (click)='onSubmit()' type="submit">Console Log</button> -->
+                        <button class="btn btn-success " (click)='onSubmit()' type="submit">Console Log</button>
                         <button class="btn btn-secondary" type="reset">Clear</button>
                     </div>
                 </div>

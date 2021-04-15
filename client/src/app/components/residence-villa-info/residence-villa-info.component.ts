@@ -36,7 +36,7 @@ export class ResidenceVillaInfoComponent implements OnInit {
       area: [({ value: 'area', disabled: true })],
       price: [({ value: 'price', disabled: true }), Validators.required],
       description: [({ value: 'description', disabled: true })],
-      parking: [({ value: 'parking', disabled: true })],  //select
+      parking: [({ value: 'parking', disabled: true })], //select
       furnishingStatus: [({ value: 'furnishingStatus', disabled: true })],//select
       timeToVisit: [({ value: 'timeToVisit', disabled: true })],
       loanRequired: [({ value: 'loanRequired', disabled: true })],//select
@@ -53,8 +53,8 @@ export class ResidenceVillaInfoComponent implements OnInit {
     )
   }
   /**
-* Mimics ngModel two way binding. contains edit by id function
-*/
+  * Mimics ngModel two way binding. contains edit by id function
+  */
   getOneResidenceVillaById(id: string) {
     this.DB.getOneResidenceVilla(id).subscribe(
       (data: ResidenceVilla) => {

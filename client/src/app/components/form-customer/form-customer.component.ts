@@ -10,6 +10,9 @@ import { RealEstate } from 'src/app/models/realEstate';
 import { RealEstateService } from 'src/app/services/realEstate.service';
 import { InformationForm } from 'src/app/models/informationForm';
 import { InformationFormService } from 'src/app/services/information.service';
+//by loopback open api spec
+import { GenderMaster } from "src/app/api/models";
+import { GenderMasterControllerService } from "src/app/api/services";
 
 @Component({
   selector: 'app-form-customer',
@@ -27,7 +30,8 @@ export class FormCustomerComponent implements OnInit {
     private httpClient: HttpClient,
     private route: ActivatedRoute,
     public RealEstateDB: RealEstateService,
-    public InfoFromDatabase: InformationFormService) { }
+    public InfoFromDatabase: InformationFormService,
+    private genderService: GenderMasterControllerService) { }
 
   customerForm: FormGroup;
 
@@ -46,6 +50,7 @@ export class FormCustomerComponent implements OnInit {
     })
     this.getRealEstateNames();
     this.getInformationInfoArray();
+    this.getGenderMaster();
   }
 
   createForms() {
@@ -66,7 +71,7 @@ export class FormCustomerComponent implements OnInit {
       officeLocation: [this.customerModel.officeLocation],
       sector: [this.customerModel.sector],
       residenceType: [this.customerModel.residenceType],
-      currResidence: [this.customerModel.currResidence],
+      currentResidence: [this.customerModel.currentResidence],
       bookingPref: [this.customerModel.bookingPref],
       budget: [this.customerModel.budget],
       possession: [this.customerModel.possession],
@@ -136,7 +141,7 @@ export class FormCustomerComponent implements OnInit {
       officeLocation: customerModel.officeLocation,
       sector: customerModel.sector,
       residenceType: customerModel.residenceType,
-      currResidence: customerModel.currResidence,
+      currentResidence: customerModel.currentResidence,
       bookingPref: customerModel.bookingPref,
       budget: customerModel.budget,
       possession: customerModel.possession,
@@ -225,5 +230,8 @@ export class FormCustomerComponent implements OnInit {
   onSubmit() {
     console.log(this.customerForm.value);
   }
-
+  genderMaster: GenderMaster[]
+  getGenderMaster(): void {
+    this.genderService.find().subscribe(genderMaster => { this.genderMaster = genderMaster })
+  }
 }// end of class

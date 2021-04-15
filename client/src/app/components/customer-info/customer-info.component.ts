@@ -50,7 +50,7 @@ export class CustomerInfoComponent implements OnInit {
       officeLocation: [({ value: 'officeLocation', disabled: true })],
       sector: [({ value: 'sector', disabled: true })],
       residenceType: [({ value: 'residenceType', disabled: true })],
-      currResidence: [({ value: 'currResidence', disabled: true })],
+      currentResidence: [({ value: 'currentResidence', disabled: true })],
       bookingPref: [({ value: 'bookingPref', disabled: true })],
       budget: [({ value: 'budget', disabled: true })],
       possession: [({ value: 'possession', disabled: true })],
@@ -67,7 +67,6 @@ export class CustomerInfoComponent implements OnInit {
   getOneCustomer() {
     this.DB.getOneCustomer(this.snapshotId).subscribe(
       (customerModel: CustomerModel) => {
-        console.log(customerModel.occupation)
         this.customerModel = customerModel,
           (err: any) => console.error(err);
       }
@@ -104,7 +103,7 @@ export class CustomerInfoComponent implements OnInit {
       officeLocation: customerModel.officeLocation,
       sector: customerModel.sector,
       residenceType: customerModel.residenceType,
-      currResidence: customerModel.currResidence,
+      currentResidence: customerModel.currentResidence,
       bookingPref: customerModel.bookingPref,
       budget: customerModel.budget,
       possession: customerModel.possession,

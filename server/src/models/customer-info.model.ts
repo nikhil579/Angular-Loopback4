@@ -95,7 +95,7 @@ export class CustomerInfo extends Entity {
   @property({
     type: 'string',
   })
-  currResidence?: string;
+  currentResidence?: string;
 
   @property({
     type: 'array',

@@ -38,7 +38,7 @@ export class InformationForm extends Entity {
     type: 'array',
     itemType: 'string',
   })
-  currResidence?: string[];
+  currentResidence?: string[];
 
   @property({
     type: 'array',

@@ -3,7 +3,7 @@ export class InformationForm {
     occupation: Array<String>
     sector: Array<String>
     residenceType: Array<String>
-    currResidence: Array<String>
+    currentResidence: Array<String>
     bookingPref: Array<String>
     budget: Array<String>
     budgetValue?: Array<Number>
