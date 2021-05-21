@@ -97,6 +97,16 @@
                     </div>
                     <div class="col">
                         <div class="form-group">
+                            <mat-label>Amenities</mat-label><br>
+                            <mat-form-field class="full-width">
+                                <mat-select [disabled]="0" disableRipple formControlName="amenities" multiple>
+                                    <mat-option>{{commercialPropertyModel.amenities}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
                             <label for='areaBand'>Area Band </label>
                             <input class="form-control" type="number" formControlName='areaBand' />
                         </div>

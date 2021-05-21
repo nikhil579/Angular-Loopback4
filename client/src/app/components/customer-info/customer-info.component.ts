@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CustomerModel } from 'src/app/models/customer';
 import { CustomerService } from 'src/app/services/customer.service';
@@ -11,9 +11,11 @@ import Swal from 'sweetalert2';
   styleUrls: ['./customer-info.component.css']
 })
 export class CustomerInfoComponent implements OnInit {
+
+  @Input() snapshotId: string
   customerModel: CustomerModel = new CustomerModel()
   customerForm: FormGroup;
-  @Input() snapshotId: string
+
   constructor(
     private fb: FormBuilder, public DB: CustomerService, private router: Router,
     private route: ActivatedRoute) { }
@@ -131,10 +133,10 @@ export class CustomerInfoComponent implements OnInit {
   /**Email Validations
    *
   */
-  customersArray: CustomerModel[];
-  get emailControl() {
-    return this.customerForm.get('email') as FormControl
-  }
+  // customersArray: CustomerModel[];
+  // get emailControl() {
+  //   return this.customerForm.get('email') as FormControl
+  // }
 
   deleteCustomerId(id) {
     Swal.fire({

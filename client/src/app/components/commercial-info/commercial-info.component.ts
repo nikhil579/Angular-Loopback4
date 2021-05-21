@@ -30,8 +30,8 @@ export class CommercialInfoComponent implements OnInit {
   }
   createForms() {
     this.commercialPropertyForm = this.fb.group({
-      name: [({ value: 'name', disabled: true }), Validators.required],
-      address: [({ value: 'address', disabled: true }), Validators.required],
+      name: [({ value: 'name', disabled: true })],
+      address: [({ value: 'address', disabled: true })],
       ageOfProperty: [({ value: 'ageOfProperty', disabled: true })],
       area: [({ value: 'area', disabled: true })],
       totalUnits: [({ value: 'totalUnits', disabled: true })],

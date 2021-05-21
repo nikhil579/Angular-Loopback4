@@ -11,7 +11,7 @@ input[type=number] {
 }
 
 
-input.ng-invalid.ng-touched, input.notValid{
+/* input.ng-invalid.ng-touched, input.notValid{
   border:1px solid red;
   border-right: 1px solid red;
   box-shadow: 0 0 0 0.2rem rgba(255, 64, 32, .25);
@@ -20,6 +20,6 @@ input.ng-pending{
   border:1px solid orange;
   border-right: 1px solid orange;
   box-shadow: 0 0 0 0.2rem rgba(255, 128, 2, .25);
-}
+} */
 
 form label {font-weight:500}
